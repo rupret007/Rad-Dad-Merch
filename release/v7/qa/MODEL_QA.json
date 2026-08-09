@@ -1,0 +1,296 @@
+{
+  "build_volume_mm": [
+    180.0,
+    180.0,
+    180.0
+  ],
+  "mesh_qa_pass": true,
+  "models": [
+    {
+      "body_count": 1,
+      "boundary_edges": 0,
+      "bounds_mm": {
+        "maximum": [
+          33.0,
+          15.13,
+          6.685
+        ],
+        "minimum": [
+          -25.162001,
+          -15.13,
+          0.0
+        ]
+      },
+      "center_mass_mm": [
+        0.974004,
+        0.170375,
+        3.003451
+      ],
+      "checks": {
+        "finite_vertices": true,
+        "fits_a1_mini_build_volume": true,
+        "single_body": true,
+        "triangles_present": true,
+        "watertight": true,
+        "winding_consistent": true,
+        "zero_boundary_edges": true,
+        "zero_degenerate_faces": true,
+        "zero_non_manifold_edges": true
+      },
+      "degenerate_faces": 0,
+      "digital_qa_pass": true,
+      "dimensions_mm": [
+        58.162001,
+        30.26,
+        6.685
+      ],
+      "faces": 22344,
+      "name": "Rad_Dad_Cassette_v37",
+      "non_manifold_edges": 0,
+      "physical_validation": "required-before-batch-production",
+      "surface_area_mm2": 5054.712011,
+      "vertices": 11170,
+      "volume_mm3": 9382.644969,
+      "watertight": true,
+      "winding_consistent": true
+    },
+    {
+      "body_count": 1,
+      "boundary_edges": 0,
+      "bounds_mm": {
+        "maximum": [
+          26.299999,
+          18.458,
+          4.13
+        ],
+        "minimum": [
+          -18.059999,
+          -18.458,
+          0.0
+        ]
+      },
+      "center_mass_mm": [
+        1.051264,
+        0.0843,
+        1.867916
+      ],
+      "checks": {
+        "finite_vertices": true,
+        "fits_a1_mini_build_volume": true,
+        "single_body": true,
+        "triangles_present": true,
+        "watertight": true,
+        "winding_consistent": true,
+        "zero_boundary_edges": true,
+        "zero_degenerate_faces": true,
+        "zero_non_manifold_edges": true
+      },
+      "degenerate_faces": 0,
+      "digital_qa_pass": true,
+      "dimensions_mm": [
+        44.359999,
+        36.916,
+        4.13
+      ],
+      "faces": 10034,
+      "name": "Rad_Dad_Floppy_v19",
+      "non_manifold_edges": 0,
+      "physical_validation": "required-before-batch-production",
+      "surface_area_mm2": 3818.531677,
+      "vertices": 5017,
+      "volume_mm3": 5173.047071,
+      "watertight": true,
+      "winding_consistent": true
+    },
+    {
+      "body_count": 1,
+      "boundary_edges": 0,
+      "bounds_mm": {
+        "maximum": [
+          36.799999,
+          15.95,
+          7.0
+        ],
+        "minimum": [
+          -29.0,
+          -15.95,
+          0.0
+        ]
+      },
+      "center_mass_mm": [
+        0.895633,
+        0.029751,
+        3.187931
+      ],
+      "checks": {
+        "finite_vertices": true,
+        "fits_a1_mini_build_volume": true,
+        "single_body": true,
+        "triangles_present": true,
+        "watertight": true,
+        "winding_consistent": true,
+        "zero_boundary_edges": true,
+        "zero_degenerate_faces": true,
+        "zero_non_manifold_edges": true
+      },
+      "degenerate_faces": 0,
+      "digital_qa_pass": true,
+      "dimensions_mm": [
+        65.799999,
+        31.9,
+        7.0
+      ],
+      "faces": 20140,
+      "name": "Rad_Dad_Mini_VHS_v4",
+      "non_manifold_edges": 0,
+      "physical_validation": "required-before-batch-production",
+      "surface_area_mm2": 6182.027735,
+      "vertices": 10070,
+      "volume_mm3": 11950.569699,
+      "watertight": true,
+      "winding_consistent": true
+    },
+    {
+      "body_count": 1,
+      "boundary_edges": 0,
+      "bounds_mm": {
+        "maximum": [
+          22.5,
+          22.5,
+          64.400002
+        ],
+        "minimum": [
+          -22.5,
+          -22.5,
+          0.0
+        ]
+      },
+      "center_mass_mm": [
+        0.125089,
+        -0.519496,
+        23.368453
+      ],
+      "checks": {
+        "finite_vertices": true,
+        "fits_a1_mini_build_volume": true,
+        "single_body": true,
+        "triangles_present": true,
+        "watertight": true,
+        "winding_consistent": true,
+        "zero_boundary_edges": true,
+        "zero_degenerate_faces": true,
+        "zero_non_manifold_edges": true
+      },
+      "degenerate_faces": 0,
+      "digital_qa_pass": true,
+      "dimensions_mm": [
+        45.0,
+        45.0,
+        64.400002
+      ],
+      "faces": 15282,
+      "name": "Trailer_Swift_v5_Bobblehead_NFC",
+      "non_manifold_edges": 0,
+      "physical_validation": "required-before-batch-production",
+      "surface_area_mm2": 8771.692235,
+      "vertices": 7633,
+      "volume_mm3": 20802.059512,
+      "watertight": true,
+      "winding_consistent": true
+    }
+  ],
+  "physical_validation": "required-before-batch-production",
+  "print_intents": {
+    "Rad_Dad_Cassette_v37": {
+      "bottom_layers": 5,
+      "display_name": "Rad Dad Compact Cassette v37",
+      "infill_pattern": "gyroid",
+      "infill_percent": 30,
+      "initial_layer_height_mm": 0.2,
+      "layer_height_mm": 0.16,
+      "nozzle_mm": 0.4,
+      "orientation": "flat",
+      "printer": "Bambu Lab A1 mini",
+      "profile_status": "verified-bambu-project",
+      "slug": "Rad_Dad_Cassette_v37",
+      "support_on_build_plate_only": false,
+      "supports": "off",
+      "top_layers": 5,
+      "wall_loops": 4
+    },
+    "Rad_Dad_Floppy_v19": {
+      "bottom_layers": 5,
+      "display_name": "Rad Dad 3.5-Inch Floppy v19",
+      "infill_pattern": "gyroid",
+      "infill_percent": 30,
+      "initial_layer_height_mm": 0.2,
+      "layer_height_mm": 0.16,
+      "nozzle_mm": 0.4,
+      "orientation": "flat",
+      "printer": "Bambu Lab A1 mini",
+      "profile_status": "verified-bambu-project",
+      "slug": "Rad_Dad_Floppy_v19",
+      "support_on_build_plate_only": false,
+      "supports": "off",
+      "top_layers": 5,
+      "wall_loops": 4
+    },
+    "Rad_Dad_Mini_VHS_v4": {
+      "bottom_layers": 5,
+      "display_name": "Rad Dad Mini VHS v4",
+      "infill_pattern": "gyroid",
+      "infill_percent": 30,
+      "initial_layer_height_mm": 0.2,
+      "layer_height_mm": 0.16,
+      "nozzle_mm": 0.4,
+      "orientation": "flat",
+      "printer": "Bambu Lab A1 mini",
+      "profile_status": "verified-bambu-project",
+      "slug": "Rad_Dad_Mini_VHS_v4",
+      "support_on_build_plate_only": false,
+      "supports": "off",
+      "top_layers": 5,
+      "wall_loops": 4
+    },
+    "Rad_Dad_Retro_Riot_v7_ALL_FOUR": {
+      "bottom_layers": 5,
+      "display_name": "Rad Dad Micro Replicas v7 All-Four Plate",
+      "infill_pattern": "gyroid",
+      "infill_percent": 30,
+      "initial_layer_height_mm": 0.2,
+      "layer_height_mm": 0.16,
+      "nozzle_mm": 0.4,
+      "orientation": "mixed",
+      "printer": "Bambu Lab A1 mini",
+      "profile_status": "verified-bambu-project",
+      "slug": "Rad_Dad_Retro_Riot_v7_ALL_FOUR",
+      "support_on_build_plate_only": true,
+      "supports": "organic",
+      "top_layers": 5,
+      "wall_loops": 4
+    },
+    "Trailer_Swift_v5_Bobblehead_NFC": {
+      "bottom_layers": 5,
+      "display_name": "Trailer Swift v5 Punk Desk Toy",
+      "infill_pattern": "gyroid",
+      "infill_percent": 30,
+      "initial_layer_height_mm": 0.2,
+      "layer_height_mm": 0.16,
+      "nozzle_mm": 0.4,
+      "orientation": "upright",
+      "printer": "Bambu Lab A1 mini",
+      "profile_status": "verified-bambu-project",
+      "slug": "Trailer_Swift_v5_Bobblehead_NFC",
+      "support_on_build_plate_only": true,
+      "supports": "organic",
+      "top_layers": 5,
+      "wall_loops": 4
+    }
+  },
+  "release": "Rad Dad Retro Riot v7: Micro Replica Edition",
+  "schema": "rad-dad-mesh-qa-v1",
+  "three_mf_policy": {
+    "bambu_project_3mf": "requires-external-verified-postprocessor",
+    "core_3mf": "model-only"
+  }
+}
