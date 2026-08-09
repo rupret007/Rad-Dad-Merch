@@ -1,0 +1,49 @@
+RAD DAD RETRO RIOT v6 - DIGITAL QA
+
+Rad Dad Cassette v36
+  Watertight: True
+  Winding consistent: True
+  Boundary edges: 0
+  Non-manifold edges: 0
+  Bodies: 1
+  Dimensions: 60.324 x 30.260 x 6.685 mm
+  Volume: 7307.021 cubic mm
+
+Rad Dad Floppy v18
+  Watertight: True
+  Winding consistent: True
+  Boundary edges: 0
+  Non-manifold edges: 0
+  Bodies: 1
+  Dimensions: 46.560 x 36.916 x 4.130 mm
+  Volume: 4290.458 cubic mm
+
+Rad Dad Mini VHS v3
+  Watertight: True
+  Winding consistent: True
+  Boundary edges: 0
+  Non-manifold edges: 0
+  Bodies: 1
+  Dimensions: 70.000 x 32.600 x 5.500 mm
+  Volume: 9096.710 cubic mm
+
+Trailer Swift v4 Bobblehead NFC
+  Watertight: True
+  Winding consistent: True
+  Boundary edges: 0
+  Non-manifold edges: 0
+  Bodies: 1
+  Dimensions: 53.000 x 53.000 x 80.460 mm
+  Volume: 26151.945 cubic mm
+
+Release checks:
+  Physical objects on combined plate: 4
+  Media keyring openings: 6.00 mm nominal
+  Trailer Swift format: upright solid-base desk collectible
+  NFC diameter: 25.00 mm nominal on all four designs
+  Floppy rear NFC protected radius: 12.85 mm
+  Trailer Swift base: 53.00 mm maximum diameter
+  Combined plate footprint: 145.500 x 127.800 mm
+  Combined plate bounds: X 15.500 to 161.000; Y 16.500 to 144.300
+  Fits A1 Mini XY: True
+  Physical print validation: REQUIRED BEFORE BATCH PRODUCTION
