@@ -1,0 +1,28 @@
+{
+  "artwork_dpi": 600,
+  "contrast": "black modules on white quiet zone",
+  "destination_url": "https://raddadband.com/tap/",
+  "error_correction": "Q",
+  "finished_label_diameter_mm": 25.4,
+  "geometry_policy": "v7 meshes and 3MF projects reused byte-for-byte",
+  "minimum_model_landing_mm": 26.0,
+  "module_pitch_mm": 0.445946,
+  "qr_matrix_modules": 29,
+  "qr_render_size_mm": 16.5,
+  "quiet_zone_modules": 4,
+  "release": "Rad Dad Retro Riot v8: QR Edition",
+  "schema": "rad-dad-qr-sticker-spec-v1",
+  "sheet_layout": {
+    "columns": 7,
+    "compatible_stock": [
+      "Avery 6450",
+      "OnlineLabels OL1025"
+    ],
+    "labels_per_sheet": 63,
+    "left_margin_mm": 9.525,
+    "page": "US Letter",
+    "pitch_mm": 28.575,
+    "rows": 9,
+    "top_margin_mm": 12.7
+  }
+}

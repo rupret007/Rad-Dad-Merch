@@ -1,5 +1,74 @@
 # Changelog
 
+## v9 - Authenticity + QR Edition - 2026-08-09
+
+### Authenticity restoration
+
+- Promoted v9 as the recommended production release while preserving v8 and v7
+  as historical QR and NFC archives.
+- Advanced the compact cassette to v38 using the exact watertight v36 body that
+  produced the successful physical reference print. Its narrow tape-entry edge,
+  stepped shell, and asymmetric head, capstan, guide, and pinch-roller apertures
+  are inherited directly rather than reconstructed as face decoration.
+- Moved only the cassette eyelet zone inward to the approved compact envelope.
+  The deformation is zero at the tape-entry edge, preserving that audited
+  transport geometry while retaining the proven 6 mm bore and rear landing.
+- Advanced the 3.5-inch floppy to v20 with deeper rear hub, shutter-track,
+  shell-seam, write-protect, and density cues around the existing circular QR
+  landing.
+- Advanced the mini VHS to v5 with stronger reel, tape-path, door, latch,
+  insertion, shell, and rear-device cues around the existing circular QR
+  landing.
+- Advanced Trailer Swift to v6 with friendlier eyes, relaxed brows, and a goofy
+  singing grin so the character reads as funny and punk rather than angry or
+  scary.
+- Preserved the collection details `C-69`, `3.69 MB`, and `T-369` without
+  allowing the easter eggs or Rad Dad branding to replace defining hardware.
+
+### Fit and construction
+
+- Kept all four external envelopes unchanged: cassette
+  `58.162 x 30.260 x 6.685 mm`, floppy `44.360 x 36.916 x 4.130 mm`, VHS
+  `65.800 x 31.900 x 7.000 mm`, and Trailer Swift
+  `45.000 x 45.000 x 64.400 mm`.
+- Kept the reinforced cassette, floppy, and VHS keyring eyelets and their 6 mm
+  openings unchanged.
+- Kept the protected 26 mm media landings and 27 mm Trailer Swift base landing
+  unchanged for exact 25.4 mm / 1-inch QR stickers.
+- Confined the authenticity work to the existing product envelopes so v9 does
+  not increase pocket bulk, plate usage, or keyring reach.
+
+### Black-and-white QR production
+
+- Replaced the colored/styled sticker presentation with strictly black-and-white
+  QR artwork on matte white adhesive stock.
+- Preserved a 29 x 29 error-correction-Q matrix, four-module white quiet zone,
+  16.5 mm printed QR square, and approximately 0.446 mm module pitch.
+- Added individual vendor masters, an exact 63-up US Letter sheet for Avery
+  6450 and OnlineLabels OL1025, and a dedicated FedEx Office full-sheet file.
+- Standardized all print instructions on Actual Size / 100% with fit-to-page,
+  shrinking, enlargement, and photo optimization disabled.
+- Required physical measurement and scan QC before cutting, after installation,
+  after adhesive cure, and before distribution.
+- Set the generated release archive path to
+  `release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip`.
+- Retained NFC documentation only as a legacy reference; NFC is not part of the
+  recommended v9 production workflow.
+
+## v8 - QR Edition - 2026-08-09
+
+- Replaced the production NFC workflow with one visible 1-inch QR sticker.
+- Preserved every v7 STL and 3MF byte-for-byte; no model was resized or remodeled.
+- Added a scan-first black-and-white QR for `https://raddadband.com/tap/` with
+  error correction Q, four-module quiet zone, and approximately 0.446 mm modules.
+- Added vendor-ready SVG, 600 DPI PNG, and exact-size PDF artwork.
+- Added an exact 63-up US Letter sheet for Avery 6450 and OnlineLabels OL1025.
+- Added a 35-up hand-cut sheet, print calibration page, placement guide,
+  sourcing guide, installation guide, and QR-specific physical QC checklist.
+- Added model-reuse provenance, v7 geometry evidence, manifest, SHA-256 sums,
+  deterministic release ZIP, and automated v8 integrity verification.
+- Marked the v7 NFC release as a historical archive rather than deleting it.
+
 ## 0.4.0 - 2026-08-09 - Retro Riot v7: Micro Replica Edition
 
 ### Final products

@@ -1,0 +1,250 @@
+{
+  "files": [
+    {
+      "bytes": 364829,
+      "path": "3mf/Rad_Dad_Cassette_v38_MODEL_ONLY.3mf",
+      "sha256": "cd7450215ffe58504d03abcf8d823d1187ccbe2ffaf4cb2533dfcefa1b59f7d2"
+    },
+    {
+      "bytes": 177779,
+      "path": "3mf/Rad_Dad_Floppy_v20_MODEL_ONLY.3mf",
+      "sha256": "9c13af307684f409a109f26ab4f4730fc3bfacc2a2cadbe7f70cd70d005f6bd4"
+    },
+    {
+      "bytes": 408229,
+      "path": "3mf/Rad_Dad_Mini_VHS_v5_MODEL_ONLY.3mf",
+      "sha256": "47cd37d44ea2706429967a84aec5d714fc42f618a12b4622903d790483256576"
+    },
+    {
+      "bytes": 1021288,
+      "path": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf",
+      "sha256": "59017cc300925ebe628b8d4ef246e8fcb66658c5e54632457da0116a391e3ceb"
+    },
+    {
+      "bytes": 280121,
+      "path": "3mf/Trailer_Swift_v6_Friendly_Punk_QR_MODEL_ONLY.3mf",
+      "sha256": "a0a4cdb16591d687820e3d8c4c905553858ced5040368d37454e6ae312c8b1fd"
+    },
+    {
+      "bytes": 2812,
+      "path": "README.md",
+      "sha256": "5e9ec65feb1b5071ff379dd3da8e4879f537364c5da623a26037e06cde2ef486"
+    },
+    {
+      "bytes": 5119,
+      "path": "SHA256SUMS.txt",
+      "sha256": "f25eb8a5cde5a83c3d0de1cc82b2c7704410c34b2adc1c4a9bece8d5c6e0e95b"
+    },
+    {
+      "bytes": 785,
+      "path": "guides/AUTHENTICITY_DESIGN_NOTES.md",
+      "sha256": "cc054dc36c96b9e746c4ebb9bb4707dfd354a8c40fb64469000b8ded26783821"
+    },
+    {
+      "bytes": 1203,
+      "path": "guides/PRINT_AT_FEDEX_OFFICE.md",
+      "sha256": "d6ae1861c1270d6dac1c5a8fad7049f4f0d959446e0ca81d4d7629acc023eae0"
+    },
+    {
+      "bytes": 3186,
+      "path": "guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.pdf",
+      "sha256": "eaf01cf286cadaaea225c4643caca9f9e7d83d44aa6cd63d86baae648fa6a143"
+    },
+    {
+      "bytes": 15883,
+      "path": "guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.svg",
+      "sha256": "c3dfb9c972fa34da4f4a52703d21654977d0fdadad6e34701f34f892358e5053"
+    },
+    {
+      "bytes": 3723,
+      "path": "guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER_600DPI.png",
+      "sha256": "53083dc4508d668e9830d07e9db8de037be65c07a5a51d3b0d14ee485b62caa1"
+    },
+    {
+      "bytes": 120830,
+      "path": "guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf",
+      "sha256": "34f23709e3c9f157f694aab39a614f1b6a857bce81bc5894f2dc8829f619d8e0"
+    },
+    {
+      "bytes": 21231,
+      "path": "guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.svg",
+      "sha256": "5f53b16f96440a7bdb7234b57b2a7f361a57a2607edd82094ed8d11463bf84b6"
+    },
+    {
+      "bytes": 189549,
+      "path": "guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER_600DPI.png",
+      "sha256": "e5b59c11b5af5d131ae46e5b9d52f309e4e84afe7a81cd773a9e6b252bbf6788"
+    },
+    {
+      "bytes": 95294,
+      "path": "guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf",
+      "sha256": "18460dba816de6f0075dc7473c79ae0750c847a2b2235bf70389b320cdcd2e3e"
+    },
+    {
+      "bytes": 38546,
+      "path": "guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.svg",
+      "sha256": "20ab85c903e5da62b5e653d61e9e3c8cffd1772b856d2a9721f0a7d8111541fa"
+    },
+    {
+      "bytes": 124577,
+      "path": "guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER_600DPI.png",
+      "sha256": "289297d12f543c6a3bee227b6f664a0260d9f1e8a8fc332cbfe1ed366211c638"
+    },
+    {
+      "bytes": 23294,
+      "path": "guides/qr_stickers/Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf",
+      "sha256": "c86b1bbb202ece9bea0df6f9da74047f9bbc8e43046f2a150df9f22665e56430"
+    },
+    {
+      "bytes": 45842,
+      "path": "guides/qr_stickers/Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER_600DPI.png",
+      "sha256": "6862ef9d931aae98a94e893d28acce7fbd4d027006f3f9c7e3ed121794b736dd"
+    },
+    {
+      "bytes": 81518,
+      "path": "previews/Rad_Dad_Cassette_v38_DETAIL.png",
+      "sha256": "ec5857dbfe235f6af308f0b804ba11df12f9f398686d376dda2a5a10e41a82ad"
+    },
+    {
+      "bytes": 82686,
+      "path": "previews/Rad_Dad_Cassette_v38_FRONT.png",
+      "sha256": "62d9512df55e8c4fa4a9e319b966601ea4fc054801e2b06d166b8a736ef53dcd"
+    },
+    {
+      "bytes": 48099,
+      "path": "previews/Rad_Dad_Floppy_v20_DETAIL.png",
+      "sha256": "1d53f07dd52d4cac2b938520d12b529d687b388868d120661861991e218f3a69"
+    },
+    {
+      "bytes": 38052,
+      "path": "previews/Rad_Dad_Floppy_v20_FRONT.png",
+      "sha256": "bb3e25badcdb7812a5d69dad07cd9704d4717ec9bddcf37efb1b774afee35321"
+    },
+    {
+      "bytes": 58733,
+      "path": "previews/Rad_Dad_Mini_VHS_v5_DETAIL.png",
+      "sha256": "afade1414323e10efdab653c17048463ebe17052bd756c44db687622d251250d"
+    },
+    {
+      "bytes": 51869,
+      "path": "previews/Rad_Dad_Mini_VHS_v5_FRONT.png",
+      "sha256": "cdaa38062302896fd69ac8b15c4b0dc28b433ae1ecbde1aa3e9c09c6061f84e2"
+    },
+    {
+      "bytes": 86360,
+      "path": "previews/Rad_Dad_Retro_Riot_v9_ALL_FOUR_DETAIL.png",
+      "sha256": "df1429dcaf0c105b6a029e0a37b08a0c967a73888854fd5f653b9a5bb8acb1ad"
+    },
+    {
+      "bytes": 87464,
+      "path": "previews/Rad_Dad_Retro_Riot_v9_ALL_FOUR_FRONT.png",
+      "sha256": "a3372bb13f64d272866bbfa799683a5ac5153c578173a0e85f23bf3dd0942627"
+    },
+    {
+      "bytes": 80569,
+      "path": "previews/Trailer_Swift_v6_Friendly_Punk_QR_DETAIL.png",
+      "sha256": "1dae610125f26f20a0ea5a3e0114c6c736c314c051f75f09e44c421f4b420404"
+    },
+    {
+      "bytes": 78414,
+      "path": "previews/Trailer_Swift_v6_Friendly_Punk_QR_FRONT.png",
+      "sha256": "4a1b9f2e53ffc2ae2dd62843481d7eee50637e017f8e9e3c0f89fc85f1f80169"
+    },
+    {
+      "bytes": 1612,
+      "path": "qa/AUTHENTICITY_SPEC.json",
+      "sha256": "1de16602c94a2e8aec5fe74044625d0706a7be1566bc996fb8cda3b1b6205e4a"
+    },
+    {
+      "bytes": 151,
+      "path": "qa/GEOMETRY_BUILD_STATUS.json",
+      "sha256": "841d46c7897fe8b36cfecddc3269428c9dd31f8e852b67d11bd29ade78271cdc"
+    },
+    {
+      "bytes": 1487,
+      "path": "qa/PHYSICAL_QC_CHECKLIST.md",
+      "sha256": "3b28300d1f5060c40e5d72caaf42edc58282e40c06bc3bffd219e64f04bd77a8"
+    },
+    {
+      "bytes": 1917,
+      "path": "qa/geometry_evidence/ALL_FOUR_PLATE_LAYOUT.json",
+      "sha256": "77e5aaf59f904cf4b5866dcaad2e2bacdaa608c3b87dfca7793fc39151411b04"
+    },
+    {
+      "bytes": 26981,
+      "path": "qa/geometry_evidence/BAMBU_PROJECT_STATUS.json",
+      "sha256": "6f3ee15b3f8480b6f7e59493bdb2c649b0edae2a71e0e39942b61c3da6634db4"
+    },
+    {
+      "bytes": 1225,
+      "path": "qa/geometry_evidence/BUILD_INDEX.json",
+      "sha256": "56188f4b7de53909f9ae15fc1edfdaec13ca54f3a73ce95262a1b7e7ae24fd25"
+    },
+    {
+      "bytes": 7828,
+      "path": "qa/geometry_evidence/MODEL_QA.json",
+      "sha256": "00b49dbe98e34f315f60dc3c696ad060dc86631722301cf765478608528e1c62"
+    },
+    {
+      "bytes": 3047,
+      "path": "qa/geometry_evidence/PRINT_INTENTS.json",
+      "sha256": "926bd09f9fa5adcd03bb87d2be240eb09be97b3200c0a30ce0a90dbcfee79b6c"
+    },
+    {
+      "bytes": 5237,
+      "path": "qa/geometry_evidence/PRODUCT_METADATA.json",
+      "sha256": "5521cfa751d5333eb44d3a07733b51bfc634792650de058bfb72f9264c700cdb"
+    },
+    {
+      "bytes": 16886,
+      "path": "source/build_rad_dad_authentic_qr_v9.py",
+      "sha256": "3fdbed8c9bdc7e794ec28c1f93dd3a02bf2f497a0d9fb1171adc9c29cac3fd8e"
+    },
+    {
+      "bytes": 11852,
+      "path": "source/media_micro_v9.py",
+      "sha256": "8a2854cc91f11fc991aeb8061301e573bcbc2dbf7d2f5ed8bc246e8cd42c7b02"
+    },
+    {
+      "bytes": 27545,
+      "path": "source/qr_artwork_v9.py",
+      "sha256": "4124e69986571e0407cb0957a798b0f3fcf14579d92ba8fab3c10c0c40f36b27"
+    },
+    {
+      "bytes": 7875,
+      "path": "source/trailer_swift_v9_sculpt.py",
+      "sha256": "cbe68680ce084f672abc10604d9702ebe0ff82fdb06781d1ad10c8ad5bfefacc"
+    },
+    {
+      "bytes": 1292084,
+      "path": "stl/Rad_Dad_Cassette_v38_BINARY.stl",
+      "sha256": "80a336b02ed1e16f4f133c97c451aa7851c4091bcde0b7de65861d7f0892b94d"
+    },
+    {
+      "bytes": 610284,
+      "path": "stl/Rad_Dad_Floppy_v20_BINARY.stl",
+      "sha256": "437b7e9633ae31fa6df24f20ca10b62d92eb3ffd0723c0053bab75f558be48de"
+    },
+    {
+      "bytes": 1646584,
+      "path": "stl/Rad_Dad_Mini_VHS_v5_BINARY.stl",
+      "sha256": "ac5fbfe07fc847e2e42dc365f265d455414b9a1fc7371de7fd2f046ea12a95ef"
+    },
+    {
+      "bytes": 868284,
+      "path": "stl/Trailer_Swift_v6_Friendly_Punk_QR_BINARY.stl",
+      "sha256": "8aa287e679f95033e8ac98315d2ad131ea3721662d1afeab580c230a08650415"
+    }
+  ],
+  "metadata": {
+    "collection": "Authenticity + QR Edition",
+    "destination_url": "https://raddadband.com/tap/",
+    "external_envelopes_changed_from_v7": false,
+    "geometry_changed_from_v7": true,
+    "interaction": "visible black-and-white 1-inch QR sticker",
+    "physical_validation": "required before batch production",
+    "printer_target": "Bambu Lab A1 mini / 0.4 mm nozzle"
+  },
+  "release": "Rad Dad Retro Riot v9: Authenticity + QR Edition",
+  "schema": "rad-dad-release-manifest-v1"
+}

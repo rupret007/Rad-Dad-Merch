@@ -1,0 +1,33 @@
+{
+  "all_four_plate": {
+    "bambu_project_3mf": null,
+    "minimum_spacing_mm": 10.0,
+    "model_only_core_3mf": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf"
+  },
+  "individual_products": {
+    "Rad_Dad_Cassette_v38": {
+      "bambu_project_3mf": null,
+      "model_only_core_3mf": "3mf/Rad_Dad_Cassette_v38_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Cassette_v38_BINARY.stl"
+    },
+    "Rad_Dad_Floppy_v20": {
+      "bambu_project_3mf": null,
+      "model_only_core_3mf": "3mf/Rad_Dad_Floppy_v20_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Floppy_v20_BINARY.stl"
+    },
+    "Rad_Dad_Mini_VHS_v5": {
+      "bambu_project_3mf": null,
+      "model_only_core_3mf": "3mf/Rad_Dad_Mini_VHS_v5_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Mini_VHS_v5_BINARY.stl"
+    },
+    "Trailer_Swift_v6_Friendly_Punk_QR": {
+      "bambu_project_3mf": null,
+      "model_only_core_3mf": "3mf/Trailer_Swift_v6_Friendly_Punk_QR_MODEL_ONLY.3mf",
+      "stl": "stl/Trailer_Swift_v6_Friendly_Punk_QR_BINARY.stl"
+    }
+  },
+  "packaging_load_mode": "direct-import",
+  "physical_validation": "required-before-batch-production",
+  "release": "Rad Dad Retro Riot v9: Authenticity + QR Edition",
+  "schema": "rad-dad-micro-replica-build-index-v1"
+}

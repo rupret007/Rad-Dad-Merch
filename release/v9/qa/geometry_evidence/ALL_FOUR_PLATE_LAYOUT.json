@@ -1,0 +1,105 @@
+{
+  "combined_bounds_mm": {
+    "maximum": [
+      162.9,
+      132.5,
+      64.400002
+    ],
+    "minimum": [
+      15.918243,
+      19.05,
+      0.0
+    ]
+  },
+  "minimum_actual_bounding_box_gap_mm": 23.018244,
+  "minimum_required_spacing_mm": 10.0,
+  "note": "The deterministic model-only plate guarantees these placements. Bambu Studio may auto-arrange a separately generated project.",
+  "pairwise_bounding_box_gaps_mm": {
+    "cassette__floppy": 41.412065,
+    "cassette__trailer_swift": 46.948038,
+    "cassette__vhs": 23.018244,
+    "floppy__trailer_swift": 35.320001,
+    "floppy__vhs": 50.427343,
+    "trailer_swift__vhs": 36.55
+  },
+  "placements": {
+    "cassette": {
+      "bounds_mm": {
+        "maximum": [
+          74.081757,
+          50.129935,
+          6.6853
+        ],
+        "minimum": [
+          15.918243,
+          19.870065,
+          0.0
+        ]
+      },
+      "center_xy_mm": [
+        45.0,
+        35.0
+      ]
+    },
+    "floppy": {
+      "bounds_mm": {
+        "maximum": [
+          67.179999,
+          128.458,
+          4.13
+        ],
+        "minimum": [
+          22.820001,
+          91.542,
+          0.0
+        ]
+      },
+      "center_xy_mm": [
+        45.0,
+        110.0
+      ]
+    },
+    "trailer_swift": {
+      "bounds_mm": {
+        "maximum": [
+          147.5,
+          132.5,
+          64.400002
+        ],
+        "minimum": [
+          102.5,
+          87.5,
+          0.0
+        ]
+      },
+      "center_xy_mm": [
+        125.0,
+        110.0
+      ]
+    },
+    "vhs": {
+      "bounds_mm": {
+        "maximum": [
+          162.9,
+          50.95,
+          7.0
+        ],
+        "minimum": [
+          97.1,
+          19.05,
+          0.0
+        ]
+      },
+      "center_xy_mm": [
+        130.0,
+        35.0
+      ]
+    }
+  },
+  "plate_margin_mm": 10.0,
+  "plate_size_mm": [
+    180.0,
+    180.0
+  ],
+  "schema": "rad-dad-a1-mini-plate-layout-v1"
+}
