@@ -1,8 +1,9 @@
 """Production QR artwork for the Rad Dad retro keychain collection.
 
-This module deliberately generates only black and white artwork for
-https://raddadband.com/tap/.  It reuses the proven 29-module QR matrix and the
-pre-cut sheet geometry established by ``build_rad_dad_qr_release_v8``.
+This module generates black-on-white masters plus a process-red-on-white
+fallback for https://raddadband.com/tap/.  It reuses the proven 29-module QR
+matrix and pre-cut sheet geometry established by
+``build_rad_dad_qr_release_v8``.
 
 Production notes
 ----------------
@@ -10,8 +11,9 @@ Production notes
   Scale to Fit, and borderless enlargement.
 * The QR field is exactly 16.5 mm square, including a four-module quiet zone.
   Nothing is drawn inside that quiet zone except its white background.
-* Raster masters are native 600 DPI, one-bit black and white, with no gray,
-  color, transparency, or antialiasing.
+* Raster masters are native 600 DPI with no gray, transparency, or
+  antialiasing. Black masters are one-bit; red masters use only pure red and
+  white so a color cartridge can print them when black ink is unavailable.
 * The 63-up sheet uses the exact Avery 6450 / OnlineLabels OL1025 geometry:
   seven columns, nine rows, 0.375-inch left margin, 0.5-inch top margin, and
   1.125-inch horizontal and vertical pitch.
@@ -29,15 +31,17 @@ from __future__ import annotations
 import importlib
 import sys
 import types
+import zlib
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
 try:
-    from PIL import Image, ImageDraw, ImageFont
+    from PIL import Image, ImageDraw, ImageFont, ImageOps
 except ImportError as exc:  # pragma: no cover - reported clearly at runtime
     Image = None  # type: ignore[assignment]
     ImageDraw = None  # type: ignore[assignment]
     ImageFont = None  # type: ignore[assignment]
+    ImageOps = None  # type: ignore[assignment]
     _PIL_IMPORT_ERROR: ImportError | None = exc
 else:
     _PIL_IMPORT_ERROR = None
@@ -73,6 +77,8 @@ HANDCUT_TOP_EDGE_MM = 15.875
 
 _BLACK = 0
 _WHITE = 1
+_RED_RGB = (255, 0, 0)
+_RED_HEX = "#ff0000"
 
 __all__ = ["write_qr_artwork_v9"]
 
@@ -467,6 +473,73 @@ def _save_pdf(image: Any, path: Path) -> None:
     image.save(path, format="PDF", resolution=float(DPI))
 
 
+def _red_raster(image: Any) -> Any:
+    """Map one-bit black artwork to pure process red without antialiasing."""
+
+    return ImageOps.colorize(
+        image.convert("L"), black=_RED_RGB, white=(255, 255, 255)
+    )
+
+
+def _red_svg(svg: str) -> str:
+    return svg.replace("#000000", _RED_HEX)
+
+
+def _save_red_pdf(image: Any, path: Path) -> None:
+    """Write a lossless indexed-color PDF with red and white as its only inks."""
+
+    one_bit = image.convert("1")
+    compressed = zlib.compress(one_bit.tobytes(), level=9)
+    width_pt = one_bit.width * 72.0 / DPI
+    height_pt = one_bit.height * 72.0 / DPI
+    width_text = _fmt(width_pt)
+    height_text = _fmt(height_pt)
+    content = (
+        f"q\n{width_text} 0 0 {height_text} 0 0 cm\n/Im0 Do\nQ\n"
+    ).encode("ascii")
+
+    objects = [
+        b"<< /Type /Catalog /Pages 2 0 R >>",
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        (
+            f"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {width_text} "
+            f"{height_text}] /Resources << /XObject << /Im0 4 0 R >> >> "
+            "/Contents 5 0 R >>"
+        ).encode("ascii"),
+        (
+            f"<< /Type /XObject /Subtype /Image /Width {one_bit.width} "
+            f"/Height {one_bit.height} /ColorSpace [/Indexed /DeviceRGB 1 "
+            f"<FF0000FFFFFF>] /BitsPerComponent 1 /Filter /FlateDecode "
+            f"/Length {len(compressed)} >>\nstream\n"
+        ).encode("ascii")
+        + compressed
+        + b"\nendstream",
+        f"<< /Length {len(content)} >>\nstream\n".encode("ascii")
+        + content
+        + b"endstream",
+    ]
+
+    document = bytearray(b"%PDF-1.4\n%\xe2\xe3\xcf\xd3\n")
+    offsets = [0]
+    for number, value in enumerate(objects, start=1):
+        offsets.append(len(document))
+        document.extend(f"{number} 0 obj\n".encode("ascii"))
+        document.extend(value)
+        document.extend(b"\nendobj\n")
+    xref_offset = len(document)
+    document.extend(f"xref\n0 {len(objects) + 1}\n".encode("ascii"))
+    document.extend(b"0000000000 65535 f \n")
+    for offset in offsets[1:]:
+        document.extend(f"{offset:010d} 00000 n \n".encode("ascii"))
+    document.extend(
+        (
+            f"trailer\n<< /Size {len(objects) + 1} /Root 1 0 R >>\n"
+            f"startxref\n{xref_offset}\n%%EOF\n"
+        ).encode("ascii")
+    )
+    path.write_bytes(document)
+
+
 def _font(size_px: int, bold: bool = False) -> Any:
     candidates = (
         "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
@@ -832,6 +905,26 @@ def write_qr_artwork_v9(output_dir: str | Path) -> dict[str, Path]:
         / "Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER_600DPI.png",
         "calibration_pdf": output
         / "Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf",
+        "red_individual_svg": output / "Rad_Dad_QR_RED_1IN_VENDOR_MASTER.svg",
+        "red_individual_png": output
+        / "Rad_Dad_QR_RED_1IN_VENDOR_MASTER_600DPI.png",
+        "red_individual_pdf": output / "Rad_Dad_QR_RED_1IN_VENDOR_MASTER.pdf",
+        "red_precut_63up_svg": output
+        / "Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.svg",
+        "red_precut_63up_png": output
+        / "Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER_600DPI.png",
+        "red_precut_63up_pdf": output
+        / "Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf",
+        "red_fedex_48up_svg": output
+        / "Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.svg",
+        "red_fedex_48up_png": output
+        / "Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER_600DPI.png",
+        "red_fedex_48up_pdf": output
+        / "Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf",
+        "red_calibration_png": output
+        / "Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER_600DPI.png",
+        "red_calibration_pdf": output
+        / "Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf",
     }
 
     tile = _sticker_tile(matrix)
@@ -853,5 +946,20 @@ def write_qr_artwork_v9(output_dir: str | Path) -> dict[str, Path]:
 
     _save_png(calibration, paths["calibration_png"])
     _save_pdf(calibration, paths["calibration_pdf"])
+
+    _write_text(paths["red_individual_svg"], _red_svg(_individual_svg(matrix)))
+    _save_png(_red_raster(tile), paths["red_individual_png"])
+    _save_red_pdf(tile, paths["red_individual_pdf"])
+
+    _write_text(paths["red_precut_63up_svg"], _red_svg(_precut_svg(matrix)))
+    _save_png(_red_raster(precut), paths["red_precut_63up_png"])
+    _save_red_pdf(precut, paths["red_precut_63up_pdf"])
+
+    _write_text(paths["red_fedex_48up_svg"], _red_svg(_handcut_svg(matrix)))
+    _save_png(_red_raster(handcut), paths["red_fedex_48up_png"])
+    _save_red_pdf(handcut, paths["red_fedex_48up_pdf"])
+
+    _save_png(_red_raster(calibration), paths["red_calibration_png"])
+    _save_red_pdf(calibration, paths["red_calibration_pdf"])
 
     return paths

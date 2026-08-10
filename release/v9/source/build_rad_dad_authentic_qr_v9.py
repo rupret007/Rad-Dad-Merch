@@ -17,6 +17,7 @@ import shutil
 import sys
 import tempfile
 from typing import Iterable, Sequence
+import zipfile
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,7 @@ RELEASE_NAME = "Rad Dad Retro Riot v9: Authenticity + QR Edition"
 DEFAULT_OUTPUT = REPO_ROOT / "release" / "v9"
 ARCHIVE_NAME = "Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip"
 ALL_FOUR_STEM = "Rad_Dad_Retro_Riot_v9_ALL_FOUR"
+SUPPORT_PROJECT_STEM = f"{ALL_FOUR_STEM}_A1_MINI_0.4_TREE_SUPPORT_PROJECT"
 TAP_URL = "https://raddadband.com/tap/"
 
 PRODUCT_UPDATES = {
@@ -59,9 +61,9 @@ PRODUCT_UPDATES = {
         "nfc_location": "central rear 1-inch QR sticker landing",
     },
     "trailer_swift": {
-        "artifact_stem": "Trailer_Swift_v6_Friendly_Punk_QR",
-        "display_name": "Trailer Swift v6 Friendly Punk Desk Toy",
-        "product_version": "v6",
+        "artifact_stem": "Trailer_Swift_v9_Signature_Punk_QR",
+        "display_name": "Trailer Swift v9 Signature Punk Collectible",
+        "product_version": "v9",
         "source_builder": "trailer_swift_v9_sculpt.build_trailer_swift_v9",
         "nfc_location": "underside 1-inch QR sticker landing",
     },
@@ -132,6 +134,52 @@ def _copy_geometry(source: Path, output: Path) -> dict[str, str]:
     return hashes
 
 
+def _write_support_ready_project(
+    output: Path, geometry_hashes: dict[str, str]
+) -> Path:
+    """Add the proven A1 mini tree-support profile to the v9 all-four model."""
+
+    source = output / "3mf" / f"{ALL_FOUR_STEM}_MODEL_ONLY.3mf"
+    target = output / "3mf" / f"{SUPPORT_PROJECT_STEM}.3mf"
+    baseline = (
+        REPO_ROOT
+        / "release"
+        / "v7"
+        / "3mf"
+        / "Rad_Dad_Retro_Riot_v7_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf"
+    )
+    if not source.is_file() or not baseline.is_file():
+        raise RuntimeError("Support-ready project inputs are missing")
+
+    with zipfile.ZipFile(baseline) as archive:
+        settings = json.loads(
+            archive.read("Metadata/project_settings.config").decode("utf-8")
+        )
+    settings.update(
+        {
+            "enable_support": "1",
+            "support_on_build_plate_only": "1",
+            "support_remove_small_overhang": "1",
+            "support_critical_regions_only": "0",
+            "support_threshold_angle": "30",
+            "support_top_z_distance": "0.2",
+            "support_bottom_z_distance": "0.2",
+            "support_type": "tree(auto)",
+            "support_style": "default",
+            "raft_layers": "0",
+        }
+    )
+
+    shutil.copyfile(source, target)
+    with zipfile.ZipFile(target, "a", compression=zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr(
+            "Metadata/project_settings.config",
+            json.dumps(settings, indent=2, sort_keys=True) + "\n",
+        )
+    geometry_hashes[target.relative_to(output).as_posix()] = _sha256(target)
+    return target
+
+
 def _find_artwork(output: Path, marker: str, suffix: str = ".pdf") -> Path:
     matches = sorted(
         path
@@ -153,6 +201,10 @@ def _write_release_documents(output: Path, geometry_hashes: dict[str, str]) -> N
     sheet_63 = _find_artwork(output, "63UP")
     fedex_sheet = _find_artwork(output, "FEDEX")
     calibration = _find_artwork(output, "CALIBRATION")
+    red_vendor_pdf = _find_artwork(output, "RED_1IN")
+    red_sheet_63 = _find_artwork(output, "RED_AVERY")
+    red_fedex_sheet = _find_artwork(output, "RED_FEDEX")
+    red_calibration = _find_artwork(output, "RED_PRINT_CALIBRATION")
 
     rel = lambda path: path.relative_to(output).as_posix()
     readme = f"""# {RELEASE_NAME}
@@ -170,11 +222,15 @@ one-inch QR sticker that opens `{TAP_URL}`.
 | Need | File |
 |---|---|
 | Print all four together | `3mf/{ALL_FOUR_STEM}_MODEL_ONLY.3mf` |
-| Use a Bambu A1 mini project | Open the matching `_A1_MINI_0.4_PROJECT.3mf` file in `3mf/` |
+| Print all four with Trailer Swift supports preset | `3mf/{SUPPORT_PROJECT_STEM}.3mf` |
 | Print on 63-up pre-cut stock | [{sheet_63.name}]({rel(sheet_63)}) |
 | Print at FedEx Office on adhesive paper | [{fedex_sheet.name}]({rel(fedex_sheet)}) |
 | Send one design to a sticker vendor | [{vendor_pdf.name}]({rel(vendor_pdf)}) |
 | Check printer scaling first | [{calibration.name}]({rel(calibration)}) |
+| Print without black ink, using pure red | [{red_sheet_63.name}]({rel(red_sheet_63)}) |
+| Print a red full sheet for hand cutting | [{red_fedex_sheet.name}]({rel(red_fedex_sheet)}) |
+| Send the red master to a vendor | [{red_vendor_pdf.name}]({rel(red_vendor_pdf)}) |
+| Calibrate and scan-test red first | [{red_calibration.name}]({rel(red_calibration)}) |
 | Follow the physical acceptance gate | [Physical QC checklist](qa/PHYSICAL_QC_CHECKLIST.md) |
 
 ## V9 authenticity changes
@@ -196,8 +252,14 @@ one-inch QR sticker that opens `{TAP_URL}`.
 - Matrix: 29 x 29 modules with error correction Q
 - Quiet zone: four complete modules on every side
 - Module pitch: approximately 0.446 mm
-- Artwork: vector plus 600 DPI raster/PDF production files
+- Standard artwork: pure black on white
+- Color-cartridge fallback: pure process red `#FF0000` on white
+- Artwork: vector plus lossless 600 DPI raster/PDF production files
 - Print scaling: Actual Size / 100%; never Fit or Scale to Page
+
+Black remains the preferred production color. Use the red files when black ink
+is unavailable, select color printing rather than grayscale, and approve them
+only after the red calibration code scans from two phones.
 
 ## Physical-production rule
 
@@ -212,14 +274,16 @@ light. The digital files cannot substitute for a physical print and scan test.
 
 ## File to bring
 
-Use `{rel(fedex_sheet)}` for a full sheet that can be cut or punched into
-one-inch circles. Bring `{rel(calibration)}` as the first proof page.
+Use `{rel(fedex_sheet)}` for the standard black full sheet. If black ink is
+unavailable, use `{rel(red_fedex_sheet)}` and first print
+`{rel(red_calibration)}`. Both layouts cut or punch into one-inch circles.
+Bring `{rel(calibration)}` as the standard black proof page.
 
 ## Counter instructions
 
 1. Print on US Letter, white matte adhesive label stock.
-2. Print black only on white. Do not use clear, metallic, holographic, or dark
-   stock.
+2. Print black on white, or use the supplied pure-red fallback on white. Do not
+   use grayscale, clear, metallic, holographic, or dark stock.
 3. Select Actual Size / 100%. Disable Fit, Shrink, Scale to Fit, borderless
    enlargement, and automatic rotation.
 4. Keep the PDF at its native resolution. Do not screenshot or resave it.
@@ -279,6 +343,8 @@ avoid thin standalone parts and preserve the support strategy and stable base.
 
 - [ ] Calibration circle measures 25.4 mm and reference square measures 50 mm.
 - [ ] QR modules are square, solid black, and surrounded by uninterrupted white.
+- [ ] If using the fallback, modules are solid pure red on clean white and the
+      printer is set to color rather than grayscale.
 - [ ] Top, center, and bottom sheet samples scan before cutting.
 - [ ] Sticker is centered, flat, clean, and fully adhered.
 - [ ] Installed QR opens `{TAP_URL}` on iPhone and Android.
@@ -300,7 +366,8 @@ avoid thin standalone parts and preserve the support strategy and stable base.
                 "render_square_mm": 16.5,
                 "quiet_zone_modules": 4,
                 "error_correction": "Q",
-                "colors": ["#000000", "#FFFFFF"],
+                "preferred_colors": ["#000000", "#FFFFFF"],
+                "color_cartridge_fallback": ["#FF0000", "#FFFFFF"],
             },
             "geometry_sha256": geometry_hashes,
             "physical_validation": "required before batch production",
@@ -340,6 +407,7 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         geometry_root = Path(temporary) / "release"
         geometry_result = legacy.build_release(geometry_root, bambu_mode=bambu_mode)
         geometry_hashes = _copy_geometry(geometry_root, output)
+        support_project = _write_support_ready_project(output, geometry_hashes)
         _write_json(
             output / "qa" / "GEOMETRY_BUILD_STATUS.json",
             {
@@ -385,6 +453,7 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         "release": output,
         "archive": archive,
         "all_four": output / "3mf" / f"{ALL_FOUR_STEM}_MODEL_ONLY.3mf",
+        "support_project": support_project,
         "sticker_63up": _find_artwork(output, "63UP"),
         "sticker_fedex": _find_artwork(output, "FEDEX"),
         "calibration": _find_artwork(output, "CALIBRATION"),
@@ -409,6 +478,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(f"Release: {result['release']}")
     print(f"Print pack: {result['archive']}")
     print(f"All four: {result['all_four']}")
+    print(f"Support-ready project: {result['support_project']}")
     print(f"63-up QR sheet: {result['sticker_63up']}")
     print(f"FedEx QR sheet: {result['sticker_fedex']}")
     print(f"Calibration: {result['calibration']}")

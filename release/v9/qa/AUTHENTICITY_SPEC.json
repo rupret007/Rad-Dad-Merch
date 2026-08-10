@@ -4,22 +4,27 @@
     "3mf/Rad_Dad_Cassette_v38_MODEL_ONLY.3mf": "cd7450215ffe58504d03abcf8d823d1187ccbe2ffaf4cb2533dfcefa1b59f7d2",
     "3mf/Rad_Dad_Floppy_v20_MODEL_ONLY.3mf": "9c13af307684f409a109f26ab4f4730fc3bfacc2a2cadbe7f70cd70d005f6bd4",
     "3mf/Rad_Dad_Mini_VHS_v5_MODEL_ONLY.3mf": "47cd37d44ea2706429967a84aec5d714fc42f618a12b4622903d790483256576",
-    "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf": "59017cc300925ebe628b8d4ef246e8fcb66658c5e54632457da0116a391e3ceb",
-    "3mf/Trailer_Swift_v6_Friendly_Punk_QR_MODEL_ONLY.3mf": "a0a4cdb16591d687820e3d8c4c905553858ced5040368d37454e6ae312c8b1fd",
+    "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf": "fbfa6d2b8b446f6bb3b1265f2fa5728cd7ac24470172d89ad4e2e3546a064c6a",
+    "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf": "06ccad15a433ea305c102c795feb3b6f958827991547b3d7bf484190f8fa44bc",
+    "3mf/Trailer_Swift_v9_Signature_Punk_QR_MODEL_ONLY.3mf": "6e2c17e0e7e9248327329c3d10d53092657fc5960f063b48c12ae70a38e90502",
     "stl/Rad_Dad_Cassette_v38_BINARY.stl": "80a336b02ed1e16f4f133c97c451aa7851c4091bcde0b7de65861d7f0892b94d",
     "stl/Rad_Dad_Floppy_v20_BINARY.stl": "437b7e9633ae31fa6df24f20ca10b62d92eb3ffd0723c0053bab75f558be48de",
     "stl/Rad_Dad_Mini_VHS_v5_BINARY.stl": "ac5fbfe07fc847e2e42dc365f265d455414b9a1fc7371de7fd2f046ea12a95ef",
-    "stl/Trailer_Swift_v6_Friendly_Punk_QR_BINARY.stl": "8aa287e679f95033e8ac98315d2ad131ea3721662d1afeab580c230a08650415"
+    "stl/Trailer_Swift_v9_Signature_Punk_QR_BINARY.stl": "18b6a0d255348802cc3e2ce70adb8db41e9290cc434f217262a572bd190c5492"
   },
   "physical_validation": "required before batch production",
   "printer_target": "Bambu Lab A1 mini / 0.4 mm nozzle",
   "qr": {
-    "colors": [
-      "#000000",
+    "color_cartridge_fallback": [
+      "#FF0000",
       "#FFFFFF"
     ],
     "error_correction": "Q",
     "label_diameter_mm": 25.4,
+    "preferred_colors": [
+      "#000000",
+      "#FFFFFF"
+    ],
     "quiet_zone_modules": 4,
     "render_square_mm": 16.5
   },

@@ -166,9 +166,9 @@
         ]
       },
       "center_mass_mm": [
-        0.124221,
-        -0.556386,
-        23.280046
+        0.175981,
+        -0.398918,
+        21.922972
       ],
       "checks": {
         "finite_vertices": true,
@@ -188,13 +188,13 @@
         45.0,
         64.400002
       ],
-      "faces": 17364,
-      "name": "Trailer_Swift_v6_Friendly_Punk_QR",
+      "faces": 22518,
+      "name": "Trailer_Swift_v9_Signature_Punk_QR",
       "non_manifold_edges": 0,
       "physical_validation": "required-before-batch-production",
-      "surface_area_mm2": 8795.511355,
-      "vertices": 8678,
-      "volume_mm3": 20887.53766,
+      "surface_area_mm2": 8426.251769,
+      "vertices": 11247,
+      "volume_mm3": 19263.539468,
       "watertight": true,
       "winding_consistent": true
     }
@@ -269,9 +269,9 @@
       "top_layers": 5,
       "wall_loops": 4
     },
-    "Trailer_Swift_v6_Friendly_Punk_QR": {
+    "Trailer_Swift_v9_Signature_Punk_QR": {
       "bottom_layers": 5,
-      "display_name": "Trailer Swift v6 Friendly Punk Desk Toy",
+      "display_name": "Trailer Swift v9 Signature Punk Collectible",
       "infill_pattern": "gyroid",
       "infill_percent": 30,
       "initial_layer_height_mm": 0.2,
@@ -280,7 +280,7 @@
       "orientation": "upright",
       "printer": "Bambu Lab A1 mini",
       "profile_status": "fallback-model-only",
-      "slug": "Trailer_Swift_v6_Friendly_Punk_QR",
+      "slug": "Trailer_Swift_v9_Signature_Punk_QR",
       "support_on_build_plate_only": true,
       "supports": "organic",
       "top_layers": 5,

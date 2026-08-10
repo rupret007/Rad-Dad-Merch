@@ -24,6 +24,8 @@
 
 - [ ] Calibration circle measures 25.4 mm and reference square measures 50 mm.
 - [ ] QR modules are square, solid black, and surrounded by uninterrupted white.
+- [ ] If using the fallback, modules are solid pure red on clean white and the
+      printer is set to color rather than grayscale.
 - [ ] Top, center, and bottom sheet samples scan before cutting.
 - [ ] Sticker is centered, flat, clean, and fully adhered.
 - [ ] Installed QR opens `https://raddadband.com/tap/` on iPhone and Android.

@@ -13,11 +13,15 @@ one-inch QR sticker that opens `https://raddadband.com/tap/`.
 | Need | File |
 |---|---|
 | Print all four together | `3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf` |
-| Use a Bambu A1 mini project | Open the matching `_A1_MINI_0.4_PROJECT.3mf` file in `3mf/` |
+| Print all four with Trailer Swift supports preset | `3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf` |
 | Print on 63-up pre-cut stock | [Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf) |
 | Print at FedEx Office on adhesive paper | [Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf) |
 | Send one design to a sticker vendor | [Rad_Dad_QR_1IN_VENDOR_MASTER.pdf](guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.pdf) |
 | Check printer scaling first | [Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf) |
+| Print without black ink, using pure red | [Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf) |
+| Print a red full sheet for hand cutting | [Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf) |
+| Send the red master to a vendor | [Rad_Dad_QR_RED_1IN_VENDOR_MASTER.pdf](guides/qr_stickers/Rad_Dad_QR_RED_1IN_VENDOR_MASTER.pdf) |
+| Calibrate and scan-test red first | [Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf) |
 | Follow the physical acceptance gate | [Physical QC checklist](qa/PHYSICAL_QC_CHECKLIST.md) |
 
 ## V9 authenticity changes
@@ -39,8 +43,14 @@ one-inch QR sticker that opens `https://raddadband.com/tap/`.
 - Matrix: 29 x 29 modules with error correction Q
 - Quiet zone: four complete modules on every side
 - Module pitch: approximately 0.446 mm
-- Artwork: vector plus 600 DPI raster/PDF production files
+- Standard artwork: pure black on white
+- Color-cartridge fallback: pure process red `#FF0000` on white
+- Artwork: vector plus lossless 600 DPI raster/PDF production files
 - Print scaling: Actual Size / 100%; never Fit or Scale to Page
+
+Black remains the preferred production color. Use the red files when black ink
+is unavailable, select color printing rather than grayscale, and approve them
+only after the red calibration code scans from two phones.
 
 ## Physical-production rule
 

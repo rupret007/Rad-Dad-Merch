@@ -20,10 +20,10 @@
       "model_only_core_3mf": "3mf/Rad_Dad_Mini_VHS_v5_MODEL_ONLY.3mf",
       "stl": "stl/Rad_Dad_Mini_VHS_v5_BINARY.stl"
     },
-    "Trailer_Swift_v6_Friendly_Punk_QR": {
+    "Trailer_Swift_v9_Signature_Punk_QR": {
       "bambu_project_3mf": null,
-      "model_only_core_3mf": "3mf/Trailer_Swift_v6_Friendly_Punk_QR_MODEL_ONLY.3mf",
-      "stl": "stl/Trailer_Swift_v6_Friendly_Punk_QR_BINARY.stl"
+      "model_only_core_3mf": "3mf/Trailer_Swift_v9_Signature_Punk_QR_MODEL_ONLY.3mf",
+      "stl": "stl/Trailer_Swift_v9_Signature_Punk_QR_BINARY.stl"
     }
   },
   "packaging_load_mode": "direct-import",
