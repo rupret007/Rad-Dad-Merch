@@ -146,7 +146,7 @@ print the individual supports-off media projects instead.
 8. Remove only brim or support material. Do not drill, melt, or scale a failed
    production feature to force acceptance.
 9. Complete visual, dimensional, mechanical, and handling inspection.
-10. Program the tag for exactly `https://raddadband.com/tap/` and test it loose
+10. Program the tag for exactly `https://raddadband.com/qr/` and test it loose
     before installation.
 11. Apply the programmed 25.0 mm tag onto the marked landing, apply the matching
     overlay, then apply the clear nonmetal overlaminate.
@@ -248,7 +248,7 @@ print the individual supports-off media projects instead.
 
 ### NFC function
 
-- Verify that every tag contains exactly `https://raddadband.com/tap/`.
+- Verify that every tag contains exactly `https://raddadband.com/qr/`.
 - Test the loose programmed tag before installation.
 - Require ten consecutive successful scans on at least one current iPhone.
 - Require ten consecutive successful scans on at least one current Android
@@ -286,7 +286,7 @@ print the individual supports-off media projects instead.
 
 ## NFC and overlay installation
 
-1. Encode exactly `https://raddadband.com/tap/` and verify it before locking the
+1. Encode exactly `https://raddadband.com/qr/` and verify it before locking the
    tag.
 2. Test the loose programmed tag on both phone platforms.
 3. Clean and dry the marked plastic landing without leaving residue.

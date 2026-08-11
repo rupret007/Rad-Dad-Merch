@@ -245,7 +245,7 @@ problem.
 | VHS | 25.0 mm | Marked flat rear landing inside a 26.0 mm protected zone | `T-369 // RAD DAD VIDEO` |
 | Trailer Swift | 25.0 mm | 27.0 mm mouth, 26.2 mm internal pocket under the base | `TRAILER SWIFT // TAP THE BASE` |
 
-Program and verify the tag for exactly `https://raddadband.com/tap/`. Apply the
+Program and verify the tag for exactly `https://raddadband.com/qr/`. Apply the
 programmed 25.0 mm tag onto the marked landing, apply the matching 25.0 mm
 overlay on top of the tag, then apply a clear nonmetal overlaminate over the
 overlay. All tag, overlay, ink, overlaminate, and adhesive materials near the

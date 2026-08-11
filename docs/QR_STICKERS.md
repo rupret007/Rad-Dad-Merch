@@ -12,7 +12,7 @@ NFC is now a legacy experiment, not a production dependency.
 ## Permanent destination
 
 ```text
-https://raddadband.com/tap/
+https://raddadband.com/qr/
 ```
 
 The code is static and the route is controlled by Rad Dad. Update shows, music,
@@ -111,7 +111,7 @@ Before leaving the counter:
 
 1. Measure one finished 25.4 mm circle.
 2. Scan QR codes from the top, center, and bottom of the proof sheet.
-3. Confirm that each opens exactly `https://raddadband.com/tap/`.
+3. Confirm that each opens exactly `https://raddadband.com/qr/`.
 4. Reject scaling, clipped circles, broken modules, banding, weak black, or
    excessive toner shine.
 
@@ -148,7 +148,7 @@ production batch must pass all of the following:
 - Every installed product scans after application.
 - Finished pieces scan on at least one current iPhone and Android phone.
 - Scans succeed in normal indoor light and from multiple approach angles.
-- Every scan resolves to `https://raddadband.com/tap/`.
+- Every scan resolves to `https://raddadband.com/qr/`.
 - Finished pieces still scan after 24-hour cure and carry testing.
 
 Quarantine and replace any label that scans slowly or inconsistently. Do not

@@ -36,7 +36,7 @@ DEFAULT_OUTPUT = REPO_ROOT / "release" / "v9"
 ARCHIVE_NAME = "Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip"
 ALL_FOUR_STEM = "Rad_Dad_Retro_Riot_v9_ALL_FOUR"
 SUPPORT_PROJECT_STEM = f"{ALL_FOUR_STEM}_A1_MINI_0.4_TREE_SUPPORT_PROJECT"
-TAP_URL = "https://raddadband.com/tap/"
+QR_URL = "https://raddadband.com/qr/"
 
 PRODUCT_UPDATES = {
     "cassette": {
@@ -215,7 +215,7 @@ This release restores the physical cues that make the cassette, floppy disk,
 and VHS recognizable while keeping the Trailer Swift collectible funny rather
 than frightening. Every exterior envelope and attachment opening remains the
 same size as v7. The NFC workflow is replaced by a visible, black-and-white,
-one-inch QR sticker that opens `{TAP_URL}`.
+one-inch QR sticker that opens `{QR_URL}`.
 
 ## Start here
 
@@ -347,7 +347,7 @@ avoid thin standalone parts and preserve the support strategy and stable base.
       printer is set to color rather than grayscale.
 - [ ] Top, center, and bottom sheet samples scan before cutting.
 - [ ] Sticker is centered, flat, clean, and fully adhered.
-- [ ] Installed QR opens `{TAP_URL}` on iPhone and Android.
+- [ ] Installed QR opens `{QR_URL}` on iPhone and Android.
 - [ ] Indoor light, bright overhead light, and daylight all pass.
 - [ ] Final scan passes again after a 24-hour adhesive cure.
 """
@@ -358,7 +358,7 @@ avoid thin standalone parts and preserve the support strategy and stable base.
         {
             "schema": "rad-dad-authenticity-v9",
             "release": RELEASE_NAME,
-            "tap_url": TAP_URL,
+            "tap_url": QR_URL,
             "printer_target": "Bambu Lab A1 mini / 0.4 mm nozzle",
             "geometry_policy": "same external envelopes and attachment openings as v7",
             "qr": {
@@ -434,7 +434,7 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         metadata={
             "collection": "Authenticity + QR Edition",
             "interaction": "visible black-and-white 1-inch QR sticker",
-            "destination_url": TAP_URL,
+            "destination_url": QR_URL,
             "geometry_changed_from_v7": True,
             "external_envelopes_changed_from_v7": False,
             "printer_target": "Bambu Lab A1 mini / 0.4 mm nozzle",

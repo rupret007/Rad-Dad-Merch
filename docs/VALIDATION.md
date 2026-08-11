@@ -283,7 +283,7 @@ Applies to cassette, floppy disk, and VHS only.
 - [ ] Repeat after applying the clear nonmetal overlaminate.
 - [ ] Repeat with ordinary nonmetal phone cases installed.
 - [ ] Repeat media tests with the production split ring and a representative metal key bundle attached.
-- [ ] Confirm every successful read offers exactly `https://raddadband.com/tap/`.
+- [ ] Confirm every successful read offers exactly `https://raddadband.com/qr/`.
 - [ ] Record tag-detection success separately from browser, network, DNS, or website-load success.
 - [ ] Measure and record the maximum repeatable read distance and phone orientation for each phone; contact-level reliability at the marked surface is mandatory.
 - [ ] Retest after 24-hour adhesive cure, the drop sequence, and the 72-hour carry period.

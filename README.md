@@ -15,7 +15,7 @@ The models remain one-color prints. The interaction layer is a separate,
 strictly black-and-white 1-inch QR sticker that opens:
 
 ```text
-https://raddadband.com/tap/
+https://raddadband.com/qr/
 ```
 
 > [!IMPORTANT]
@@ -129,7 +129,7 @@ master uses only pure black and pure white:
 
 | Property | V9 production specification |
 |---|---|
-| Destination | `https://raddadband.com/tap/` |
+| Destination | `https://raddadband.com/qr/` |
 | Finished label | 25.4 mm / 1 inch round |
 | QR matrix | 29 x 29 modules |
 | Error correction | Q |
@@ -187,7 +187,7 @@ must pass physical quality control:
 3. Check that modules are square, solid, separated, and surrounded by an intact
    white quiet zone.
 4. Scan labels from the top, center, and bottom of every printed sheet.
-5. Verify that every sample opens exactly `https://raddadband.com/tap/`.
+5. Verify that every sample opens exactly `https://raddadband.com/qr/`.
 6. Apply stickers only to clean, dry, flat landings.
 7. Scan every finished product with at least one current iPhone and Android
    phone.
