@@ -1,10 +1,10 @@
 {
   "bambu_projects": {
     "Rad_Dad_Cassette_v38": "Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf",
-    "Rad_Dad_Floppy_v21": "Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf",
+    "Rad_Dad_Floppy_v22": "Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf",
     "Rad_Dad_Mini_VHS_v5": "Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf",
     "Rad_Dad_Retro_Riot_v9_ALL_FOUR": "Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf",
-    "Trailer_Swift_v9_Signature_Punk_QR": "Trailer_Swift_v9_Signature_Punk_QR_A1_MINI_0.4_PROJECT.3mf"
+    "Trailer_Swift_v16_Strat_Style_Punk_QR": "Trailer_Swift_v16_Strat_Style_Punk_QR_A1_MINI_0.4_PROJECT.3mf"
   },
   "intents": {
     "Rad_Dad_Cassette_v38": {
@@ -24,9 +24,9 @@
       "top_layers": 5,
       "wall_loops": 4
     },
-    "Rad_Dad_Floppy_v21": {
+    "Rad_Dad_Floppy_v22": {
       "bottom_layers": 5,
-      "display_name": "Rad Dad 3.5-Inch Floppy v21 Legible Capacity",
+      "display_name": "Rad Dad 3.5-Inch Floppy v22 High-Contrast Capacity",
       "infill_pattern": "gyroid",
       "infill_percent": 30,
       "initial_layer_height_mm": 0.2,
@@ -35,7 +35,7 @@
       "orientation": "flat",
       "printer": "Bambu Lab A1 mini",
       "profile_status": "verified-bambu-project",
-      "slug": "Rad_Dad_Floppy_v21",
+      "slug": "Rad_Dad_Floppy_v22",
       "support_on_build_plate_only": false,
       "supports": "off",
       "top_layers": 5,
@@ -75,9 +75,9 @@
       "top_layers": 5,
       "wall_loops": 4
     },
-    "Trailer_Swift_v9_Signature_Punk_QR": {
+    "Trailer_Swift_v16_Strat_Style_Punk_QR": {
       "bottom_layers": 5,
-      "display_name": "Trailer Swift v9 Signature Punk Collectible",
+      "display_name": "Trailer Swift v16 Strat-Style Punk Collectible",
       "infill_pattern": "gyroid",
       "infill_percent": 30,
       "initial_layer_height_mm": 0.2,
@@ -86,7 +86,7 @@
       "orientation": "upright",
       "printer": "Bambu Lab A1 mini",
       "profile_status": "verified-bambu-project",
-      "slug": "Trailer_Swift_v9_Signature_Punk_QR",
+      "slug": "Trailer_Swift_v16_Strat_Style_Punk_QR",
       "support_on_build_plate_only": true,
       "supports": "organic",
       "top_layers": 5,

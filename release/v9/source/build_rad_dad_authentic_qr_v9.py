@@ -28,8 +28,8 @@ import build_rad_dad_micro_replica_v7 as legacy  # noqa: E402
 from build_three_device_plate_v9 import build as build_three_device_plate  # noqa: E402
 import qr_artwork_v9  # noqa: E402
 import v7_release_packaging as packaging  # noqa: E402
-from media_micro_v9 import build_cassette_v9, build_floppy_v9, build_vhs_v9  # noqa: E402
-from trailer_swift_v9_sculpt import build_trailer_swift_v9  # noqa: E402
+from media_micro_v9 import build_cassette_v9, build_floppy_v22, build_vhs_v9  # noqa: E402
+from trailer_swift_v9_sculpt import build_trailer_swift_v16  # noqa: E402
 
 
 RELEASE_NAME = "Rad Dad Retro Riot v9: Authenticity + QR Edition"
@@ -52,10 +52,10 @@ PRODUCT_UPDATES = {
         "nfc_location": "flat rear 1-inch QR sticker landing",
     },
     "floppy": {
-        "artifact_stem": "Rad_Dad_Floppy_v21",
-        "display_name": "Rad Dad 3.5-Inch Floppy v21 Legible Capacity",
-        "product_version": "v21",
-        "source_builder": "media_micro_v9.build_floppy_v9",
+        "artifact_stem": "Rad_Dad_Floppy_v22",
+        "display_name": "Rad Dad 3.5-Inch Floppy v22 High-Contrast Capacity",
+        "product_version": "v22",
+        "source_builder": "media_micro_v9.build_floppy_v22",
         "nfc_location": "rear faux-hub 1-inch QR sticker landing",
     },
     "vhs": {
@@ -66,10 +66,10 @@ PRODUCT_UPDATES = {
         "nfc_location": "central rear 1-inch QR sticker landing",
     },
     "trailer_swift": {
-        "artifact_stem": "Trailer_Swift_v9_Signature_Punk_QR",
-        "display_name": "Trailer Swift v9 Signature Punk Collectible",
-        "product_version": "v9",
-        "source_builder": "trailer_swift_v9_sculpt.build_trailer_swift_v9",
+        "artifact_stem": "Trailer_Swift_v16_Strat_Style_Punk_QR",
+        "display_name": "Trailer Swift v16 Strat-Style Punk Collectible",
+        "product_version": "v11",
+        "source_builder": "trailer_swift_v9_sculpt.build_trailer_swift_v16",
         "nfc_location": "underside 1-inch QR sticker landing",
     },
 }
@@ -105,9 +105,9 @@ def _configure_geometry_builder() -> None:
     legacy.ARCHIVE_NAME = "Rad_Dad_v9_Geometry_Source.zip"
     legacy.ALL_FOUR_STEM = ALL_FOUR_STEM
     legacy.build_cassette_v7 = build_cassette_v9
-    legacy.build_floppy_v7 = build_floppy_v9
+    legacy.build_floppy_v7 = build_floppy_v22
     legacy.build_vhs_v7 = build_vhs_v9
-    legacy.build_trailer_swift_v7 = build_trailer_swift_v9
+    legacy.build_trailer_swift_v7 = build_trailer_swift_v16
 
 
 def _copy_geometry(source: Path, output: Path) -> dict[str, str]:
@@ -226,7 +226,7 @@ one-inch QR sticker that opens `{QR_URL}`.
 
 | Need | File |
 |---|---|
-| Print the current cassette, v21 floppy, and VHS together | `3mf/{CURRENT_THREE_STEM}.3mf` |
+| Print the current cassette, v22 floppy, and VHS together | `3mf/{CURRENT_THREE_STEM}.3mf` |
 | Print all four together | `3mf/{ALL_FOUR_STEM}_MODEL_ONLY.3mf` |
 | Print all four with Trailer Swift supports preset | `3mf/{SUPPORT_PROJECT_STEM}.3mf` |
 | Print on 63-up pre-cut stock | [{sheet_63.name}]({rel(sheet_63)}) |
@@ -246,7 +246,7 @@ one-inch QR sticker that opens `{QR_URL}`.
   keychain durability without restoring the previous solid toy-like edge.
 - Floppy: rear spindle, shutter-track, shell-seam, and write-protect cues frame
   the functional QR landing; the front keeps `RAD DAD` and rebuilds `3.69 MB`
-  at 12.60 x 2.85 mm with heavier strokes for reliable 0.4 mm-nozzle printing.
+  at 20.00 x 4.00 mm with heavier strokes for reliable 0.4 mm-nozzle printing.
 - VHS: rear reel-drive, shell, door, and fastener cues join the front tape door,
   windows, hubs, `RAD DAD`, and `T-369` details.
 - Trailer Swift: the stable solid base and underside QR landing remain, while

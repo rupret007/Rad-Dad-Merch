@@ -17,7 +17,7 @@ The verifier checks:
 
 - Required v9 source, documents, QR artwork, STL, and 3MF files.
 - Canonical `https://raddadband.com/qr/` metadata.
-- The v21 floppy and balanced current three-device project.
+- The v22 floppy and balanced current three-device project.
 - Manifest records, SHA256SUMS entries, archive checksum, and ZIP integrity.
 - Bambu project generation status.
 - One-body, watertight, consistently wound meshes with zero boundary,

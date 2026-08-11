@@ -32,10 +32,10 @@ V9 deepens authentic device details without changing the proven sticker fit:
 
 Cassette v38 directly preserves the audited narrow tape-entry edge from the
 successful earlier body, including its stepped shell and asymmetric transport
-apertures. Floppy v21 retains its developed rear cues and adds a larger,
+apertures. Floppy v22 retains its developed rear cues and adds a larger,
 heavier `3.69 MB` front capacity mark. VHS v5 deepens its rear and
 device-specific cues around, not through, the unchanged QR landing. Trailer
-Swift v9 retains the protected pocket beneath the solid circular base.
+Swift v16 retains the protected pocket beneath the solid circular base.
 
 ## Non-negotiable artwork rules
 

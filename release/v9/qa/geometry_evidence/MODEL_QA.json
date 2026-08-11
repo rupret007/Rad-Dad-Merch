@@ -70,9 +70,9 @@
         ]
       },
       "center_mass_mm": [
-        1.062265,
-        0.073058,
-        1.876222
+        1.05202,
+        0.06297,
+        1.87929
       ],
       "checks": {
         "finite_vertices": true,
@@ -92,13 +92,13 @@
         36.916,
         4.13
       ],
-      "faces": 13634,
-      "name": "Rad_Dad_Floppy_v21",
+      "faces": 13762,
+      "name": "Rad_Dad_Floppy_v22",
       "non_manifold_edges": 0,
       "physical_validation": "required-before-batch-production",
-      "surface_area_mm2": 3913.083548,
-      "vertices": 6817,
-      "volume_mm3": 5154.632591,
+      "surface_area_mm2": 3927.19573,
+      "vertices": 6881,
+      "volume_mm3": 5162.326391,
       "watertight": true,
       "winding_consistent": true
     },
@@ -118,9 +118,9 @@
         ]
       },
       "center_mass_mm": [
-        0.899462,
-        0.025443,
-        3.193686
+        0.895034,
+        0.025964,
+        3.20254
       ],
       "checks": {
         "finite_vertices": true,
@@ -140,13 +140,13 @@
         31.9,
         7.0
       ],
-      "faces": 34074,
+      "faces": 38562,
       "name": "Rad_Dad_Mini_VHS_v5",
       "non_manifold_edges": 0,
       "physical_validation": "required-before-batch-production",
-      "surface_area_mm2": 6299.961095,
-      "vertices": 17037,
-      "volume_mm3": 11915.734255,
+      "surface_area_mm2": 6428.027726,
+      "vertices": 19281,
+      "volume_mm3": 11946.552683,
       "watertight": true,
       "winding_consistent": true
     },
@@ -157,7 +157,7 @@
         "maximum": [
           22.5,
           22.5,
-          64.400002
+          64.4
         ],
         "minimum": [
           -22.5,
@@ -166,9 +166,9 @@
         ]
       },
       "center_mass_mm": [
-        0.175981,
-        -0.398918,
-        21.922972
+        0.158292,
+        -0.511699,
+        21.797327
       ],
       "checks": {
         "finite_vertices": true,
@@ -186,15 +186,15 @@
       "dimensions_mm": [
         45.0,
         45.0,
-        64.400002
+        64.4
       ],
-      "faces": 22520,
-      "name": "Trailer_Swift_v9_Signature_Punk_QR",
+      "faces": 36510,
+      "name": "Trailer_Swift_v16_Strat_Style_Punk_QR",
       "non_manifold_edges": 0,
       "physical_validation": "required-before-batch-production",
-      "surface_area_mm2": 8426.251765,
-      "vertices": 11248,
-      "volume_mm3": 19263.539468,
+      "surface_area_mm2": 8526.32058,
+      "vertices": 18247,
+      "volume_mm3": 19507.826405,
       "watertight": true,
       "winding_consistent": true
     }
@@ -218,9 +218,9 @@
       "top_layers": 5,
       "wall_loops": 4
     },
-    "Rad_Dad_Floppy_v21": {
+    "Rad_Dad_Floppy_v22": {
       "bottom_layers": 5,
-      "display_name": "Rad Dad 3.5-Inch Floppy v21 Legible Capacity",
+      "display_name": "Rad Dad 3.5-Inch Floppy v22 High-Contrast Capacity",
       "infill_pattern": "gyroid",
       "infill_percent": 30,
       "initial_layer_height_mm": 0.2,
@@ -229,7 +229,7 @@
       "orientation": "flat",
       "printer": "Bambu Lab A1 mini",
       "profile_status": "verified-bambu-project",
-      "slug": "Rad_Dad_Floppy_v21",
+      "slug": "Rad_Dad_Floppy_v22",
       "support_on_build_plate_only": false,
       "supports": "off",
       "top_layers": 5,
@@ -269,9 +269,9 @@
       "top_layers": 5,
       "wall_loops": 4
     },
-    "Trailer_Swift_v9_Signature_Punk_QR": {
+    "Trailer_Swift_v16_Strat_Style_Punk_QR": {
       "bottom_layers": 5,
-      "display_name": "Trailer Swift v9 Signature Punk Collectible",
+      "display_name": "Trailer Swift v16 Strat-Style Punk Collectible",
       "infill_pattern": "gyroid",
       "infill_percent": 30,
       "initial_layer_height_mm": 0.2,
@@ -280,7 +280,7 @@
       "orientation": "upright",
       "printer": "Bambu Lab A1 mini",
       "profile_status": "verified-bambu-project",
-      "slug": "Trailer_Swift_v9_Signature_Punk_QR",
+      "slug": "Trailer_Swift_v16_Strat_Style_Punk_QR",
       "support_on_build_plate_only": true,
       "supports": "organic",
       "top_layers": 5,

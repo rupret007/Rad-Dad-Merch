@@ -8,7 +8,7 @@ geometry but do not carry the complete Bambu printer intent.
 | Need | Recommended file |
 |---|---|
 | Cassette only | `Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf` |
-| Floppy only | `Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf` |
+| Floppy only | `Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf` |
 | VHS only | `Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf` |
 | Trailer Swift only | `Trailer_Swift_v9_Signature_Punk_QR_A1_MINI_0.4_PROJECT.3mf` |
 | Current cassette, floppy, and VHS together | `Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf` |
@@ -60,11 +60,11 @@ figure with the media pieces.
 - Confirm `RAD DAD`, `90`, and `C-69` remain readable.
 - Confirm the rear landing stays continuous and supports are off.
 
-### Floppy v21
+### Floppy v22
 
 - Confirm the shutter is above the writable label.
 - Confirm `RAD DAD` remains inside the label field.
-- Confirm every character of the 12.60 x 2.85 mm bold `3.69 MB` mark has a
+- Confirm every character of the 20.00 x 4.00 mm bold `3.69 MB` mark has a
   continuous toolpath.
 - Confirm the rear spindle, tracks, seam, and write-protect cues remain distinct.
 - Confirm the 6.0 mm eyelet is open and supports are off.
@@ -77,7 +77,7 @@ figure with the media pieces.
 - Reject a Preview that reads like a stretched audio cassette.
 - Confirm the rear landing is flat and supports are off.
 
-### Trailer Swift v9
+### Trailer Swift v16
 
 - Confirm the figure and base remain one object.
 - Confirm feet, guitar, hands, neck, hair, and nameplate are supported.
@@ -86,7 +86,7 @@ figure with the media pieces.
 
 ## Current three-device plate
 
-The current plate contains only the cassette, v21 floppy, and VHS. They are
+The current plate contains only the cassette, v22 floppy, and VHS. They are
 spaced across the A1 Mini bed with the floppy centered above the longer pair:
 
 - Cassette bounds: X 19.02-77.18 mm, Y 39.87-70.13 mm.

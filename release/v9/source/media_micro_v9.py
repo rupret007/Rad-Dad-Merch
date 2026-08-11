@@ -32,7 +32,12 @@ from shapely.ops import unary_union as _unary_union
 import media_micro_v7 as _v7
 
 
-__all__ = ["build_cassette_v9", "build_floppy_v9", "build_vhs_v9"]
+__all__ = [
+    "build_cassette_v9",
+    "build_floppy_v9",
+    "build_floppy_v22",
+    "build_vhs_v9",
+]
 
 
 QR_LANDING_DIAMETER_MM = 25.400
@@ -183,27 +188,27 @@ def build_cassette_v9() -> _trimesh.Trimesh:
     return _v7._finalize(model, "cassette v9 exact heritage bottom")
 
 
-def build_floppy_v9() -> _trimesh.Trimesh:
-    """Build the v9 floppy with authentic rear mechanics around its QR land.
+def build_floppy_v22() -> _trimesh.Trimesh:
+    """Build the v22 floppy with authentic rear mechanics around its QR land.
 
     The asymmetric 36.56 x 36.916 mm v7 shell, front RAD DAD label, and 6.0 mm
-    eyelet are preserved.  The lower-right 3.69 MB mark is rebuilt with larger,
-    heavier 0.4 mm-nozzle-safe geometry without increasing the outer envelope.
+    eyelet are preserved.  The centered 3.69 MB mark is rebuilt as a dominant,
+    high-contrast 0.4 mm-nozzle-safe label cue without increasing the envelope.
     A shallow rear spindle witness ring, eight radial ribs, two shutter tracks,
     shell seam, and write-protect outline are clipped to the shell and excluded
     from the guarded 25.4 mm QR landing centered at (-0.04, 1.80) mm.
     """
 
-    # The inherited capacity mark was only 10.20 x 2.30 mm. A physical print
-    # showed that its counters and spacing were marginal with a 0.4 mm nozzle.
-    # Build the larger mark as part of the original Boolean assembly rather
-    # than stacking a second shell onto a finalized mesh. This keeps one
-    # watertight body and the exact established 4.130 mm maximum thickness.
+    # Physical prints showed that both the original 10.20 x 2.30 mm mark and
+    # the v21 12.60 x 2.85 mm mark were too small in one-color PETG.  V22 uses
+    # most of the writable-label width, a full 4.0 mm character box, and larger
+    # stroke cells.  It remains part of the original Boolean assembly so the
+    # result stays one watertight body at the exact 4.130 mm maximum thickness.
     source = _v7.build_floppy_v7(
-        capacity_width=12.60,
-        capacity_height=2.85,
-        capacity_center=(6.45, -10.25),
-        capacity_pixel=0.18,
+        capacity_width=20.00,
+        capacity_height=4.00,
+        capacity_center=(-0.75, -10.45),
+        capacity_pixel=0.32,
     )
 
     x0, x1 = -18.060, 18.500
@@ -264,7 +269,13 @@ def build_floppy_v9() -> _trimesh.Trimesh:
     )
 
     modified = _v7._v6.difference_mesh(source, (_rear_cutter(rear_cues),))
-    return _finish_without_resizing(source, modified, "floppy v9")
+    return _finish_without_resizing(source, modified, "floppy v22")
+
+
+def build_floppy_v9() -> _trimesh.Trimesh:
+    """Backward-compatible entry point for the current floppy geometry."""
+
+    return build_floppy_v22()
 
 
 def build_vhs_v9() -> _trimesh.Trimesh:
@@ -374,3 +385,83 @@ def build_vhs_v9() -> _trimesh.Trimesh:
     )
     modified = _v7._v6.union_meshes([modified, *replacement_label_text])
     return _finish_without_resizing(source, modified, "VHS v9")
+# ---------------------------------------------------------------------------
+# Locked-envelope authenticity refinements
+#
+# These wrappers deliberately preserve the approved source geometry, QR lands,
+# eyelets, and overall bounds.  The added features sit below each model's
+# existing maximum Z so this pass adds visual information without making the
+# keepsakes larger or changing their fit on an A1 Mini plate.
+# ---------------------------------------------------------------------------
+
+_build_floppy_v22_approved = build_floppy_v22
+
+
+def build_floppy_v22():
+    """Add restrained stamped-metal shutter cues to the approved floppy."""
+    from shapely.geometry import Polygon as _AuthPolygon
+    from shapely.geometry import box as _auth_box
+    import trimesh as _auth_trimesh
+
+    model = _build_floppy_v22_approved()
+
+    # Folded top and bottom shutter lips.  They flank the read slot and remain
+    # inside the existing 4.13 mm envelope.
+    details = [
+        _v7._extrude(_auth_box(-9.00, 17.28, 7.00, 17.56), 3.82, 4.10),
+        _v7._extrude(_auth_box(-9.00, 6.54, 7.00, 6.82), 3.82, 4.10),
+    ]
+
+    # A small stamped slide-direction arrow is a familiar real-disk cue.  Its
+    # 0.8+ mm strokes remain resolvable with the documented 0.4 mm nozzle.
+    arrow = _AuthPolygon(
+        [
+            (3.05, 14.48),
+            (4.62, 14.48),
+            (4.62, 13.68),
+            (6.38, 15.05),
+            (4.62, 16.42),
+            (4.62, 15.62),
+            (3.05, 15.62),
+        ]
+    )
+    details.append(_v7._extrude(arrow, 3.82, 4.10))
+
+    return _auth_trimesh.boolean.union(
+        [model, *details], engine="manifold", check_volume=False
+    )
+
+
+_build_vhs_v9_approved = build_vhs_v9
+
+
+def build_vhs_v9():
+    """Strengthen reel and flip-up tape-door cues on the approved mini VHS."""
+    from shapely.geometry import Point as _AuthPoint
+    from shapely.geometry import box as _auth_box
+    import trimesh as _auth_trimesh
+
+    model = _build_vhs_v9_approved()
+    details = []
+
+    # Concentric molded rings distinguish VHS supply/take-up hubs from generic
+    # circles while retaining the existing six-spoke reel geometry.
+    for reel_x in (-17.00, 17.00):
+        center = _AuthPoint(reel_x, -1.20)
+        inner_witness = center.buffer(2.12, resolution=32).difference(
+            center.buffer(1.48, resolution=32)
+        )
+        outer_witness = center.buffer(5.12, resolution=48).difference(
+            center.buffer(4.72, resolution=48)
+        )
+        details.append(_v7._extrude(inner_witness, 5.85, 6.98))
+        details.append(_v7._extrude(outer_witness, 5.85, 6.98))
+
+    # Two restrained reinforcement ribs make the broad upper section read as
+    # the hinged VHS tape door.  They stay clear of the hinges and shell seam.
+    details.append(_v7._extrude(_auth_box(-23.70, 10.48, 23.70, 10.76), 5.85, 6.98))
+    details.append(_v7._extrude(_auth_box(-23.70, 12.02, 23.70, 12.30), 5.85, 6.98))
+
+    return _auth_trimesh.boolean.union(
+        [model, *details], engine="manifold", check_volume=False
+    )

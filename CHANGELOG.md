@@ -1,5 +1,82 @@
 # Changelog
 
+## Trailer Swift v16 Strat-style guitar rebuild
+
+- Replaced the generic double-cutaway with a rounded Strat-style perimeter:
+  long upper horn, short lower horn, narrow waist, offset shoulder, and broad
+  lower bout.
+- Rebuilt the front as a recognizable SSS layout with an angled bridge pickup,
+  full pickguard, synchronized tremolo block and arm, three knobs, five-way
+  blade switch, jack cup, bridge saddles, position dots, and strap buttons.
+- Replaced the generic three-per-side headstock with an asymmetric six-inline
+  profile, six same-side tuners, string tree, tapered neck, nut, and two durable
+  representative strings.
+- Kept the design unbranded while preserving the v15 face, clean jeans, exact
+  45 x 45 x 64.4 mm envelope, one-piece construction, and 27 mm QR landing.
+
+## Trailer Swift v15 expression and instrument refinement
+
+- Opened the eyes, thinned and raised the lids, and reduced the brows so the
+  expression reads alert and musical rather than sleepy.
+- Replaced the mustache-like split tooth bars with one recessed curved tooth
+  mass and simplified the tongue and lower lip inside the singing mouth.
+- Rounded the guitar body perimeter, added a printable fretboard nut, preserved
+  its aligned hardware and strap, and removed the unrealistic external flame
+  tabs while retaining the flame relief on the body.
+- Preserved the clean jeans, exact 45 x 45 x 64.4 mm envelope, one-piece
+  construction, and full 27 mm underside QR landing.
+
+## Trailer Swift v14 face and guitar realism pass
+
+- Rebuilt the eyes as inset eyeballs with raised irises and printable upper lids
+  instead of empty sockets with floating dots.
+- Reshaped the nose and singing mouth with a smaller cavity, sloped upper teeth,
+  recessed tongue, lower lip, and cheek creases.
+- Broadened the double-cutaway guitar body, added a connected shoulder strap,
+  retained aligned strings and hardware, and reduced the rear flames from three
+  spikes to two smoother attached flame forms.
+- Preserved the clean v13 jeans, exact 45 x 45 x 64.4 mm envelope, one-piece
+  construction, and full 27 mm underside QR landing.
+
+## Trailer Swift v13 source-level jeans rebuild
+
+- Removed the complete three-stroke plaid generator responsible for the star
+  shapes instead of attempting to filter its geometry after assembly.
+- Rebuilt each pant leg with one stance-following outside seam and one durable
+  molded cuff line above the boot.
+- Retained the v11 retail-style face, hair, flaming guitar, two-line nameplate,
+  exact 45 x 45 x 64.4 mm envelope, and full 27 mm underside QR landing.
+
+## Trailer Swift v12 retail cleanup
+
+- Removed the crossed star stitching from both jean legs so the clothing reads
+  as a clean molded toy rather than a themed costume.
+- Preserved the smoother expressive head, asymmetric punk hair, flaming guitar,
+  two-line display name, exact 45 x 45 x 64.4 mm envelope, and 27 mm QR landing.
+- Kept the figurine as one connected, watertight, support-ready collectible.
+
+## 2026-08-11 - Trailer Swift retail-toy redesign
+
+- Advanced Trailer Swift to v11 with a smoother designer-toy head, asymmetric
+  upward flame hair, narrower expressive eye sockets, a simplified singing
+  face, and a two-line retail nameplate that can be read in one color.
+- Added three structural flame tongues to the electric-guitar silhouette and
+  retained the large shirt bolt, plaid pants, punk stance, and album-character
+  cues so the result feels like Jeff without becoming a literal portrait.
+- Kept the exact 45 x 45 x 64.4 mm envelope and protected 27 mm underside QR
+  landing. Cassette, floppy, VHS, keyring, and plate geometry are unchanged.
+
+## 2026-08-11 - Physical-readability pass
+
+- Advanced the floppy to v22 after PETG testing showed the v21 `3.69 MB`
+  mark was still too small. The mark is now centered, 20.00 x 4.00 mm, and uses
+  substantially heavier stroke geometry without changing the disk envelope.
+- Advanced Trailer Swift to v10 with deep eye and mouth shadows, anchored inset
+  pupils, simplified plaid, a larger shirt bolt, stronger guitar relief, and a
+  heavier base name so the character reads clearly as a punk guitarist.
+- Preserved the 45 x 45 x 64.4 mm figurine envelope, 27 mm underside QR landing,
+  floppy keyring bore, cassette/VHS geometry, and all established plate layouts.
+
 ## v9.1 - Floppy Capacity Legibility - 2026-08-11
 
 - Advanced the 3.5-inch floppy from v20 to v21 after physical-print feedback
@@ -179,3 +256,10 @@
   handoff card so tap behavior is obvious without compromising the authentic
   media fronts.
 - Added a molded `TAP THE BASE` cue to the Trailer Swift display stand.
+# Repository rename and authenticity micro-refinement pass
+
+- Renamed the project from `Rad-Dad-NFC-Tags` to `Rad-Dad-QR-Merch` so the repository identity matches the current QR-first merchandise collection.
+- Kept the approved cassette geometry unchanged, including its audited tape-transport edge, proportions, QR land, and compact eyelet.
+- Added subtle stamped shutter lips and a slide-direction mark to the floppy without changing its dimensions, label, `3.69 MB` marking, QR land, or key-ring geometry.
+- Added molded concentric reel rings and restrained flip-up door ribs to the VHS without changing its dimensions, larger `RAD DAD` label, QR land, or key-ring geometry.
+- Preserved Trailer Swift's established collectible silhouette, clean jeans, Strat-style guitar, base, and underside QR land rather than risking another broad redesign.

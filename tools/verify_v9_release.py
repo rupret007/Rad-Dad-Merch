@@ -19,7 +19,7 @@ CURRENT_THREE = (
     "3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_"
     "A1_MINI_0.4_PROJECT.3mf"
 )
-FLOPPY_MODEL = "3mf/Rad_Dad_Floppy_v21_MODEL_ONLY.3mf"
+FLOPPY_MODEL = "3mf/Rad_Dad_Floppy_v22_MODEL_ONLY.3mf"
 
 
 def require(condition: bool, message: str) -> None:
@@ -97,7 +97,7 @@ def verify_geometry(root: Path) -> None:
     qa = read_json(root / "qa/geometry_evidence/MODEL_QA.json")
     require(qa.get("mesh_qa_pass") is True, "Mesh QA did not pass")
     models = {model["name"]: model for model in qa.get("models", [])}
-    floppy = models.get("Rad_Dad_Floppy_v21")
+    floppy = models.get("Rad_Dad_Floppy_v22")
     require(floppy is not None, "V21 floppy is absent from model QA")
     require(floppy.get("digital_qa_pass") is True, "V21 floppy digital QA failed")
     require(all(floppy.get("checks", {}).values()), "V21 floppy has a failed geometry check")
@@ -131,8 +131,8 @@ def verify(root: Path) -> None:
         "qa/geometry_evidence/MODEL_QA.json",
         CURRENT_THREE,
         FLOPPY_MODEL,
-        "3mf/Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf",
-        "stl/Rad_Dad_Floppy_v21_BINARY.stl",
+        "3mf/Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf",
+        "stl/Rad_Dad_Floppy_v22_BINARY.stl",
         "source/media_micro_v7.py",
         "source/media_micro_v9.py",
         "source/build_three_device_plate_v9.py",
@@ -146,7 +146,7 @@ def verify(root: Path) -> None:
     verify_archive(root)
     verify_geometry(root)
     verify_qr(root)
-    for relative in (CURRENT_THREE, FLOPPY_MODEL, "3mf/Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf"):
+    for relative in (CURRENT_THREE, FLOPPY_MODEL, "3mf/Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf"):
         verify_3mf(root / relative)
 
 

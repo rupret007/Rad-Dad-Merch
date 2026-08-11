@@ -56,19 +56,19 @@ on the front face. It must remain open and visible from the physical bottom of
 the printed cassette. The rear stays continuous for durability and QR sticker
 adhesion.
 
-## 3.5-inch floppy v21
+## 3.5-inch floppy v22
 
 Required recognition cues:
 
 - Nearly square shell with asymmetric orientation chamfer.
 - Top shutter panel, shutter fold, and protected head-slot impression.
 - Writable front label with raised `RAD DAD` and three ruled lines.
-- Lower-right `3.69 MB` capacity mark.
+- Centered, high-contrast `3.69 MB` capacity mark.
 - Rear spindle witness ring, radial ribs, shutter tracks, shell seam, and
   write-protect treatment around the QR landing.
 
 The physical v20 print showed that the original 10.20 x 2.30 mm capacity mark
-was too difficult to read. V21 uses a 12.60 x 2.85 mm bold mark at the authentic
+was too difficult to read. V22 uses a 20.00 x 4.00 mm bold mark at the authentic
 lower-right label position. It is built into the original Boolean assembly,
 not stacked onto a finished mesh. Its top remains at the established 4.130 mm
 maximum, so the improvement does not increase the product envelope.
@@ -88,7 +88,7 @@ Required recognition cues:
 The rear cues surround the protected circular sticker landing. They must not
 reduce adhesive contact or open through the shell.
 
-## Trailer Swift v9
+## Trailer Swift v16
 
 Trailer Swift is a funny, friendly punk-rock micro-collectible inspired by the
 album persona, not a realistic portrait and not a frightening caricature.

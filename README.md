@@ -1,8 +1,8 @@
-# Rad Dad Retro Riot v9: Authenticity + QR Edition
+# Rad Dad QR Merch: Retro Riot v9
 
 <p align="center"><strong>REAL DETAILS. LOUD BAND. ONE SCAN.</strong></p>
 
-Rad Dad Retro Riot turns familiar music and computer hardware into durable,
+Rad Dad QR Merch turns familiar music and computer hardware into durable,
 one-color punk-rock keepsakes. The collection includes an authentic micro
 compact cassette, 3.5-inch floppy disk, mini VHS cassette, and the deliberately
 ridiculous Trailer Swift desk collectible.
@@ -59,13 +59,13 @@ window, pressure-pad cue, shell hardware, readable `RAD DAD`, `90`, and the
 small `C-69` easter egg. The existing rear QR landing and compact keyring eyelet
 remain unchanged.
 
-### Floppy v21
+### Floppy v22
 
-Floppy v21 retains the developed rear hub, shutter-track, shell-seam,
+Floppy v22 retains the developed rear hub, shutter-track, shell-seam,
 write-protect, and density cues that make the underside read as a real 3.5-inch
 floppy instead of a flat backing plate. The front keeps its shutter, label
 hierarchy, and `RAD DAD`, while the `3.69 MB` joke is enlarged to
-12.60 x 2.85 mm with heavier strokes for reliable one-color printing.
+20.00 x 4.00 mm with heavier strokes for reliable one-color printing.
 
 The improved marking and rear treatment stay inside the same protected 1-inch
 QR landing, outside size, 4.130 mm thickness, and keyring geometry.
@@ -80,7 +80,7 @@ The established rear QR landing, product envelope, and keyring geometry stay
 unchanged. The restrained `T-369` detail remains part of the collection-wide
 capacity joke.
 
-### Trailer Swift v6
+### Trailer Swift v16
 
 Trailer Swift v6 keeps the spiky punk hair, guitar, compact toy proportions,
 solid display base, and readable `TRAILER SWIFT` nameplate while changing the
@@ -96,9 +96,9 @@ unchanged.
 | Product | Revision | Unchanged external envelope | Keyring / format | V9 authenticity focus |
 |---|---|---:|---|---|
 | Rad Dad Compact Cassette | v38 | 58.162 x 30.260 x 6.685 mm | Integrated 6 mm bore | Exact audited narrow tape-entry edge and complete cassette transport geometry |
-| Rad Dad 3.5-Inch Floppy | v21 | 44.360 x 36.916 x 4.130 mm | Integrated 6 mm bore | Authentic rear mechanics and enlarged, bold `3.69 MB` capacity mark |
+| Rad Dad 3.5-Inch Floppy | v22 | 44.360 x 36.916 x 4.130 mm | Integrated 6 mm bore | Authentic rear mechanics and enlarged, bold `3.69 MB` capacity mark |
 | Rad Dad Mini VHS | v5 | 65.800 x 31.900 x 7.000 mm | Integrated 6 mm bore | Stronger VHS reel, tape-door, latch, insertion, and rear-device language |
-| Trailer Swift | v6 | 45.000 x 45.000 x 64.400 mm | Upright desk collectible | Friendly punk caricature on a solid QR-ready display base |
+| Trailer Swift | v16 | 45.000 x 45.000 x 64.400 mm | Upright desk collectible | Friendly punk caricature on a solid QR-ready display base |
 
 | Product | Protected QR landing | Finished sticker | Radial placement clearance |
 |---|---:|---:|---:|

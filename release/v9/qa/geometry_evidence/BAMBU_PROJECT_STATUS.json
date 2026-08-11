@@ -15,9 +15,9 @@
       "status": "verified-bambu-project",
       "support_mode": "off"
     },
-    "Rad_Dad_Floppy_v21": {
+    "Rad_Dad_Floppy_v22": {
       "bambu_studio_version": "02.07.01.62",
-      "file": "3mf/Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf",
+      "file": "3mf/Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf",
       "matches_rad_dad_v7_base_profile": true,
       "model_instance_count": 1,
       "plate_count": 1,
@@ -42,9 +42,9 @@
       "status": "verified-bambu-project",
       "support_mode": "organic_build_plate_only"
     },
-    "Trailer_Swift_v9_Signature_Punk_QR": {
+    "Trailer_Swift_v16_Strat_Style_Punk_QR": {
       "bambu_studio_version": "02.07.01.62",
-      "file": "3mf/Trailer_Swift_v9_Signature_Punk_QR_A1_MINI_0.4_PROJECT.3mf",
+      "file": "3mf/Trailer_Swift_v16_Strat_Style_Punk_QR_A1_MINI_0.4_PROJECT.3mf",
       "matches_rad_dad_v7_base_profile": true,
       "model_instance_count": 1,
       "plate_count": 1,

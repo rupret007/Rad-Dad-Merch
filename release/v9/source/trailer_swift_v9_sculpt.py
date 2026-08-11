@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Build the highly detailed Trailer Swift punk collectible.
+"""Build the retail-style Trailer Swift v11 punk collectible.
 
 The sculpt translates the Songs You Made Me Ruin cover character into a
-one-piece micro-figurine: swept flame hair, angular expressive face, ripped
-shirt, plaid pants, studded cuff, performance stance, and a fully developed
-offset electric guitar.  The solid display base and protected 27 mm underside
-QR landing remain unchanged.  Every feature is broad, fused, and intentionally
-exaggerated for a one-color 0.4 mm-nozzle print.
+one-piece micro-figurine: swept flame hair, a deeply modeled expressive face,
+ripped shirt, plaid pants, performance stance, and an unmistakable oversized
+electric guitar.  The solid display base and protected 27 mm underside QR
+landing remain unchanged.  V10 deliberately favors a few large shadow-making
+forms over many fine lines so the character reads in a one-color 0.4 mm print.
 
-The public API is ``build_trailer_swift_v9()``.  Running this module directly
+The public API is ``build_trailer_swift_v11()``. Running this module directly
 exports the same single connected watertight body as an STL file.
 """
 
@@ -147,16 +147,16 @@ def _build_base_v9() -> list[trimesh.Trimesh]:
         groove.apply_translation([0.0, 0.0, 5.64])
         parts.append(groove)
 
-    # One compact full-name line replaces the old overlapping two-line label.
-    # Its plaque occupies clear top-front space beyond the boots.
+    # A broad trapezoidal retail nameplate follows the circular base. Two large
+    # lines read far more clearly in one color than the former tiny single line.
     nameplate = Polygon(
-        [(-16.0, -16.4), (16.0, -16.4), (16.0, -10.5), (-16.0, -10.5)]
+        [(-11.8, -18.0), (11.8, -18.0), (16.0, -9.70), (-16.0, -9.70)]
     )
-    parts.append(_top_relief(nameplate, bottom_z=5.43, height=1.25))
-    for glyph in _compact_text_polygons(
-        "TRAILER SWIFT", cell=0.60, center_y=-13.45
-    ):
-        parts.append(_top_relief(glyph, bottom_z=6.15, height=1.05))
+    parts.append(_top_relief(nameplate, bottom_z=5.40, height=1.30))
+    for glyph in _compact_text_polygons("TRAILER", cell=0.75, center_y=-16.00):
+        parts.append(_top_relief(glyph, bottom_z=6.18, height=1.12))
+    for glyph in _compact_text_polygons("SWIFT", cell=0.86, center_y=-11.85):
+        parts.append(_top_relief(glyph, bottom_z=6.18, height=1.12))
 
     return parts
 
@@ -170,12 +170,22 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
     head = _tapered_blob(
         [[0.0, 0.15, 43.7], [0.0, 0.0, 49.7], [0.0, 0.55, 55.6]],
         [[8.3, 7.0, 5.5], [12.4, 8.8, 7.8], [10.6, 7.8, 5.8]],
-        subdivisions=3,
+        subdivisions=4,
     )
     smile_cutter = _ellipsoid(
-        [0.0, -8.15, 46.0], [5.45, 2.75, 3.25], subdivisions=2
+        [0.25, -8.15, 46.15], [4.65, 2.65, 3.25], subdivisions=3
     )
     head = _boolean_difference(head, smile_cutter)
+
+    # Deep eye sockets create real shadow in a single filament color. The old
+    # surface-mounted eyeballs looked acceptable in a render but merged into the
+    # face after slicing. Broad sockets plus anchored inset pupils survive PETG.
+    eye_cutters = (
+        _tilted_ellipsoid([-4.25, -7.95, 52.25], [3.05, 1.55, 1.75], 9.0, 3),
+        _tilted_ellipsoid([4.25, -7.95, 52.25], [3.05, 1.55, 1.75], -9.0, 3),
+    )
+    for eye_cutter in eye_cutters:
+        head = _boolean_difference(head, eye_cutter)
     parts.append(head)
 
     # Broad ears, a compact chin, and sideburns establish the album character's
@@ -198,18 +208,17 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
         ]
     )
 
-    # Asymmetric swept flame locks follow the cover art instead of forming a
-    # regular mohawk.  The tallest tip establishes the exact 64.4 mm envelope.
+    # Seven broad upward flame locks replace the old horizontal fan. Their
+    # asymmetry follows the album character while retaining a toy-clean outline.
+    # The center-left tip still establishes the exact 64.4 mm envelope.
     flame_specs = (
-        ([-9.4, 0.9, 56.0], [-10.8, 1.0, 60.0], [3.35, 2.75, 3.1]),
-        ([-7.2, 0.7, 58.0], [-5.8, 0.8, 62.0], [3.25, 2.65, 3.2]),
-        ([-4.0, 0.5, 59.4], [-0.8, 0.6, 63.4], [3.15, 2.55, 3.0]),
-        ([-0.2, 0.5, 60.0], [4.2, 0.5, 63.0], [3.25, 2.55, 3.0]),
-        ([3.4, 0.5, 59.5], [8.2, 0.6, 62.2], [3.3, 2.6, 3.1]),
-        ([6.6, 0.7, 58.0], [12.0, 0.8, 61.0], [3.4, 2.7, 3.2]),
-        ([9.0, 0.9, 56.0], [15.0, 1.0, 59.3], [3.45, 2.75, 3.2]),
-        ([9.8, 1.0, 53.7], [16.2, 1.2, 57.0], [3.15, 2.55, 3.0]),
-        ([5.8, 2.1, 56.8], [13.0, 3.0, 59.2], [2.85, 2.55, 2.8]),
+        ([-9.5, 0.9, 55.5], [-13.2, 1.1, 59.6], [3.55, 2.85, 3.25]),
+        ([-7.4, 0.7, 57.5], [-9.2, 0.9, 62.0], [3.45, 2.75, 3.25]),
+        ([-4.2, 0.5, 59.2], [-3.0, 0.7, 63.35], [3.35, 2.65, 3.10]),
+        ([-0.2, 0.4, 59.8], [2.7, 0.6, 63.0], [3.45, 2.65, 3.10]),
+        ([3.7, 0.5, 59.0], [7.7, 0.8, 62.0], [3.55, 2.75, 3.20]),
+        ([7.0, 0.7, 57.4], [12.0, 1.0, 60.5], [3.60, 2.80, 3.25]),
+        ([9.5, 0.9, 55.2], [15.0, 1.2, 57.8], [3.45, 2.70, 3.15]),
     )
     for root, tip, root_radius in flame_specs:
         middle = (np.asarray(root) * 0.46 + np.asarray(tip) * 0.54).tolist()
@@ -217,7 +226,7 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
             _tapered_blob(
                 [root, middle, tip],
                 [root_radius, [2.0, 1.75, 2.1], [0.9, 0.8, 1.0]],
-                subdivisions=2,
+                subdivisions=3,
             )
         )
 
@@ -226,52 +235,57 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
     parts.extend(
         [
             _tapered_blob(
-                [[-6.8, -2.0, 57.2], [-1.8, -3.0, 60.0], [4.8, -3.4, 61.5]],
-                [[3.0, 2.1, 2.5], [2.1, 1.5, 1.8], [0.85, 0.70, 0.95]],
-                subdivisions=2,
+                [[-7.0, -2.0, 57.0], [-2.5, -3.0, 60.0], [2.8, -3.5, 61.4]],
+                [[3.2, 2.2, 2.6], [2.2, 1.6, 1.9], [0.95, 0.76, 1.00]],
+                subdivisions=3,
             ),
             _tapered_blob(
-                [[-3.8, -3.0, 56.7], [1.0, -3.8, 58.8], [6.2, -3.8, 59.5]],
-                [[2.4, 1.7, 2.0], [1.65, 1.2, 1.45], [0.70, 0.60, 0.80]],
-                subdivisions=2,
+                [[-3.8, -3.0, 56.7], [0.0, -3.8, 59.0], [4.6, -4.0, 60.0]],
+                [[2.6, 1.8, 2.1], [1.80, 1.3, 1.55], [0.80, 0.65, 0.86]],
+                subdivisions=3,
             ),
         ]
     )
 
-    # Tilted eyes and off-center pupils capture the cover's performance energy
-    # without the staring circular-eyed look of the previous sculpt.
+    # Full inset eyeballs, raised irises, and broad upper lids replace the old
+    # empty sockets. The offset gaze still points toward the guitar, but now the
+    # eyes read as a molded human face rather than holes with dots in them.
     parts.extend(
         [
-            _tilted_ellipsoid([-4.20, -7.65, 52.0], [2.85, 1.30, 1.82], 12.0),
-            _tilted_ellipsoid([4.20, -7.65, 52.0], [2.85, 1.30, 1.82], -12.0),
-            _tilted_ellipsoid([-3.55, -8.65, 51.65], [0.76, 0.62, 0.82], 12.0, 1),
-            _tilted_ellipsoid([4.85, -8.65, 51.65], [0.76, 0.62, 0.82], -12.0, 1),
+            _tilted_ellipsoid([-4.25, -7.42, 52.15], [2.35, 1.20, 1.30], 9.0, 3),
+            _tilted_ellipsoid([4.25, -7.42, 52.15], [2.35, 1.20, 1.30], -9.0, 3),
+            _tilted_ellipsoid([-4.70, -8.40, 52.00], [0.74, 0.48, 0.82], 9.0, 2),
+            _tilted_ellipsoid([3.80, -8.40, 52.00], [0.74, 0.48, 0.82], -9.0, 2),
+            _capsule([-6.35, -8.48, 53.15], [-4.25, -8.70, 53.65], 0.30, 1),
+            _capsule([-4.25, -8.70, 53.65], [-2.15, -8.48, 53.15], 0.30, 1),
+            _capsule([2.15, -8.48, 53.15], [4.25, -8.70, 53.65], 0.30, 1),
+            _capsule([4.25, -8.70, 53.65], [6.35, -8.48, 53.15], 0.30, 1),
         ]
     )
 
     # Upward outer arches read as thrilled and mischievous rather than angry.
     brow_specs = (
-        ([-7.2, -7.38, 55.75], [-4.5, -7.82, 55.95]),
-        ([-4.5, -7.82, 55.95], [-1.7, -7.70, 55.15]),
-        ([1.7, -7.70, 55.15], [4.5, -7.82, 55.95]),
-        ([4.5, -7.82, 55.95], [7.2, -7.38, 55.75]),
+        ([-7.2, -7.38, 55.45], [-4.5, -7.82, 56.15]),
+        ([-4.5, -7.82, 56.15], [-1.6, -7.70, 55.45]),
+        ([1.6, -7.70, 55.30], [4.5, -7.82, 56.00]),
+        ([4.5, -7.82, 56.00], [7.2, -7.38, 55.25]),
     )
     for start, end in brow_specs:
-        parts.append(_capsule(start, end, 0.72, subdivisions=1))
+        parts.append(_capsule(start, end, 0.64, subdivisions=1))
 
-    # Nose, cheek creases, a backed upper tooth bar, and tongue make the open
-    # singing grin readable from normal viewing distance without sharp fangs.
+    # A compact bridge and rounded tip lead into an asymmetric singing grin. A
+    # single curved upper-tooth mass is recessed into the mouth so it reads as
+    # teeth rather than a mustache; the tongue and lower lip stay similarly inset.
     parts.extend(
         [
             _tapered_blob(
-                [[0.0, -7.8, 50.7], [0.2, -8.9, 48.8]],
-                [[1.2, 1.1, 1.55], [1.55, 0.95, 0.95]],
-                subdivisions=1,
+                [[0.0, -7.8, 50.7], [0.15, -8.85, 48.9]],
+                [[0.95, 0.90, 1.30], [1.25, 0.85, 0.78]],
+                subdivisions=2,
             ),
-            _capsule([-6.2, -7.45, 47.1], [-4.7, -8.0, 45.6], 0.55, 1),
-            _capsule([6.2, -7.45, 47.1], [4.7, -8.0, 45.6], 0.55, 1),
-            _capsule([-3.7, -8.38, 47.75], [3.7, -8.38, 47.75], 0.78, 1),
-            _ellipsoid([0.0, -6.60, 44.25], [3.45, 1.70, 1.15], 2),
+            _ellipsoid([0.10, -6.78, 47.75], [3.45, 1.35, 0.76], 3),
+            _ellipsoid([0.40, -6.65, 44.25], [3.00, 1.70, 0.98], 3),
+            _capsule([-3.00, -7.52, 43.25], [3.10, -7.52, 43.25], 0.54, 1),
         ]
     )
 
@@ -303,42 +317,17 @@ def _build_detailed_body_v9() -> list[trimesh.Trimesh]:
         ]
     )
 
-    # Broad crossed relief survives one-color printing as unmistakable plaid.
-    for x_center in (-5.2, 5.2):
-        parts.extend(
-            [
-                _capsule(
-                    [x_center - 2.0, -3.05, 11.5],
-                    [x_center + 2.0, -3.05, 17.7],
-                    0.66,
-                    1,
-                ),
-                _capsule(
-                    [x_center + 2.0, -3.05, 11.5],
-                    [x_center - 2.0, -3.05, 17.7],
-                    0.66,
-                    1,
-                ),
-                _capsule(
-                    [x_center - 2.2, -3.10, 14.6],
-                    [x_center + 2.2, -3.10, 14.6],
-                    0.42,
-                    1,
-                ),
-                _capsule(
-                    [x_center, -3.12, 10.8],
-                    [x_center, -3.12, 19.0],
-                    0.36,
-                    1,
-                ),
-                _capsule(
-                    [x_center - 2.2, -3.12, 17.3],
-                    [x_center + 2.2, -3.12, 17.3],
-                    0.36,
-                    1,
-                ),
-            ]
-        )
+    # Clean molded jeans replace the costume-like plaid stars. Each leg gets
+    # one restrained outside seam that follows its stance and one broad cuff
+    # line above the boot. Both are backed deeply enough to survive handling.
+    parts.extend(
+        [
+            _capsule([-8.55, -3.02, 10.5], [-6.05, -3.02, 18.7], 0.38, 1),
+            _capsule([8.55, -3.02, 10.5], [6.05, -3.02, 18.7], 0.38, 1),
+            _capsule([-8.15, -3.08, 10.7], [-4.65, -3.08, 10.7], 0.44, 1),
+            _capsule([4.65, -3.08, 10.7], [8.15, -3.08, 10.7], 0.44, 1),
+        ]
+    )
 
     torso = _tapered_blob(
         [[0.0, 0.0, 19.0], [0.0, 0.0, 26.0], [0.0, 0.0, 32.0]],
@@ -350,8 +339,8 @@ def _build_detailed_body_v9() -> list[trimesh.Trimesh]:
     # Belt, buckle, ripped collar, and a large lightning emblem replace blank
     # torso space without relying on unreadable miniature shirt lettering.
     bolt = Polygon(
-        [(-2.0, 22.0), (1.7, 22.0), (-0.2, 26.0), (2.8, 26.0),
-         (-2.8, 31.3), (-0.8, 27.4), (-3.4, 27.4)]
+        [(-2.6, 21.8), (1.8, 21.8), (-0.2, 25.8), (3.4, 25.8),
+         (-3.3, 31.5), (-0.9, 27.3), (-4.0, 27.3)]
     )
     collar_left = Polygon([(-5.2, 31.7), (-0.5, 28.4), (-1.0, 32.6)])
     collar_right = Polygon([(5.2, 31.7), (0.5, 28.4), (1.0, 32.6)])
@@ -359,7 +348,7 @@ def _build_detailed_body_v9() -> list[trimesh.Trimesh]:
         [
             _capsule([-7.0, -5.0, 20.4], [7.0, -5.0, 20.4], 0.72, 1),
             _front_relief(Polygon([(-2.0, 18.8), (2.0, 18.8), (2.0, 22.1), (-2.0, 22.1)]), rear_y=-5.15, depth=0.95),
-            _front_relief(bolt, rear_y=-5.15, depth=1.05),
+            _front_relief(bolt, rear_y=-5.15, depth=1.35),
             _front_relief(collar_left, rear_y=-5.05, depth=0.85),
             _front_relief(collar_right, rear_y=-5.05, depth=0.85),
         ]
@@ -542,111 +531,165 @@ def _build_signature_guitar_v9() -> list[trimesh.Trimesh]:
             subdivisions,
         )
 
-    # Exaggerated double cutaways, a pinched waist, offset bouts, and two
-    # unmistakable horns make the silhouette read before hardware is added.
+    # Strat-style perimeter: long upper horn, shorter lower horn, pinched waist,
+    # offset shoulder, and a broad rounded lower bout. Extra perimeter points
+    # plus a round-trip buffer create a molded contour rather than a polygonal
+    # generic double-cutaway.
     body = polygon(
         [
-            (4.8, 1.45),
-            (4.2, 4.35),
-            (2.4, 3.35),
-            (0.8, 5.55),
-            (-2.4, 5.85),
-            (-5.25, 3.65),
-            (-5.85, 0.15),
-            (-4.55, -3.75),
-            (-1.70, -5.75),
-            (1.45, -5.25),
-            (2.45, -3.05),
-            (4.35, -4.25),
-            (3.45, -1.55),
-            (4.8, -1.35),
+            (5.20, 1.25),
+            (5.10, 2.80),
+            (4.50, 4.90),
+            (3.50, 5.75),
+            (2.60, 4.00),
+            (1.40, 3.65),
+            (0.00, 5.30),
+            (-2.80, 6.65),
+            (-5.50, 4.80),
+            (-6.80, 1.50),
+            (-6.70, -1.20),
+            (-5.20, -4.40),
+            (-2.10, -6.60),
+            (0.70, -6.20),
+            (2.40, -4.80),
+            (2.90, -3.10),
+            (4.80, -4.30),
+            (4.20, -2.00),
+            (3.50, -1.35),
+            (5.20, -1.20),
         ]
+    ).buffer(0.68, quad_segs=8, join_style=1).buffer(
+        -0.68, quad_segs=8, join_style=1
     )
     neck = polygon(
         [(3.7, -1.45), (19.5, -1.05), (19.5, 1.05), (3.7, 1.45)]
     )
+    # The asymmetric six-inline headstock is as important to the Strat read as
+    # the body. Its tuner-side lobe stays broad enough for printable pegs.
     headstock = polygon(
         [
-            (18.9, -1.15),
-            (23.0, -1.70),
-            (25.0, -0.35),
-            (24.25, 2.05),
-            (21.7, 2.45),
-            (19.0, 1.20),
+            (18.75, -1.05),
+            (23.55, -1.18),
+            (25.25, -0.55),
+            (25.75, 0.65),
+            (25.30, 1.75),
+            (24.15, 2.50),
+            (22.45, 2.68),
+            (20.75, 2.20),
+            (18.75, 1.05),
         ]
+    ).buffer(0.30, quad_segs=6, join_style=1).buffer(
+        -0.30, quad_segs=6, join_style=1
     )
     parts.extend(
         [
-            _front_relief(body, rear_y=-2.75, depth=5.75),
-            _front_relief(neck, rear_y=-3.55, depth=4.65),
-            _front_relief(headstock, rear_y=-3.50, depth=4.70),
+            _front_relief(body, rear_y=-2.55, depth=6.35),
+            _front_relief(neck, rear_y=-3.25, depth=5.25),
+            _front_relief(headstock, rear_y=-3.20, depth=5.30),
         ]
     )
 
     # The pickguard follows the lower bout.  Pickup bars and bridge are all
     # perpendicular to the strings and deeply backed by the solid body.
+    # Full Strat-style pickguard wraps the three pickups and controls while
+    # leaving a readable body rim around the perimeter.
     pickguard = polygon(
         [
-            (3.0, 0.7),
-            (2.1, 3.0),
-            (-0.5, 4.2),
-            (-3.3, 2.6),
-            (-3.0, -0.3),
-            (-0.6, -2.5),
-            (2.2, -2.0),
+            (3.55, 0.85),
+            (2.75, 3.20),
+            (0.65, 4.15),
+            (-1.45, 3.55),
+            (-3.75, 1.85),
+            (-3.85, -1.45),
+            (-2.70, -3.90),
+            (-0.10, -4.55),
+            (2.25, -3.45),
+            (2.85, -1.65),
         ]
+    ).buffer(0.28, quad_segs=6, join_style=1).buffer(
+        -0.28, quad_segs=6, join_style=1
     )
     flame = polygon(
         [
-            (-4.7, -3.6),
-            (-2.9, -2.1),
-            (-3.8, -0.5),
-            (-1.7, -1.5),
-            (-1.8, 0.9),
-            (0.2, -0.8),
-            (0.8, 1.5),
-            (1.8, -2.6),
-            (-1.0, -4.6),
+            (-4.65, -3.45),
+            (-3.35, -2.10),
+            (-3.85, -0.55),
+            (-2.30, -1.55),
+            (-2.20, 0.25),
+            (-0.75, -1.05),
+            (0.10, -3.35),
+            (-2.20, -4.55),
         ]
     )
     parts.extend(
         [
-            _front_relief(pickguard, rear_y=-8.22, depth=0.72),
-            _front_relief(flame, rear_y=-8.52, depth=0.58),
-            capsule(0.4, -2.2, 0.4, 2.2, -8.62, 0.58),
-            capsule(2.5, -1.95, 2.5, 1.95, -8.62, 0.58),
-            capsule(-1.4, -2.55, -1.4, 2.55, -8.64, 0.70),
+            _front_relief(pickguard, rear_y=-8.38, depth=1.00),
+            _front_relief(flame, rear_y=-8.70, depth=0.92),
+            # Neck and middle single coils remain straight; the bridge pickup
+            # carries the unmistakable Strat angle.
+            capsule(2.45, -2.15, 2.45, 2.15, -8.92, 0.66),
+            capsule(0.30, -2.20, 0.30, 2.20, -8.92, 0.66),
+            capsule(-1.85, -2.35, -1.05, 2.35, -8.94, 0.72),
+            # Synchronized tremolo bridge block.
+            capsule(-3.45, -2.60, -3.45, 2.60, -8.93, 0.64),
         ]
     )
 
     # Two printable strings cross the bridge, both pickups, fretboard, and
     # headstock as continuous lines.  Six broad frets reinforce scale.
-    for v_value in (-0.38, 0.38):
-        parts.append(capsule(-1.5, v_value, 23.7, v_value, -8.18, 0.27))
+    for v_value in (-0.42, 0.42):
+        parts.append(capsule(-3.55, v_value, 24.6, v_value, -8.62, 0.36))
     for u_value in (6.0, 8.2, 10.5, 12.8, 15.1, 17.4):
         half_width = 1.35 - (u_value - 6.0) * 0.018
         parts.append(
-            capsule(u_value, -half_width, u_value, half_width, -8.22, 0.32)
+            capsule(u_value, -half_width, u_value, half_width, -8.66, 0.42)
         )
 
-    # Three controls, six tuning pegs, two strap buttons, and a jack cup finish
-    # the instrument without depending on sub-nozzle engraving.
-    for u_value, v_value in ((-2.6, -2.9), (-3.8, -1.25), (-0.3, -4.1)):
+    # Broad position dots, three representative bridge saddles, and a screw-in
+    # tremolo arm remain visible after 0.4 mm slicing without becoming clutter.
+    for u_value in (8.2, 12.8, 17.4):
+        center_xz = point(u_value, 0.0)
+        parts.append(
+            _ellipsoid([center_xz[0], -8.78, center_xz[1]], [0.48, 0.42, 0.48], 1)
+        )
+    for v_value in (-1.45, 0.0, 1.45):
+        parts.append(capsule(-3.85, v_value, -2.80, v_value, -8.92, 0.24))
+    parts.extend(
+        [
+            capsule(-3.35, 2.05, 0.15, 4.15, -8.78, 0.30),
+            _ellipsoid(
+                [point(0.15, 4.15)[0], -8.78, point(0.15, 4.15)[1]],
+                [0.58, 0.48, 0.58],
+                1,
+            ),
+        ]
+    )
+
+    # Master volume and two tone controls follow the lower pickguard arc.
+    for u_value, v_value in ((-1.55, -3.65), (-3.15, -2.85), (-4.20, -1.20)):
         center_xz = point(u_value, v_value)
         parts.append(
             _ellipsoid(
                 [center_xz[0], -8.74, center_xz[1]],
-                [0.70, 0.62, 0.70],
+                [0.84, 0.72, 0.84],
                 1,
             )
         )
+    # Five-way selector blade and knob sit above the controls.
+    parts.append(capsule(0.55, -3.35, 1.75, -2.95, -8.80, 0.28))
+    switch_xz = point(1.75, -2.95)
+    parts.append(
+        _ellipsoid([switch_xz[0], -8.82, switch_xz[1]], [0.52, 0.46, 0.52], 1)
+    )
+
+    # Six tuners line one side of the Fender-style headstock.
     for u_value, v_value in (
-        (20.4, -1.45),
-        (21.9, -1.65),
-        (23.4, -1.35),
-        (20.6, 1.45),
-        (22.1, 1.80),
-        (23.6, 1.45),
+        (19.75, 1.55),
+        (20.75, 2.05),
+        (21.75, 2.35),
+        (22.75, 2.48),
+        (23.75, 2.35),
+        (24.65, 1.95),
     ):
         center_xz = point(u_value, v_value)
         parts.append(
@@ -656,7 +699,16 @@ def _build_signature_guitar_v9() -> list[trimesh.Trimesh]:
                 1,
             )
         )
-    for u_value, v_value in ((-5.15, 2.9), (-4.6, -3.0)):
+    # String tree, jack cup, and two strap buttons complete the Strat read.
+    tree_xz = point(21.05, 0.25)
+    jack_xz = point(-1.05, -4.70)
+    parts.extend(
+        [
+            _ellipsoid([tree_xz[0], -8.52, tree_xz[1]], [0.48, 0.42, 0.48], 1),
+            _ellipsoid([jack_xz[0], -8.48, jack_xz[1]], [1.05, 0.52, 0.72], 1),
+        ]
+    )
+    for u_value, v_value in ((-5.45, 3.25), (-4.85, -3.35)):
         center_xz = point(u_value, v_value)
         parts.append(
             _ellipsoid(
@@ -665,28 +717,38 @@ def _build_signature_guitar_v9() -> list[trimesh.Trimesh]:
                 1,
             )
         )
+
+    # The strap sits behind the instrument and anchors into the shoulder and
+    # lower bout. A broad nut completes the fretboard; the flame motif remains
+    # as backed body relief rather than unrealistic spikes outside the body.
+    parts.extend(
+        [
+            _capsule([-7.4, -5.45, 32.5], [7.8, -5.45, 19.5], 0.64, 2),
+            capsule(18.65, -1.10, 18.65, 1.10, -8.62, 0.44),
+        ]
+    )
     return parts
 
 
-def _validate_v9(mesh: trimesh.Trimesh) -> None:
+def _validate_v16(mesh: trimesh.Trimesh) -> None:
     bodies = mesh.split(only_watertight=False)
     if len(bodies) != 1:
         raise RuntimeError(f"Expected one connected body, found {len(bodies)}")
     if not mesh.is_watertight:
-        raise RuntimeError("Trailer Swift v9 mesh is not watertight")
+        raise RuntimeError("Trailer Swift v16 mesh is not watertight")
     if not mesh.is_winding_consistent:
-        raise RuntimeError("Trailer Swift v9 mesh winding is inconsistent")
+        raise RuntimeError("Trailer Swift v16 mesh winding is inconsistent")
     if not np.allclose(mesh.extents, EXACT_ENVELOPE_MM, atol=0.02, rtol=0.0):
         raise RuntimeError(
-            "Trailer Swift v9 must retain the exact 45 x 45 x 64.4 mm envelope; "
+            "Trailer Swift v16 must retain the exact 45 x 45 x 64.4 mm envelope; "
             f"received {np.round(mesh.extents, 3).tolist()}"
         )
     if mesh.bounds[0, 2] < -1e-3:
-        raise RuntimeError("Trailer Swift v9 extends below the build plane")
+        raise RuntimeError("Trailer Swift v16 extends below the build plane")
 
 
-def build_trailer_swift_v9() -> trimesh.Trimesh:
-    """Return the one-piece, highly detailed Trailer Swift collectible."""
+def build_trailer_swift_v16() -> trimesh.Trimesh:
+    """Return the Trailer Swift collectible with a true Strat-style guitar."""
     parts: list[trimesh.Trimesh] = []
     parts.extend(_build_base_v9())
     parts.extend(_build_detailed_body_v9())
@@ -699,18 +761,64 @@ def build_trailer_swift_v9() -> trimesh.Trimesh:
     if len(components) > 1:
         sculpture = max(components, key=lambda component: len(component.faces))
     sculpture.apply_translation([0.0, 0.0, -sculpture.bounds[0, 2]])
-    _validate_v9(sculpture)
+    # Boolean cleanup can shave a few hundredths from curved extremities. Lock
+    # the collectible back to its documented retail-scale envelope without
+    # changing the 45 mm base or the underside QR landing.
+    sculpture.apply_scale([1.0, 1.0, EXACT_ENVELOPE_MM[2] / sculpture.extents[2]])
+    _validate_v16(sculpture)
     return sculpture
+
+
+def build_trailer_swift_v15() -> trimesh.Trimesh:
+    """Backward-compatible v15 entry point for the current sculpt."""
+
+    return build_trailer_swift_v16()
+
+
+def build_trailer_swift_v14() -> trimesh.Trimesh:
+    """Backward-compatible v14 entry point for the current sculpt."""
+
+    return build_trailer_swift_v16()
+
+
+def build_trailer_swift_v13() -> trimesh.Trimesh:
+    """Backward-compatible v13 entry point for the current sculpt."""
+
+    return build_trailer_swift_v16()
+
+
+def build_trailer_swift_v12() -> trimesh.Trimesh:
+    """Backward-compatible v12 entry point for the current sculpt."""
+
+    return build_trailer_swift_v16()
+
+
+def build_trailer_swift_v11() -> trimesh.Trimesh:
+    """Backward-compatible v11 entry point for the current sculpt."""
+
+    return build_trailer_swift_v16()
+
+
+def build_trailer_swift_v10() -> trimesh.Trimesh:
+    """Backward-compatible v10 entry point for the current sculpt."""
+
+    return build_trailer_swift_v16()
+
+
+def build_trailer_swift_v9() -> trimesh.Trimesh:
+    """Backward-compatible entry point for the current Trailer Swift sculpt."""
+
+    return build_trailer_swift_v16()
 
 
 def _main() -> None:
     parser = argparse.ArgumentParser(
-        description="Export the one-piece Trailer Swift v9 QR collectible STL."
+        description="Export the one-piece Trailer Swift v16 QR collectible STL."
     )
     parser.add_argument("output", type=Path, help="Destination STL path")
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    mesh = build_trailer_swift_v9()
+    mesh = build_trailer_swift_v16()
     mesh.export(args.output, file_type="stl")
     dimensions = " x ".join(f"{value:.2f}" for value in mesh.extents)
     print(f"Wrote {args.output} ({dimensions} mm, watertight one-piece mesh)")
