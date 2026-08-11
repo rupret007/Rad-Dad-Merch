@@ -1,5 +1,16 @@
 # Changelog
 
+## v9.1 - Floppy Capacity Legibility - 2026-08-11
+
+- Advanced the 3.5-inch floppy from v20 to v21 after physical-print feedback
+  showed that the lower-right `3.69 MB` capacity mark was too difficult to read.
+- Increased the mark from 10.20 x 2.30 mm to 12.60 x 2.85 mm, strengthened the
+  bold stroke geometry, and moved it slightly inward for cleaner label spacing.
+- Kept the exact `44.360 x 36.916 x 4.130 mm` envelope, 6.0 mm keyring bore,
+  shutter, label hierarchy, rear mechanics, and 25.4 mm QR landing unchanged.
+- Updated the release builder, printing guidance, validation gate, and current
+  three-device plate workflow for the v21 floppy.
+
 ## v9 - Authenticity + QR Edition - 2026-08-09
 
 ### Authenticity restoration

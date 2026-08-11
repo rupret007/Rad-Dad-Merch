@@ -46,9 +46,10 @@ authenticity work:
 
 - Cassette v38 directly preserves the audited narrow tape-entry edge and its
   asymmetric real-cassette transport apertures.
-- Floppy v20 deepens rear and device-specific cues around the same QR landing.
+- Floppy v21 retains the rear device cues and adds a more readable front
+  `3.69 MB` capacity mark without changing the QR landing or outer envelope.
 - VHS v5 deepens rear and VHS-specific cues around the same QR landing.
-- Trailer Swift v6 uses a friendly, funny expression while retaining the same
+- Trailer Swift v9 uses a friendly, funny expression while retaining the same
   QR-ready base envelope.
 
 External envelopes and media-keychain dimensions remain unchanged. The v9

@@ -25,6 +25,7 @@ if str(REPO_ROOT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "src"))
 
 import build_rad_dad_micro_replica_v7 as legacy  # noqa: E402
+from build_three_device_plate_v9 import build as build_three_device_plate  # noqa: E402
 import qr_artwork_v9  # noqa: E402
 import v7_release_packaging as packaging  # noqa: E402
 from media_micro_v9 import build_cassette_v9, build_floppy_v9, build_vhs_v9  # noqa: E402
@@ -36,6 +37,10 @@ DEFAULT_OUTPUT = REPO_ROOT / "release" / "v9"
 ARCHIVE_NAME = "Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip"
 ALL_FOUR_STEM = "Rad_Dad_Retro_Riot_v9_ALL_FOUR"
 SUPPORT_PROJECT_STEM = f"{ALL_FOUR_STEM}_A1_MINI_0.4_TREE_SUPPORT_PROJECT"
+CURRENT_THREE_STEM = (
+    "Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_"
+    "A1_MINI_0.4_PROJECT"
+)
 QR_URL = "https://raddadband.com/qr/"
 
 PRODUCT_UPDATES = {
@@ -47,9 +52,9 @@ PRODUCT_UPDATES = {
         "nfc_location": "flat rear 1-inch QR sticker landing",
     },
     "floppy": {
-        "artifact_stem": "Rad_Dad_Floppy_v20",
-        "display_name": "Rad Dad 3.5-Inch Floppy v20 Authentic Rear",
-        "product_version": "v20",
+        "artifact_stem": "Rad_Dad_Floppy_v21",
+        "display_name": "Rad Dad 3.5-Inch Floppy v21 Legible Capacity",
+        "product_version": "v21",
         "source_builder": "media_micro_v9.build_floppy_v9",
         "nfc_location": "rear faux-hub 1-inch QR sticker landing",
     },
@@ -221,6 +226,7 @@ one-inch QR sticker that opens `{QR_URL}`.
 
 | Need | File |
 |---|---|
+| Print the current cassette, v21 floppy, and VHS together | `3mf/{CURRENT_THREE_STEM}.3mf` |
 | Print all four together | `3mf/{ALL_FOUR_STEM}_MODEL_ONLY.3mf` |
 | Print all four with Trailer Swift supports preset | `3mf/{SUPPORT_PROJECT_STEM}.3mf` |
 | Print on 63-up pre-cut stock | [{sheet_63.name}]({rel(sheet_63)}) |
@@ -239,7 +245,8 @@ one-inch QR sticker that opens `{QR_URL}`.
   transport positions. A continuous rear skin and substantial ribs retain
   keychain durability without restoring the previous solid toy-like edge.
 - Floppy: rear spindle, shutter-track, shell-seam, and write-protect cues frame
-  the functional QR landing; `RAD DAD` and `3.69 MB` remain on the front label.
+  the functional QR landing; the front keeps `RAD DAD` and rebuilds `3.69 MB`
+  at 12.60 x 2.85 mm with heavier strokes for reliable 0.4 mm-nozzle printing.
 - VHS: rear reel-drive, shell, door, and fastener cues join the front tape door,
   windows, hubs, `RAD DAD`, and `T-369` details.
 - Trailer Swift: the stable solid base and underside QR landing remain, while
@@ -264,7 +271,7 @@ only after the red calibration code scans from two phones.
 ## Physical-production rule
 
 Print one of each model and one ordinary-paper QR proof before producing a
-batch. A finished item passes only when the installed QR opens the Rad Dad tap
+batch. A finished item passes only when the installed QR opens the Rad Dad QR
 page with the normal camera on both iPhone and Android in indoor and outdoor
 light. The digital files cannot substitute for a physical print and scan test.
 """
@@ -358,7 +365,7 @@ avoid thin standalone parts and preserve the support strategy and stable base.
         {
             "schema": "rad-dad-authenticity-v9",
             "release": RELEASE_NAME,
-            "tap_url": QR_URL,
+            "destination_url": QR_URL,
             "printer_target": "Bambu Lab A1 mini / 0.4 mm nozzle",
             "geometry_policy": "same external envelopes and attachment openings as v7",
             "qr": {
@@ -379,10 +386,16 @@ def _copy_source_snapshot(output: Path) -> None:
     source_output = output / "source"
     source_output.mkdir(parents=True, exist_ok=True)
     for name in (
+        "cad_primitives_v7.py",
+        "media_micro_v7.py",
         "media_micro_v9.py",
+        "trailer_swift_v7_sculpt.py",
         "trailer_swift_v9_sculpt.py",
+        "build_rad_dad_micro_replica_v7.py",
+        "build_three_device_plate_v9.py",
         "qr_artwork_v9.py",
         "build_rad_dad_authentic_qr_v9.py",
+        "v7_release_packaging.py",
     ):
         shutil.copyfile(REPO_ROOT / "src" / name, source_output / name)
 
@@ -408,6 +421,13 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         geometry_result = legacy.build_release(geometry_root, bambu_mode=bambu_mode)
         geometry_hashes = _copy_geometry(geometry_root, output)
         support_project = _write_support_ready_project(output, geometry_hashes)
+        current_three = build_three_device_plate(
+            source=support_project,
+            output=output / "3mf" / f"{CURRENT_THREE_STEM}.3mf",
+        )
+        geometry_hashes[current_three.relative_to(output).as_posix()] = _sha256(
+            current_three
+        )
         _write_json(
             output / "qa" / "GEOMETRY_BUILD_STATUS.json",
             {
@@ -454,6 +474,7 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         "archive": archive,
         "all_four": output / "3mf" / f"{ALL_FOUR_STEM}_MODEL_ONLY.3mf",
         "support_project": support_project,
+        "current_three": current_three,
         "sticker_63up": _find_artwork(output, "63UP"),
         "sticker_fedex": _find_artwork(output, "FEDEX"),
         "calibration": _find_artwork(output, "CALIBRATION"),
@@ -479,6 +500,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(f"Print pack: {result['archive']}")
     print(f"All four: {result['all_four']}")
     print(f"Support-ready project: {result['support_project']}")
+    print(f"Current three-device plate: {result['current_three']}")
     print(f"63-up QR sheet: {result['sticker_63up']}")
     print(f"FedEx QR sheet: {result['sticker_fedex']}")
     print(f"Calibration: {result['calibration']}")

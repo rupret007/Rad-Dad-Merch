@@ -1,7 +1,7 @@
 """Production QR artwork for the Rad Dad retro keychain collection.
 
 This module generates black-on-white masters plus a process-red-on-white
-fallback for https://raddadband.com/tap/.  It reuses the proven 29-module QR
+fallback for https://raddadband.com/qr/.  It reuses the proven 29-module QR
 matrix and pre-cut sheet geometry established by
 ``build_rad_dad_qr_release_v8``.
 
@@ -47,7 +47,7 @@ else:
     _PIL_IMPORT_ERROR = None
 
 
-TARGET_URL = "https://raddadband.com/tap/"
+TARGET_URL = "https://raddadband.com/qr/"
 
 MM_PER_INCH = 25.4
 DPI = 600
@@ -832,7 +832,7 @@ def _calibration_raster(tile: Any) -> Any:
         draw,
         sample_left + tile.width // 2,
         sample_top + tile.height + 90,
-        "https://raddadband.com/tap/",
+        "https://raddadband.com/qr/",
         body,
     )
 
@@ -841,7 +841,7 @@ def _calibration_raster(tile: Any) -> Any:
         "PASS CHECKLIST",
         "1. The 1-inch square measures exactly 1.000 inch / 25.4 mm.",
         "2. The metric bar measures exactly 50.0 mm.",
-        "3. The QR opens https://raddadband.com/tap/ from two different phones.",
+        "3. The QR opens https://raddadband.com/qr/ from two different phones.",
         "4. Black areas are solid black; white areas are clean white; no scaling or gray.",
         "5. Cut outside the black circle and keep tape seams away from the QR square.",
     )
@@ -860,7 +860,7 @@ def _calibration_raster(tile: Any) -> Any:
         "Sticker: 1.000 inch / 25.4 mm round",
         "QR field: 16.5 mm square including four-module quiet zone",
         "Artwork: one-bit black and white at 600 DPI",
-        "Destination: https://raddadband.com/tap/",
+        "Destination: https://raddadband.com/qr/",
     )
     for index, line in enumerate(specs):
         draw.text(

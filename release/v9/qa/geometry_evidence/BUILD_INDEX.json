@@ -1,27 +1,27 @@
 {
   "all_four_plate": {
-    "bambu_project_3mf": null,
+    "bambu_project_3mf": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf",
     "minimum_spacing_mm": 10.0,
     "model_only_core_3mf": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf"
   },
   "individual_products": {
     "Rad_Dad_Cassette_v38": {
-      "bambu_project_3mf": null,
+      "bambu_project_3mf": "3mf/Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf",
       "model_only_core_3mf": "3mf/Rad_Dad_Cassette_v38_MODEL_ONLY.3mf",
       "stl": "stl/Rad_Dad_Cassette_v38_BINARY.stl"
     },
-    "Rad_Dad_Floppy_v20": {
-      "bambu_project_3mf": null,
-      "model_only_core_3mf": "3mf/Rad_Dad_Floppy_v20_MODEL_ONLY.3mf",
-      "stl": "stl/Rad_Dad_Floppy_v20_BINARY.stl"
+    "Rad_Dad_Floppy_v21": {
+      "bambu_project_3mf": "3mf/Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf",
+      "model_only_core_3mf": "3mf/Rad_Dad_Floppy_v21_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Floppy_v21_BINARY.stl"
     },
     "Rad_Dad_Mini_VHS_v5": {
-      "bambu_project_3mf": null,
+      "bambu_project_3mf": "3mf/Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf",
       "model_only_core_3mf": "3mf/Rad_Dad_Mini_VHS_v5_MODEL_ONLY.3mf",
       "stl": "stl/Rad_Dad_Mini_VHS_v5_BINARY.stl"
     },
     "Trailer_Swift_v9_Signature_Punk_QR": {
-      "bambu_project_3mf": null,
+      "bambu_project_3mf": "3mf/Trailer_Swift_v9_Signature_Punk_QR_A1_MINI_0.4_PROJECT.3mf",
       "model_only_core_3mf": "3mf/Trailer_Swift_v9_Signature_Punk_QR_MODEL_ONLY.3mf",
       "stl": "stl/Trailer_Swift_v9_Signature_Punk_QR_BINARY.stl"
     }

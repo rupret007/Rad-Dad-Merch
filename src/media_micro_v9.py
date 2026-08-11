@@ -1,8 +1,9 @@
 """Authenticity-preserving v9 wrappers for the Rad Dad media micros.
 
-The v7 solids remain the dimensional source of truth.  V9 only subtracts
-printable mechanical cues, so the current envelopes, front branding, 6.0 mm
-eyelet bores, and flat 25.4 mm QR landing surfaces are preserved exactly.
+The v7 solids remain the dimensional source of truth.  V9 adds or subtracts
+only printable detail inside those established envelopes, so the current
+dimensions, 6.0 mm eyelet bores, and flat 25.4 mm QR landing surfaces are
+preserved exactly.
 
 Nominal source dimensions (millimeters):
 
@@ -185,14 +186,25 @@ def build_cassette_v9() -> _trimesh.Trimesh:
 def build_floppy_v9() -> _trimesh.Trimesh:
     """Build the v9 floppy with authentic rear mechanics around its QR land.
 
-    The asymmetric 36.56 x 36.916 mm v7 shell, front RAD DAD label,
-    3.69 MB capacity joke, and 6.0 mm eyelet are preserved.  A shallow rear
-    spindle witness ring, eight radial ribs, two shutter tracks, shell seam,
-    and write-protect outline are clipped to the shell and excluded from the
-    guarded 25.4 mm QR landing centered at (-0.04, 1.80) mm.
+    The asymmetric 36.56 x 36.916 mm v7 shell, front RAD DAD label, and 6.0 mm
+    eyelet are preserved.  The lower-right 3.69 MB mark is rebuilt with larger,
+    heavier 0.4 mm-nozzle-safe geometry without increasing the outer envelope.
+    A shallow rear spindle witness ring, eight radial ribs, two shutter tracks,
+    shell seam, and write-protect outline are clipped to the shell and excluded
+    from the guarded 25.4 mm QR landing centered at (-0.04, 1.80) mm.
     """
 
-    source = _v7.build_floppy_v7()
+    # The inherited capacity mark was only 10.20 x 2.30 mm. A physical print
+    # showed that its counters and spacing were marginal with a 0.4 mm nozzle.
+    # Build the larger mark as part of the original Boolean assembly rather
+    # than stacking a second shell onto a finalized mesh. This keeps one
+    # watertight body and the exact established 4.130 mm maximum thickness.
+    source = _v7.build_floppy_v7(
+        capacity_width=12.60,
+        capacity_height=2.85,
+        capacity_center=(6.45, -10.25),
+        capacity_pixel=0.18,
+    )
 
     x0, x1 = -18.060, 18.500
     y0, y1 = -18.458, 18.458

@@ -46,10 +46,10 @@
       "support_intent": "off"
     },
     "floppy": {
-      "artifact_stem": "Rad_Dad_Floppy_v20",
+      "artifact_stem": "Rad_Dad_Floppy_v21",
       "bambu_product_kind": "floppy",
       "capacity_easter_egg": "3.69 MB",
-      "display_name": "Rad Dad 3.5-Inch Floppy v20 Authentic Rear",
+      "display_name": "Rad Dad 3.5-Inch Floppy v21 Legible Capacity",
       "easter_egg_location": "front writable label",
       "exact_envelope_mm": [
         44.36,

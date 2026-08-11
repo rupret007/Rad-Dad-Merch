@@ -28,6 +28,6 @@
       printer is set to color rather than grayscale.
 - [ ] Top, center, and bottom sheet samples scan before cutting.
 - [ ] Sticker is centered, flat, clean, and fully adhered.
-- [ ] Installed QR opens `https://raddadband.com/tap/` on iPhone and Android.
+- [ ] Installed QR opens `https://raddadband.com/qr/` on iPhone and Android.
 - [ ] Indoor light, bright overhead light, and daylight all pass.
 - [ ] Final scan passes again after a 24-hour adhesive cure.

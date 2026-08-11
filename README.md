@@ -59,15 +59,16 @@ window, pressure-pad cue, shell hardware, readable `RAD DAD`, `90`, and the
 small `C-69` easter egg. The existing rear QR landing and compact keyring eyelet
 remain unchanged.
 
-### Floppy v20
+### Floppy v21
 
-Floppy v20 deepens the rear hub, shutter-track, shell-seam, write-protect, and
-density cues so the underside reads as a developed 3.5-inch floppy instead of a
-flat backing plate. The front keeps its shutter, label hierarchy, `RAD DAD`, and
-visible `3.69 MB` joke.
+Floppy v21 retains the developed rear hub, shutter-track, shell-seam,
+write-protect, and density cues that make the underside read as a real 3.5-inch
+floppy instead of a flat backing plate. The front keeps its shutter, label
+hierarchy, and `RAD DAD`, while the `3.69 MB` joke is enlarged to
+12.60 x 2.85 mm with heavier strokes for reliable one-color printing.
 
-The deeper rear treatment is built around the same protected 1-inch QR landing.
-It does not change the outside size or keyring geometry.
+The improved marking and rear treatment stay inside the same protected 1-inch
+QR landing, outside size, 4.130 mm thickness, and keyring geometry.
 
 ### VHS v5
 
@@ -95,7 +96,7 @@ unchanged.
 | Product | Revision | Unchanged external envelope | Keyring / format | V9 authenticity focus |
 |---|---|---:|---|---|
 | Rad Dad Compact Cassette | v38 | 58.162 x 30.260 x 6.685 mm | Integrated 6 mm bore | Exact audited narrow tape-entry edge and complete cassette transport geometry |
-| Rad Dad 3.5-Inch Floppy | v20 | 44.360 x 36.916 x 4.130 mm | Integrated 6 mm bore | Deeper rear hub, shutter track, shell, and disk-specific cues |
+| Rad Dad 3.5-Inch Floppy | v21 | 44.360 x 36.916 x 4.130 mm | Integrated 6 mm bore | Authentic rear mechanics and enlarged, bold `3.69 MB` capacity mark |
 | Rad Dad Mini VHS | v5 | 65.800 x 31.900 x 7.000 mm | Integrated 6 mm bore | Stronger VHS reel, tape-door, latch, insertion, and rear-device language |
 | Trailer Swift | v6 | 45.000 x 45.000 x 64.400 mm | Upright desk collectible | Friendly punk caricature on a solid QR-ready display base |
 

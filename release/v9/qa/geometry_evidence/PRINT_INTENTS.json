@@ -1,5 +1,11 @@
 {
-  "bambu_projects": {},
+  "bambu_projects": {
+    "Rad_Dad_Cassette_v38": "Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf",
+    "Rad_Dad_Floppy_v21": "Rad_Dad_Floppy_v21_A1_MINI_0.4_PROJECT.3mf",
+    "Rad_Dad_Mini_VHS_v5": "Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf",
+    "Rad_Dad_Retro_Riot_v9_ALL_FOUR": "Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf",
+    "Trailer_Swift_v9_Signature_Punk_QR": "Trailer_Swift_v9_Signature_Punk_QR_A1_MINI_0.4_PROJECT.3mf"
+  },
   "intents": {
     "Rad_Dad_Cassette_v38": {
       "bottom_layers": 5,
@@ -11,16 +17,16 @@
       "nozzle_mm": 0.4,
       "orientation": "flat",
       "printer": "Bambu Lab A1 mini",
-      "profile_status": "fallback-model-only",
+      "profile_status": "verified-bambu-project",
       "slug": "Rad_Dad_Cassette_v38",
       "support_on_build_plate_only": false,
       "supports": "off",
       "top_layers": 5,
       "wall_loops": 4
     },
-    "Rad_Dad_Floppy_v20": {
+    "Rad_Dad_Floppy_v21": {
       "bottom_layers": 5,
-      "display_name": "Rad Dad 3.5-Inch Floppy v20 Authentic Rear",
+      "display_name": "Rad Dad 3.5-Inch Floppy v21 Legible Capacity",
       "infill_pattern": "gyroid",
       "infill_percent": 30,
       "initial_layer_height_mm": 0.2,
@@ -28,8 +34,8 @@
       "nozzle_mm": 0.4,
       "orientation": "flat",
       "printer": "Bambu Lab A1 mini",
-      "profile_status": "fallback-model-only",
-      "slug": "Rad_Dad_Floppy_v20",
+      "profile_status": "verified-bambu-project",
+      "slug": "Rad_Dad_Floppy_v21",
       "support_on_build_plate_only": false,
       "supports": "off",
       "top_layers": 5,
@@ -45,7 +51,7 @@
       "nozzle_mm": 0.4,
       "orientation": "flat",
       "printer": "Bambu Lab A1 mini",
-      "profile_status": "fallback-model-only",
+      "profile_status": "verified-bambu-project",
       "slug": "Rad_Dad_Mini_VHS_v5",
       "support_on_build_plate_only": false,
       "supports": "off",
@@ -62,7 +68,7 @@
       "nozzle_mm": 0.4,
       "orientation": "mixed",
       "printer": "Bambu Lab A1 mini",
-      "profile_status": "fallback-model-only",
+      "profile_status": "verified-bambu-project",
       "slug": "Rad_Dad_Retro_Riot_v9_ALL_FOUR",
       "support_on_build_plate_only": true,
       "supports": "organic",
@@ -79,7 +85,7 @@
       "nozzle_mm": 0.4,
       "orientation": "upright",
       "printer": "Bambu Lab A1 mini",
-      "profile_status": "fallback-model-only",
+      "profile_status": "verified-bambu-project",
       "slug": "Trailer_Swift_v9_Signature_Punk_QR",
       "support_on_build_plate_only": true,
       "supports": "organic",
