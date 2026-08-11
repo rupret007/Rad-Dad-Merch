@@ -324,6 +324,7 @@ def build_floppy_v7(
     capacity_height: float = 2.30,
     capacity_center: tuple[float, float] = (8.15, -10.45),
     capacity_pixel: float = 0.22,
+    capacity_z_base: float = 3.54,
 ) -> _trimesh.Trimesh:
     """Build a v18-size floppy with configurable capacity-mark geometry.
 
@@ -421,7 +422,7 @@ def build_floppy_v7(
             capacity_height,
             capacity_center[0],
             capacity_center[1],
-            3.54,
+            capacity_z_base,
             4.13,
             _v6.FONT_BOLD,
             capacity_pixel,

@@ -62,14 +62,15 @@ Required recognition cues:
 
 - Nearly square shell with asymmetric orientation chamfer.
 - Top shutter panel, shutter fold, and protected head-slot impression.
+- Asymmetric lower-corner write-protect and density-detection shell recesses.
 - Writable front label with raised `RAD DAD` and three ruled lines.
 - Centered, high-contrast `3.69 MB` capacity mark.
 - Rear spindle witness ring, radial ribs, shutter tracks, shell seam, and
   write-protect treatment around the QR landing.
 
 The physical v20 print showed that the original 10.20 x 2.30 mm capacity mark
-was too difficult to read. V22 uses a 20.00 x 4.00 mm bold mark at the authentic
-lower-right label position. It is built into the original Boolean assembly,
+was too difficult to read. V22 uses a 20.00 x 4.00 mm bold mark centered in the
+clear shell field directly below the writable label. It is built into the original Boolean assembly,
 not stacked onto a finished mesh. Its top remains at the established 4.130 mm
 maximum, so the improvement does not increase the product envelope.
 

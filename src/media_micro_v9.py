@@ -207,8 +207,9 @@ def build_floppy_v22() -> _trimesh.Trimesh:
     source = _v7.build_floppy_v7(
         capacity_width=20.00,
         capacity_height=4.00,
-        capacity_center=(-0.75, -10.45),
+        capacity_center=(-0.75, -14.55),
         capacity_pixel=0.32,
+        capacity_z_base=3.32,
     )
 
     x0, x1 = -18.060, 18.500
@@ -404,6 +405,35 @@ def build_floppy_v22():
     import trimesh as _auth_trimesh
 
     model = _build_floppy_v22_approved()
+
+    def _auth_rounded_recess(width, height, radius, center_x, center_y):
+        rectangle = _auth_box(
+            center_x - width / 2.0,
+            center_y - height / 2.0,
+            center_x + width / 2.0,
+            center_y + height / 2.0,
+        )
+        return rectangle.buffer(-radius).buffer(radius)
+
+    # A real 3.5-inch shell has intentionally asymmetric write-protect and
+    # density-detection features at its lower corners.  These are shallow
+    # front-side molded recesses rather than through-holes so the established
+    # rear QR landing and shell strength remain untouched.
+    corner_recesses = [
+        _v7._extrude(
+            _auth_rounded_recess(2.70, 2.95, 0.34, -14.65, -15.18),
+            3.16,
+            3.62,
+        ),
+        _v7._extrude(
+            _auth_rounded_recess(2.30, 2.30, 0.30, 14.78, -15.18),
+            3.16,
+            3.62,
+        ),
+    ]
+    model = _auth_trimesh.boolean.difference(
+        [model, *corner_recesses], engine="manifold", check_volume=False
+    )
 
     # Folded top and bottom shutter lips.  They flank the read slot and remain
     # inside the existing 4.13 mm envelope.

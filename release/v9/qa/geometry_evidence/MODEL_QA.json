@@ -70,9 +70,9 @@
         ]
       },
       "center_mass_mm": [
-        1.05202,
-        0.06297,
-        1.87929
+        1.051915,
+        0.02658,
+        1.882608
       ],
       "checks": {
         "finite_vertices": true,
@@ -92,13 +92,13 @@
         36.916,
         4.13
       ],
-      "faces": 13762,
+      "faces": 14052,
       "name": "Rad_Dad_Floppy_v22",
       "non_manifold_edges": 0,
       "physical_validation": "required-before-batch-production",
-      "surface_area_mm2": 3927.19573,
-      "vertices": 6881,
-      "volume_mm3": 5162.326391,
+      "surface_area_mm2": 3975.664413,
+      "vertices": 7026,
+      "volume_mm3": 5171.255967,
       "watertight": true,
       "winding_consistent": true
     },

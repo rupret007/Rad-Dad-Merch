@@ -3,7 +3,7 @@
     {
       "bytes": 302744,
       "path": "3mf/Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "7da7fb27b146b053f7c26d25d6f34187191c07252280ace30fca744e47335b62"
+      "sha256": "6b4fc77f451a34acd74f206aef80435ce8c5b354d026f172f36fa503abd94075"
     },
     {
       "bytes": 364829,
@@ -11,19 +11,19 @@
       "sha256": "cd7450215ffe58504d03abcf8d823d1187ccbe2ffaf4cb2533dfcefa1b59f7d2"
     },
     {
-      "bytes": 168450,
+      "bytes": 172113,
       "path": "3mf/Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "383e0f49fc2c444c18a74341e1357373570da848c995846fbc987e80bbf2ed01"
+      "sha256": "17e2e60eb535a0c7540e520d2fd01927001c967a6947eee80d4bed693d34b18d"
     },
     {
-      "bytes": 196111,
+      "bytes": 200129,
       "path": "3mf/Rad_Dad_Floppy_v22_MODEL_ONLY.3mf",
-      "sha256": "c7225e143154f228ebbda06de544e0f0e69997b780cab27b194be2a2a0976ea6"
+      "sha256": "d989016be4c3dbb8547337cf6fb175ece1c2d294ff7c6bb3a887f24e5dc1c8fc"
     },
     {
       "bytes": 419016,
       "path": "3mf/Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "b4cec2c567e617bbf2264a4d632f24023fccc9da5908494c5e53c67725e99ba6"
+      "sha256": "777d2a2328570d69613681754c012bdcba4c089c5ea7f5d3f7674fbfe02ad0b2"
     },
     {
       "bytes": 475074,
@@ -31,29 +31,29 @@
       "sha256": "0cfc3b76b8e4a702bc3a97f06888bf5a2ec7838ad51d6a2beb7489f991eaac6f"
     },
     {
-      "bytes": 1308403,
+      "bytes": 1311629,
       "path": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "d824f94fef432f939c61766d695c4a26cc37929354ebd62c7b64eb0133d3f8cd"
+      "sha256": "3fe8ca2708dece856aefff73e1c45e85c1b45d07287a80df31684746a7e3fda2"
     },
     {
-      "bytes": 1366072,
+      "bytes": 1369006,
       "path": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf",
-      "sha256": "3b3881dec35a1e21e27b34f19e35a66fdea52f24cf7f5c5707a59738dff95927"
+      "sha256": "2d92bb3bfa22db55570b3ea286274a5d59237573c3f9742b5c823c23544d22d0"
     },
     {
-      "bytes": 1358613,
+      "bytes": 1361547,
       "path": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf",
-      "sha256": "f762b2e0334f29a36da75ab2acc913ae33f1e2723264e3e8cc7366e9c3dc8bc2"
+      "sha256": "d3b4114a57c56e63fe5351d134fcc90f8b10844cd11459aa2d25871436994220"
     },
     {
-      "bytes": 752459,
+      "bytes": 755452,
       "path": "3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "b7849d11bb10882b90ae2ab69167ac3e20b0afe68b08dfccabc9dc3cfb0c3e68"
+      "sha256": "1c661f11383cbb6468b636647817cd251fb42d9ee3f77aa9674501d50c6bd8fb"
     },
     {
       "bytes": 524148,
       "path": "3mf/Trailer_Swift_v16_Strat_Style_Punk_QR_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "cddd84751736b54855321723754247fb9ec5e41b29b3792c62a2f4eec9b02e2c"
+      "sha256": "8b358640f5882a5c8199281fa328486ebfe031dbc82660ba23ec0d4f9efcc43e"
     },
     {
       "bytes": 563808,
@@ -68,7 +68,7 @@
     {
       "bytes": 8113,
       "path": "SHA256SUMS.txt",
-      "sha256": "87bf377ba2dc046be7ad494d1bb0f10dbebeeefc7d405bd8dac08cca5d1bccab"
+      "sha256": "2b893842ae80b58896d97d6d52176a13beb51784e3af09bced6046ccf1c16b01"
     },
     {
       "bytes": 785,
@@ -83,7 +83,7 @@
     {
       "bytes": 3179,
       "path": "guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.pdf",
-      "sha256": "ed922e135a6283bd7662e56b90dc49496173be9949fb365c68fe018901c8c89a"
+      "sha256": "4e0af1614a22e4154c981712be0a1baec5b752f92393b9c528a0bc6c2e7874c8"
     },
     {
       "bytes": 15883,
@@ -98,7 +98,7 @@
     {
       "bytes": 120823,
       "path": "guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf",
-      "sha256": "4ef8f343f680745ee6074d24be33a7e171c3578539a989a47a89015959ff7e18"
+      "sha256": "e179b9cbff5080dc01d77c9ef9e7523b8156574403a1d6f6fd8c7a6e7a053310"
     },
     {
       "bytes": 21231,
@@ -113,7 +113,7 @@
     {
       "bytes": 95287,
       "path": "guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf",
-      "sha256": "809ff38641b4e39b7d9e16f2495c4c2c75e8cc94d055665b19b4190583d6244c"
+      "sha256": "815b330594b7efce03dd2a9c58b49a410d5ec62399cbe92d2f85d705797e16b2"
     },
     {
       "bytes": 38546,
@@ -128,7 +128,7 @@
     {
       "bytes": 23187,
       "path": "guides/qr_stickers/Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf",
-      "sha256": "f646e2458c66a85dd0b376a75683a953fdc5c93f46c4b46a16c4c7e957846c72"
+      "sha256": "d93bb9e7a429a67a597e7eb0b20d3f91d2d8f21936ff68e2c11df3105ff52bfe"
     },
     {
       "bytes": 45703,
@@ -201,14 +201,14 @@
       "sha256": "62d9512df55e8c4fa4a9e319b966601ea4fc054801e2b06d166b8a736ef53dcd"
     },
     {
-      "bytes": 50908,
+      "bytes": 53102,
       "path": "previews/Rad_Dad_Floppy_v22_DETAIL.png",
-      "sha256": "65a3f401281f7c01c4257b82f33a13492831e472a8f1e1449f0b20fe07724a1b"
+      "sha256": "5edc58fae6e44e2b875d8e700ae4678bd9871be72160869596119e167e4e5557"
     },
     {
-      "bytes": 39791,
+      "bytes": 40461,
       "path": "previews/Rad_Dad_Floppy_v22_FRONT.png",
-      "sha256": "44c0919086a76e617eb6f3c5fb77a016fed18e20c4fa93e510a5c252634e195b"
+      "sha256": "971c4b7b639d1b3a403af2619f0c7a855bb3856f48e2a607761f253f6689fdcf"
     },
     {
       "bytes": 62584,
@@ -221,14 +221,14 @@
       "sha256": "06f731b40c9554b3260b729ea7f023fe5c7540195e65ea5f066a65e62bfb2a5f"
     },
     {
-      "bytes": 90058,
+      "bytes": 90405,
       "path": "previews/Rad_Dad_Retro_Riot_v9_ALL_FOUR_DETAIL.png",
-      "sha256": "5b7d3e98f99e1cfbcce8fafd592c037cd03cf9b715bea94985f73790c87a071e"
+      "sha256": "24ac83db6cdc364858b2562930cae77ea8d3fb3360c1af3ce2ef787d6bb1f039"
     },
     {
-      "bytes": 89827,
+      "bytes": 90443,
       "path": "previews/Rad_Dad_Retro_Riot_v9_ALL_FOUR_FRONT.png",
-      "sha256": "6231101a4054d81947f2341972d3ee15a593a86d260ea8adeeeef521b0d1c670"
+      "sha256": "d20f208c1838a65e152a0c36693fc2c79ef3292c65d87f387fe9c2b291022759"
     },
     {
       "bytes": 91377,
@@ -243,7 +243,7 @@
     {
       "bytes": 2661,
       "path": "qa/AUTHENTICITY_SPEC.json",
-      "sha256": "613014e6dfce4ab97a2e81d6837d7a3002ae773e3ca70b17bbef8c24e26bf93b"
+      "sha256": "f7e862af3c63bcc7f9b0fbde76dc9c5d1e46c63dbf88fb510ac27eb37f6ebbc2"
     },
     {
       "bytes": 151,
@@ -271,9 +271,9 @@
       "sha256": "651dfaadcfcca00e4e3920e48366db80bb7d78f0188984cdc61da4f005d28917"
     },
     {
-      "bytes": 7857,
+      "bytes": 7860,
       "path": "qa/geometry_evidence/MODEL_QA.json",
-      "sha256": "b8c32301dfbf9ce1343b9ff6f829bad889f58ea83f8a17873b707ba759b72f39"
+      "sha256": "f3c6a8189c4437e96848031701d6a54d09b31e909b56eb9ab21737bbec87a05f"
     },
     {
       "bytes": 3515,
@@ -306,14 +306,14 @@
       "sha256": "05ed20288fb48135bbe3e1c96f9f483fb6926ab925a2ddac53697d0af9050fe9"
     },
     {
-      "bytes": 20202,
+      "bytes": 20248,
       "path": "source/media_micro_v7.py",
-      "sha256": "2bb9d2c8fad80de200fab144455b297bec7b3a988b9574b5bea18c8f78956ad8"
+      "sha256": "a71d24d3262623b43ff00517de27abee7d9b733f4e26aa48cdfbc9369d7c57dc"
     },
     {
-      "bytes": 15759,
+      "bytes": 16821,
       "path": "source/media_micro_v9.py",
-      "sha256": "d61528063e2526fd77db0ba0008e1159e85c7c6cc53197356314acfc2dc571b6"
+      "sha256": "fe42500ae7f5740d4b3857926e82dd5484aa701f2d72df9c9b6c04b5a00f5664"
     },
     {
       "bytes": 31946,
@@ -341,9 +341,9 @@
       "sha256": "80a336b02ed1e16f4f133c97c451aa7851c4091bcde0b7de65861d7f0892b94d"
     },
     {
-      "bytes": 688184,
+      "bytes": 702684,
       "path": "stl/Rad_Dad_Floppy_v22_BINARY.stl",
-      "sha256": "e0137a44d771e8c18e0c9a7e22f54851651c478064dd87dca05ce9d3e4a0fdd6"
+      "sha256": "064f4e4d3c0a811eeed7d320a103b080124c0695a875b1e6ed7795e8b034fea5"
     },
     {
       "bytes": 1928184,
