@@ -258,6 +258,7 @@
 - Added a molded `TAP THE BASE` cue to the Trailer Swift display stand.
 # Repository rename and authenticity micro-refinement pass
 
+- Refined Trailer Swift v16 with a slimmer cocked head, layered eyelids, smile and ear folds, a broad singing grin, molded boot laces, pickup pole pieces, and pickguard fasteners while retaining the exact envelope, pose, base, and underside QR landing.
 - Moved the full `3.69 MB` marking into the clear shell field directly below the floppy label while preserving its high-contrast size and stroke weight.
 - Added shallow, asymmetric write-protect and density-detection recesses to the floppy front without opening the shell or disturbing its rear QR landing.
 - Renamed the project from `Rad-Dad-NFC-Tags` to `Rad-Dad-QR-Merch` so the repository identity matches the current QR-first merchandise collection.

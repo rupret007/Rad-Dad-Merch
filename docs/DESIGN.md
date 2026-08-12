@@ -96,8 +96,11 @@ album persona, not a realistic portrait and not a frightening caricature.
 
 Required cues:
 
-- Oversized stylized head, upbeat singing expression, and energetic punk hair.
-- Guitar, stage stance, clothing, shoes, and readable `TRAILER SWIFT` nameplate.
+- Slim, slightly cocked stylized head with layered eyelids, smile creases,
+  broad singing expression, inner-ear detail, and energetic punk hair.
+- Strat-style guitar with double cutaways, three pickups, pole pieces,
+  pickguard fasteners, tremolo hardware, controls, and six-inline tuners.
+- Stage stance, clean jeans, laced boots, and readable `TRAILER SWIFT` nameplate.
 - Solid circular display base that supports the figure like a compact toy.
 - Protected 27.0 mm underside landing for the 25.4 mm QR sticker.
 

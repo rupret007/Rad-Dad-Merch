@@ -250,7 +250,9 @@ one-inch QR sticker that opens `{QR_URL}`.
 - VHS: rear reel-drive, shell, door, and fastener cues join the front tape door,
   windows, hubs, `RAD DAD`, and `T-369` details.
 - Trailer Swift: the stable solid base and underside QR landing remain, while
-  the face reads as a playful singing punk character rather than an angry one.
+  a slimmer cocked head, layered facial structure, a broad singing grin,
+  finished boots, and molded Strat hardware make the character quirky rather
+  than angry.
 
 ## QR specification
 

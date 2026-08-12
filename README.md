@@ -82,11 +82,12 @@ capacity joke.
 
 ### Trailer Swift v16
 
-Trailer Swift v6 keeps the spiky punk hair, guitar, compact toy proportions,
+Trailer Swift v16 keeps the spiky punk hair, guitar, compact toy proportions,
 solid display base, and readable `TRAILER SWIFT` nameplate while changing the
 character's expression from angry or scary to friendly, funny, and knowingly
-ridiculous. Relaxed brows, friendlier eyes, and a goofy singing grin make it a
-collectible joke rather than a horror figure.
+ridiculous. A slimmer, slightly cocked head, relaxed brows, molded eyelids and
+smile creases, a broad singing grin, finished boots, and readable Strat
+hardware make it a quirky collectible joke rather than a horror figure.
 
 The 45 mm circular base and protected 27 mm QR landing beneath it stay
 unchanged.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the retail-style Trailer Swift v11 punk collectible.
+"""Build the retail-style Trailer Swift v16 punk collectible.
 
 The sculpt translates the Songs You Made Me Ruin cover character into a
 one-piece micro-figurine: swept flame hair, a deeply modeled expressive face,
@@ -8,7 +8,7 @@ electric guitar.  The solid display base and protected 27 mm underside QR
 landing remain unchanged.  V10 deliberately favors a few large shadow-making
 forms over many fine lines so the character reads in a one-color 0.4 mm print.
 
-The public API is ``build_trailer_swift_v11()``. Running this module directly
+The public API is ``build_trailer_swift_v16()``. Running this module directly
 exports the same single connected watertight body as an STL file.
 """
 
@@ -165,11 +165,12 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
     """Return the angular cover-character face and swept flame hair."""
     parts: list[trimesh.Trimesh] = []
 
-    # Three overlapping facial masses make a cheeky tapered jaw rather than a
-    # spherical mascot head.  The convex hull is robust and prints cleanly.
+    # Three deliberately narrow facial masses form a cheeky tapered jaw rather
+    # than the previous broad mascot head.  The slimmer temples and cheeks let
+    # the flame hair, eyes, and grin carry the caricature.
     head = _tapered_blob(
         [[0.0, 0.15, 43.7], [0.0, 0.0, 49.7], [0.0, 0.55, 55.6]],
-        [[8.3, 7.0, 5.5], [12.4, 8.8, 7.8], [10.6, 7.8, 5.8]],
+        [[7.35, 6.55, 5.35], [10.65, 8.05, 7.55], [9.15, 7.15, 5.65]],
         subdivisions=4,
     )
     smile_cutter = _ellipsoid(
@@ -186,27 +187,40 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
     )
     for eye_cutter in eye_cutters:
         head = _boolean_difference(head, eye_cutter)
+
     parts.append(head)
 
     # Broad ears, a compact chin, and sideburns establish the album character's
     # face silhouette.  All overlap deeply with the head and hair.
     parts.extend(
         [
-            _ellipsoid([-11.15, 0.0, 49.5], [2.15, 1.8, 3.15], 2),
-            _ellipsoid([11.15, 0.0, 49.5], [2.15, 1.8, 3.15], 2),
-            _ellipsoid([0.0, -0.2, 41.9], [5.0, 5.8, 2.1], 2),
+            _ellipsoid([-9.85, 0.0, 49.5], [1.85, 1.65, 2.90], 2),
+            _ellipsoid([9.85, 0.0, 49.5], [1.85, 1.65, 2.90], 2),
+            _ellipsoid([0.0, -0.2, 41.9], [4.45, 5.45, 2.0], 2),
             _tapered_blob(
-                [[-9.2, -0.1, 54.5], [-11.4, -0.3, 51.6]],
-                [[2.2, 1.7, 2.7], [1.2, 1.1, 1.6]],
+                [[-8.15, -0.1, 54.5], [-10.1, -0.3, 51.6]],
+                [[1.95, 1.55, 2.55], [1.05, 1.0, 1.5]],
                 2,
             ),
             _tapered_blob(
-                [[9.2, -0.1, 54.5], [11.4, -0.3, 51.6]],
-                [[2.2, 1.7, 2.7], [1.2, 1.1, 1.6]],
+                [[8.15, -0.1, 54.5], [10.1, -0.3, 51.6]],
+                [[1.95, 1.55, 2.55], [1.05, 1.0, 1.5]],
                 2,
             ),
         ]
     )
+
+    # Broad asymmetric brow ridges are embedded deeply into the slimmer
+    # forehead.  The higher left arch gives the singer delighted, full-volume
+    # intensity while avoiding both an angry V and the failed pinhole recess.
+    brow_specs = (
+        ([-6.85, -6.95, 55.20], [-4.30, -7.15, 56.20]),
+        ([-4.30, -7.15, 56.20], [-1.55, -6.98, 55.40]),
+        ([1.55, -6.98, 55.16], [4.30, -7.12, 55.82]),
+        ([4.30, -7.12, 55.82], [6.85, -6.92, 55.08]),
+    )
+    for start, end in brow_specs:
+        parts.append(_capsule(start, end, 0.72, subdivisions=1))
 
     # Seven broad upward flame locks replace the old horizontal fan. Their
     # asymmetry follows the album character while retaining a toy-clean outline.
@@ -263,19 +277,26 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
         ]
     )
 
-    # Upward outer arches read as thrilled and mischievous rather than angry.
-    brow_specs = (
-        ([-7.2, -7.38, 55.45], [-4.5, -7.82, 56.15]),
-        ([-4.5, -7.82, 56.15], [-1.6, -7.70, 55.45]),
-        ([1.6, -7.70, 55.30], [4.5, -7.82, 56.00]),
-        ([4.5, -7.82, 56.00], [7.2, -7.38, 55.25]),
+    # Lower eyelid folds, inner-ear ridges, and short smile creases make the
+    # expression read as an intentionally sculpted singing face instead of a
+    # collection of surface symbols.  Each line overlaps its supporting mass.
+    facial_folds = (
+        ([-6.15, -8.25, 51.00], [-4.25, -8.46, 50.66], 0.25),
+        ([-4.25, -8.46, 50.66], [-2.35, -8.25, 51.00], 0.25),
+        ([2.35, -8.25, 51.00], [4.25, -8.46, 50.66], 0.25),
+        ([4.25, -8.46, 50.66], [6.15, -8.25, 51.00], 0.25),
+        ([-3.78, -8.10, 47.18], [-4.18, -7.76, 45.60], 0.30),
+        ([3.88, -8.10, 47.12], [4.22, -7.76, 45.55], 0.30),
+        ([-9.85, -1.46, 48.25], [-9.85, -1.50, 50.65], 0.27),
+        ([9.85, -1.46, 48.25], [9.85, -1.50, 50.65], 0.27),
     )
-    for start, end in brow_specs:
-        parts.append(_capsule(start, end, 0.64, subdivisions=1))
+    for start, end, radius in facial_folds:
+        parts.append(_capsule(start, end, radius, subdivisions=1))
 
     # A compact bridge and rounded tip lead into an asymmetric singing grin. A
     # single curved upper-tooth mass is recessed into the mouth so it reads as
     # teeth rather than a mustache; the tongue and lower lip stay similarly inset.
+    upper_teeth = _ellipsoid([0.10, -6.78, 47.75], [3.45, 1.35, 0.76], 3)
     parts.extend(
         [
             _tapered_blob(
@@ -283,12 +304,20 @@ def _build_friendly_head_v9() -> list[trimesh.Trimesh]:
                 [[0.95, 0.90, 1.30], [1.25, 0.85, 0.78]],
                 subdivisions=2,
             ),
-            _ellipsoid([0.10, -6.78, 47.75], [3.45, 1.35, 0.76], 3),
+            upper_teeth,
             _ellipsoid([0.40, -6.65, 44.25], [3.00, 1.70, 0.98], 3),
             _capsule([-3.00, -7.52, 43.25], [3.10, -7.52, 43.25], 0.54, 1),
         ]
     )
 
+    # A small cocked-head angle gives the finished toy an intentionally odd,
+    # caught-mid-chorus personality.  Rotating every head feature together
+    # preserves facial alignment and keeps a deep overlap with the solid neck.
+    head_tilt = trimesh.transformations.rotation_matrix(
+        math.radians(-4.5), [0.0, 1.0, 0.0], point=[0.0, 0.0, 48.8]
+    )
+    for part in parts:
+        part.apply_transform(head_tilt)
     return parts
 
 
@@ -308,6 +337,27 @@ def _build_detailed_body_v9() -> list[trimesh.Trimesh]:
             _capsule([4.3, -2.9, 7.0], [10.1, -2.9, 7.0], 0.68, 1),
         ]
     )
+
+    # Three broad laces and one toe-cap seam per boot add retail-toy finish
+    # without introducing unsupported strands or changing the stance.
+    for boot_x in (-7.0, 7.0):
+        for lace_z in (7.15, 7.90, 8.65):
+            parts.append(
+                _capsule(
+                    [boot_x - 1.45, -5.62, lace_z],
+                    [boot_x + 1.45, -5.62, lace_z],
+                    0.24,
+                    1,
+                )
+            )
+        parts.append(
+            _capsule(
+                [boot_x - 2.25, -5.48, 6.65],
+                [boot_x + 2.25, -5.48, 6.65],
+                0.30,
+                1,
+            )
+        )
     parts.extend(
         [
             _capsule([-10.4, -5.15, 6.55], [-3.7, -5.15, 6.55], 0.58, 1),
@@ -634,6 +684,40 @@ def _build_signature_guitar_v9() -> list[trimesh.Trimesh]:
             capsule(-3.45, -2.60, -3.45, 2.60, -8.93, 0.64),
         ]
     )
+
+    # Molded pickup pole pieces and pickguard screws complete the recognizable
+    # Strat hardware hierarchy.  Their diameters are deliberately larger than
+    # scale so a 0.4 mm nozzle produces dots rather than intermittent specks.
+    pickup_poles = (
+        (2.45, -1.45), (2.45, 0.00), (2.45, 1.45),
+        (0.30, -1.45), (0.30, 0.00), (0.30, 1.45),
+        (-1.62, -1.55), (-1.42, 0.00), (-1.22, 1.55),
+    )
+    for u_value, v_value in pickup_poles:
+        center_xz = point(u_value, v_value)
+        parts.append(
+            _ellipsoid(
+                [center_xz[0], -9.43, center_xz[1]],
+                [0.32, 0.28, 0.32],
+                1,
+            )
+        )
+    for u_value, v_value in (
+        (3.00, 2.55),
+        (1.35, 3.35),
+        (-0.85, 3.05),
+        (-3.05, 1.10),
+        (-2.95, -2.35),
+        (1.70, -2.65),
+    ):
+        center_xz = point(u_value, v_value)
+        parts.append(
+            _ellipsoid(
+                [center_xz[0], -9.30, center_xz[1]],
+                [0.34, 0.29, 0.34],
+                1,
+            )
+        )
 
     # Two printable strings cross the bridge, both pickups, fretboard, and
     # headstock as continuous lines.  Six broad frets reinforce scale.
