@@ -1,0 +1,263 @@
+{
+  "files": [
+    {
+      "bytes": 260346,
+      "path": "3mf/Rad_Dad_Cassette_v37_A1_MINI_0.4_PROJECT.3mf",
+      "sha256": "55e5174f525884596201b67065ec56ac1cbf1003bc074ef543e934ed9ca01d27"
+    },
+    {
+      "bytes": 307612,
+      "path": "3mf/Rad_Dad_Cassette_v37_MODEL_ONLY.3mf",
+      "sha256": "ed91f79549f0bfa59054dbb039470f832a28ae5038b0a46d2e34a956b27a69d1"
+    },
+    {
+      "bytes": 129141,
+      "path": "3mf/Rad_Dad_Floppy_v19_A1_MINI_0.4_PROJECT.3mf",
+      "sha256": "6d566e99db28e78b3a5d43dfbc5c68e4807d51b938b77277dd529ca32fc6eb0e"
+    },
+    {
+      "bytes": 149555,
+      "path": "3mf/Rad_Dad_Floppy_v19_MODEL_ONLY.3mf",
+      "sha256": "dcc6aeb4fab10e185aaacac3bd9913b1d64a4f7e6532ebded90e62490153868c"
+    },
+    {
+      "bytes": 237866,
+      "path": "3mf/Rad_Dad_Mini_VHS_v4_A1_MINI_0.4_PROJECT.3mf",
+      "sha256": "b9f36d5e7e1c452c928def7f128aa660b3bcdc434bba506630147a7ef6791d5b"
+    },
+    {
+      "bytes": 276042,
+      "path": "3mf/Rad_Dad_Mini_VHS_v4_MODEL_ONLY.3mf",
+      "sha256": "2e2692646dde6a67bd5e78f99d36a8f478a619b01ebbf70a938ed10a8a3a5759"
+    },
+    {
+      "bytes": 807128,
+      "path": "3mf/Rad_Dad_Retro_Riot_v7_ALL_FOUR_MODEL_ONLY.3mf",
+      "sha256": "09d9c25333db90d52b134fe6ffb1f363251f69a2e4db68ec3826ac8e377463b0"
+    },
+    {
+      "bytes": 221241,
+      "path": "3mf/Trailer_Swift_v5_Bobblehead_NFC_A1_MINI_0.4_PROJECT.3mf",
+      "sha256": "450badc2012c1f687a4189581b5abfcdf27ae791650e94a07eed9611f5e844dd"
+    },
+    {
+      "bytes": 251221,
+      "path": "3mf/Trailer_Swift_v5_Bobblehead_NFC_MODEL_ONLY.3mf",
+      "sha256": "af5ac6856843c9e1f174a9a93ca9e6c12e408e166b8e7ac61c07f0bf29db3b46"
+    },
+    {
+      "bytes": 2009,
+      "path": "README.md",
+      "sha256": "73c0ded1430137c8650212ab7c0f04b026e7229847e14adc56bb1403c0b53ab3"
+    },
+    {
+      "bytes": 5516,
+      "path": "SHA256SUMS.txt",
+      "sha256": "98c4a9f862ef53dee058b83e5f6dd8c78bfe6ec51075156c33baf81cab7c611e"
+    },
+    {
+      "bytes": 698,
+      "path": "guides/PRINTING_AND_3MF_STATUS.md",
+      "sha256": "29f1a1f997c020d60574910ec654460694fdec15de4dad47683ee1c611c4954e"
+    },
+    {
+      "bytes": 1490,
+      "path": "guides/QR_STICKER_SETUP.md",
+      "sha256": "8afc39f85fb2f7e2112c7f9c3102951b8219619c7dd3641fbb38fe86d29021a7"
+    },
+    {
+      "bytes": 2909,
+      "path": "guides/Rad_Dad_QR_STICKER_PLACEMENT_GUIDE.svg",
+      "sha256": "a817ab22e9fe68cd112722f9ca03379e7428755c8025a8c4e110cc891bd61ac1"
+    },
+    {
+      "bytes": 1775,
+      "path": "guides/STICKER_SOURCING.md",
+      "sha256": "1dc2e7a4d170d059c0c30628f409cec653efefac78584ebe0aa59baf12ac0fe4"
+    },
+    {
+      "bytes": 11928,
+      "path": "guides/qr_stickers/Rad_Dad_1IN_QR_STICKER_VENDOR_MASTER.pdf",
+      "sha256": "bb1859281ea0b2ad966aab4f31f40feb25836df4344e02540dbaddfe06702573"
+    },
+    {
+      "bytes": 13078,
+      "path": "guides/qr_stickers/Rad_Dad_1IN_QR_STICKER_VENDOR_MASTER.png",
+      "sha256": "0fdbb3cd493d4bd169e8fac54759c4ccde7f93885884ccf8cfea1a1bfb60bb8f"
+    },
+    {
+      "bytes": 37170,
+      "path": "guides/qr_stickers/Rad_Dad_1IN_QR_STICKER_VENDOR_MASTER.svg",
+      "sha256": "a0c9be27287e40bfcf2bf4cae80af4eaf6c2767ccd6c8dc0300dd428cba3a4b8"
+    },
+    {
+      "bytes": 431282,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKERS_AVERY_6450_OL1025_63UP_US_LETTER.pdf",
+      "sha256": "0bf1c239eb4493206daeb5a4342a9da5fa922acdc2851d7f6a1adef16fb6af0e"
+    },
+    {
+      "bytes": 320020,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKERS_AVERY_6450_OL1025_63UP_US_LETTER.png",
+      "sha256": "961727015b545fb1ed7d527eda20e22f10874f326523fbf1641ff8c8bcd5563d"
+    },
+    {
+      "bytes": 40851,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKERS_AVERY_6450_OL1025_63UP_US_LETTER.svg",
+      "sha256": "db130894a1f017bc737be0ac7b49d3c9d656a5469fc286672e50e40b3302835e"
+    },
+    {
+      "bytes": 117956,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKERS_HAND_CUT_35UP_US_LETTER.pdf",
+      "sha256": "3956d39e25f1407fea08c4364488326c78842022499edfa53274e65318479b7d"
+    },
+    {
+      "bytes": 119105,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKERS_HAND_CUT_35UP_US_LETTER.png",
+      "sha256": "2c10b0614b93aea753e4494ef66f1e6d654deed07d4513f16fda06cf68376537"
+    },
+    {
+      "bytes": 42489,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKERS_HAND_CUT_35UP_US_LETTER.svg",
+      "sha256": "fd5d3583c220422005c54d6bca5a7f1dc2b6b88d2e8880867292f864b23ef29e"
+    },
+    {
+      "bytes": 84121,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKER_PRINT_CALIBRATION.pdf",
+      "sha256": "d9d01479fc40a921b5754a12bc2f38d6e5a09797115d16fab8c2fff39fb3f22b"
+    },
+    {
+      "bytes": 98496,
+      "path": "guides/qr_stickers/Rad_Dad_QR_STICKER_PRINT_CALIBRATION.png",
+      "sha256": "5d1921cbd88a1bfc12b8e33cd263930f4f20cc5a64b28d27a955679d450479ad"
+    },
+    {
+      "bytes": 62674,
+      "path": "previews/Rad_Dad_Cassette_v37_DETAIL.png",
+      "sha256": "ff2be25356948ee0eaaeaf502545268abc82efc73f5024be0e0ed9c0e130e533"
+    },
+    {
+      "bytes": 57447,
+      "path": "previews/Rad_Dad_Cassette_v37_FRONT.png",
+      "sha256": "2963d5aa5812a732d0d52eb4548f20736a2127cd4b64754d407354996b988a22"
+    },
+    {
+      "bytes": 45632,
+      "path": "previews/Rad_Dad_Floppy_v19_DETAIL.png",
+      "sha256": "238f6faee78640dd4797aef52b30104cd1e72bd26c30fe2869ab8bb4950a8c0e"
+    },
+    {
+      "bytes": 36191,
+      "path": "previews/Rad_Dad_Floppy_v19_FRONT.png",
+      "sha256": "3e4d5ffc92a0906460a858cd86ee2eb58c95ab93a77ac7389f3a1f524cb0a9a8"
+    },
+    {
+      "bytes": 56721,
+      "path": "previews/Rad_Dad_Mini_VHS_v4_DETAIL.png",
+      "sha256": "fb34f8ae7896dc6a4aaf722d5b6517cddc99eaf003790a142767f444ebfaf067"
+    },
+    {
+      "bytes": 48941,
+      "path": "previews/Rad_Dad_Mini_VHS_v4_FRONT.png",
+      "sha256": "bd4a1e208a169777a52e59bb5bfbed31e9139aff0a09929f1d4bf8f0563c02cd"
+    },
+    {
+      "bytes": 81243,
+      "path": "previews/Rad_Dad_Retro_Riot_v7_ALL_FOUR_DETAIL.png",
+      "sha256": "bd59341f462be5dfe5aaf51113f1943c881e9a4835b9f31e428a5c7d4654f8d2"
+    },
+    {
+      "bytes": 82047,
+      "path": "previews/Rad_Dad_Retro_Riot_v7_ALL_FOUR_FRONT.png",
+      "sha256": "95bde625f6a4aa41f70e827b3b91445af74a5ae1b10dbaf4a8c09b8f7de9e172"
+    },
+    {
+      "bytes": 40193,
+      "path": "previews/Rad_Dad_v8_QR_STICKER_SYSTEM_PREVIEW.png",
+      "sha256": "71cfe66d88a7cd93865229aed9da4c0a9efd8c8bc15e11d0aff4aa96f6f5e8f6"
+    },
+    {
+      "bytes": 77128,
+      "path": "previews/Trailer_Swift_v5_Bobblehead_NFC_DETAIL.png",
+      "sha256": "66dabffa6e986b5cca50ac11b5a79d88dae492017c123f04da80e0e24d28c6a1"
+    },
+    {
+      "bytes": 78166,
+      "path": "previews/Trailer_Swift_v5_Bobblehead_NFC_FRONT.png",
+      "sha256": "d88e06e0e6c679c3f61106dbe24c788860e15b29e9b84c043343f877a3f53047"
+    },
+    {
+      "bytes": 4772,
+      "path": "qa/MODEL_REUSE_PROVENANCE.json",
+      "sha256": "08aa20173e29e0c21e7e2b95c6e1d449a32abb47e25150460c871a23d370ec98"
+    },
+    {
+      "bytes": 1700,
+      "path": "qa/PHYSICAL_QC_CHECKLIST.md",
+      "sha256": "0dd98061facd9576cd51640517d3a1e266afd4f2262cdfc54cae2e73e24ec283"
+    },
+    {
+      "bytes": 778,
+      "path": "qa/QR_SPEC.json",
+      "sha256": "1c64a673ef9e987b9c05ee1a271f30c84a5fe6aa92abba188a9dd6d70d5ec1ab"
+    },
+    {
+      "bytes": 1890,
+      "path": "qa/v7_geometry_evidence/ALL_FOUR_PLATE_LAYOUT.json",
+      "sha256": "6446447d3665ca4f2ca403804b22f21aaded43a3796f7ae11bb2826d7bfbb2c1"
+    },
+    {
+      "bytes": 2354,
+      "path": "qa/v7_geometry_evidence/BAMBU_PROJECT_STATUS.json",
+      "sha256": "b8e86bbc801fb65bcb32506c3ac5d124f1f64ab03435e1e32bbbabe931837167"
+    },
+    {
+      "bytes": 1463,
+      "path": "qa/v7_geometry_evidence/BUILD_INDEX.json",
+      "sha256": "7e5490ae485608bd31331905552eae3f090325afd79969a65b8bdafa9e07ff86"
+    },
+    {
+      "bytes": 7763,
+      "path": "qa/v7_geometry_evidence/MODEL_QA.json",
+      "sha256": "3b2007974baa57757d7d3be1ed6d05bacbfa4950b24472963d4647753bf1ce45"
+    },
+    {
+      "bytes": 3421,
+      "path": "qa/v7_geometry_evidence/PRINT_INTENTS.json",
+      "sha256": "08143cad056716d4e07cae5c8ce508d7a690d49a8b228a33330f358f2775b124"
+    },
+    {
+      "bytes": 5119,
+      "path": "qa/v7_geometry_evidence/PRODUCT_METADATA.json",
+      "sha256": "6c6fa53661d1156225413c5875dd77e72e8559b77b7b8b988b94e0e9cf5229e4"
+    },
+    {
+      "bytes": 1117284,
+      "path": "stl/Rad_Dad_Cassette_v37_BINARY.stl",
+      "sha256": "31f4ae42b8f910715698f76b7711b13f4dd46c2dbe1bb8d28e5d37b785d6d053"
+    },
+    {
+      "bytes": 501784,
+      "path": "stl/Rad_Dad_Floppy_v19_BINARY.stl",
+      "sha256": "10d7d80ed0d85cced581882d613785db61ed0de3dcb06fde7bbd6414d9484e5f"
+    },
+    {
+      "bytes": 1007084,
+      "path": "stl/Rad_Dad_Mini_VHS_v4_BINARY.stl",
+      "sha256": "7808ace93ddef3f646ea6694251fcc36925eb9f23c0772f70821c3646df936b9"
+    },
+    {
+      "bytes": 764184,
+      "path": "stl/Trailer_Swift_v5_Bobblehead_NFC_BINARY.stl",
+      "sha256": "cf32d03beff2ff6770c4e10db34b206790588c2c566a800201b1e77eeb29460b"
+    }
+  ],
+  "metadata": {
+    "destination_url": "https://raddadband.com/tap/",
+    "geometry_changed": false,
+    "interaction": "visible 1-inch QR sticker",
+    "printer_target": "Bambu Lab A1 mini / 0.4 mm nozzle",
+    "source_geometry_release": "v7"
+  },
+  "release": "Rad Dad Retro Riot v8: QR Edition",
+  "schema": "rad-dad-release-manifest-v1"
+}

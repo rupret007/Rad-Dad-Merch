@@ -1,0 +1,107 @@
+{
+  "release": "Retro Riot v6",
+  "generated": "2026-08-09",
+  "visibility": "private-development-only",
+  "files": [
+    {
+      "path": "release/v6/3mf/Rad_Dad_Cassette_v36_SINGLE_TEST_A1_MINI.3mf",
+      "bytes": 303708,
+      "sha256": "657847d3b95df3b2b3e7e2a4de2e6d7d955f1ae7eaddc82b5bd476c85542e57f"
+    },
+    {
+      "path": "release/v6/3mf/Rad_Dad_Floppy_v18_SINGLE_TEST_A1_MINI.3mf",
+      "bytes": 1796706,
+      "sha256": "6f16f6cbd1836b9a4784093dc34896bd7fc334178615eb50bc204c10274f41ff"
+    },
+    {
+      "path": "release/v6/3mf/Rad_Dad_Mini_VHS_v3_SINGLE_TEST_A1_MINI.3mf",
+      "bytes": 217007,
+      "sha256": "a02ec762c8327482bb03573577e3a2c4f9dc051aeaddd184056b6694095cdbee"
+    },
+    {
+      "path": "release/v6/3mf/Rad_Dad_Retro_Riot_v6_ALL_FOUR_A1_MINI.3mf",
+      "bytes": 2599781,
+      "sha256": "d26968631d8347af7c57699585db2b42af0e4b0b6320731ae3c84e35643e9ec6"
+    },
+    {
+      "path": "release/v6/3mf/Trailer_Swift_v4_Bobblehead_NFC_SINGLE_TEST_A1_MINI.3mf",
+      "bytes": 425432,
+      "sha256": "ed087f8b29a539474cd9675d83e9a1148e36b86f90d76a900878e6884a58ae4b"
+    },
+    {
+      "path": "release/v6/README.md",
+      "bytes": 1128,
+      "sha256": "9276dc986513f4525f46a1ea1d677c4a965c87583cd28715c9af132322127b39"
+    },
+    {
+      "path": "release/v6/Rad_Dad_Retro_Riot_v6_Print_Pack.zip",
+      "bytes": 8287018,
+      "sha256": "d84263a39a214795c86ed84fe35491b2965829135b471d4c976a060bed99977d"
+    },
+    {
+      "path": "release/v6/guides/NFC_PLACEMENT_GUIDE.svg",
+      "bytes": 1263,
+      "sha256": "9a04dd69008630451ac96f6eed33599c21b6da31cc56d1de5617713952157896"
+    },
+    {
+      "path": "release/v6/guides/Rad_Dad_25MM_TAP_LABEL_20UP_US_LETTER.svg",
+      "bytes": 2129,
+      "sha256": "c28749f2f2b2745f15aa3981674e0d0a89566df66f61ce89f52fc5fbac132c78"
+    },
+    {
+      "path": "release/v6/guides/Rad_Dad_25MM_TAP_TO_PLAY_LABEL.svg",
+      "bytes": 843,
+      "sha256": "66d1be572dfadf5722bd4c2253187599356c124f12374a28390b041ff9a2eed3"
+    },
+    {
+      "path": "release/v6/guides/Rad_Dad_NFC_HANDOFF_CARD.svg",
+      "bytes": 1266,
+      "sha256": "9128c5038a30917119a5f125813bc1a777f852950f7bba3b11c32a14d06a13d6"
+    },
+    {
+      "path": "release/v6/previews/Rad_Dad_Floppy_v18_FRONT_REAR_PREVIEW.png",
+      "bytes": 57462,
+      "sha256": "a70c59dbdb83d6558ef2de116f402d673ffe3181fe75f2a55e1a0b0bb4860edb"
+    },
+    {
+      "path": "release/v6/previews/Rad_Dad_Retro_Riot_v6_COLLECTION_PREVIEW.png",
+      "bytes": 64710,
+      "sha256": "8a26d4cc144e20ba02f6745bcff4222559ef36690b57d13cda35b35e881f7c7d"
+    },
+    {
+      "path": "release/v6/previews/Trailer_Swift_v4_BOBBLEHEAD_DETAIL_PREVIEW.png",
+      "bytes": 67639,
+      "sha256": "cc5b0c4f055764d9edd78cabf6dd5385f6f7bb2c3704430e4b705ce3af0026e7"
+    },
+    {
+      "path": "release/v6/qa/MODEL_QA_REPORT.txt",
+      "bytes": 1323,
+      "sha256": "51afc6febf54885b93d155e699a4f14ef7813ace7698351628f2839d34871332"
+    },
+    {
+      "path": "release/v6/qa/PHYSICAL_QC_CHECKLIST.md",
+      "bytes": 1358,
+      "sha256": "8262c21bdb6eb011529b96292cc55622831d40b6b47035fa25f0e2cac8ff4e42"
+    },
+    {
+      "path": "release/v6/stl/Rad_Dad_Cassette_v36.stl",
+      "bytes": 1292084,
+      "sha256": "ba0e34ae93895bbdeb9c5a65915cc9d770ae9701b1827113e8b9743517401e3d"
+    },
+    {
+      "path": "release/v6/stl/Rad_Dad_Floppy_v18.stl",
+      "bytes": 8597384,
+      "sha256": "c97069a829055b8e58ba4f21de07f3494e0aef0d322566040c5aa404d3c35752"
+    },
+    {
+      "path": "release/v6/stl/Rad_Dad_Mini_VHS_v3.stl",
+      "bytes": 871384,
+      "sha256": "18c3e3b98eee212fa6852e971cca044efb31f8f0b64058972b14d592a9021cc9"
+    },
+    {
+      "path": "release/v6/stl/Trailer_Swift_v4_Bobblehead_NFC.stl",
+      "bytes": 1885184,
+      "sha256": "af52ca8c8d7bf43f8225d13e1dfa13376b20ae8e33ad3e974f1ef988a4268939"
+    }
+  ]
+}

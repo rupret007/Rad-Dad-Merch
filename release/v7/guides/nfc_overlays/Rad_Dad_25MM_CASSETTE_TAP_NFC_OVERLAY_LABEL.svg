@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="25.0mm" height="25.0mm" viewBox="0 0 25.0 25.0">
+<title>C-69 // SIDE A 25 mm non-metal NFC overlay</title>
+<metadata>PRINT NFC OVERLAYS ONLY ON NON-METALLIC PAPER OR VINYL. NEVER USE FOIL, METALLIC INK, OR METAL-BACKED LABEL STOCK.</metadata>
+<circle cx="12.5" cy="12.5" r="12.5" fill="#050B12"/>
+<circle cx="12.5" cy="12.5" r="10.95" fill="none" stroke="#A6EF12" stroke-width="0.48"/>
+<text x="12.5" y="3.6" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.7" font-weight="900" font-stretch="condensed" fill="#A6EF12" textLength="10.8" lengthAdjust="spacingAndGlyphs">C-69 // SIDE A</text>
+<text x="12.5" y="6.25" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="2.2" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="15.0" lengthAdjust="spacingAndGlyphs">RAD DAD</text>
+<rect x="3.5" y="7.8" width="18.0" height="9.1" fill="#0C1722" stroke="#F5F1E8" stroke-width="0.48" rx="1.0"/>
+<circle cx="7.7" cy="12.05" r="2.55" fill="none" stroke="#A6EF12" stroke-width="0.88"/>
+<circle cx="7.7" cy="12.05" r="1.0" fill="#F5F1E8"/>
+<circle cx="7.7" cy="12.05" r="0.42" fill="#050B12"/>
+<circle cx="17.3" cy="12.05" r="2.55" fill="none" stroke="#A6EF12" stroke-width="0.88"/>
+<circle cx="17.3" cy="12.05" r="1.0" fill="#F5F1E8"/>
+<circle cx="17.3" cy="12.05" r="0.42" fill="#050B12"/>
+<rect x="10.3" y="10.25" width="4.4" height="3.55" fill="#F5F1E8" rx="0.45"/>
+<rect x="11.2" y="10.78" width="2.6" height="2.5" fill="#0C1722" rx="0.25"/>
+<text x="12.5" y="19.35" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="3.0" font-weight="900" font-stretch="condensed" fill="#A6EF12" textLength="8.4" lengthAdjust="spacingAndGlyphs">TAP</text>
+<text x="12.5" y="22.1" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.55" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="7.6" lengthAdjust="spacingAndGlyphs">TO PLAY</text>
+</svg>

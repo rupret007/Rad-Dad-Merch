@@ -1,0 +1,86 @@
+{
+  "files": {
+    "3mf/Rad_Dad_Cassette_v37_A1_MINI_0.4_PROJECT.3mf": {
+      "copied_sha256": "55e5174f525884596201b67065ec56ac1cbf1003bc074ef543e934ed9ca01d27",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Cassette_v37_A1_MINI_0.4_PROJECT.3mf",
+      "source_sha256": "55e5174f525884596201b67065ec56ac1cbf1003bc074ef543e934ed9ca01d27"
+    },
+    "3mf/Rad_Dad_Cassette_v37_MODEL_ONLY.3mf": {
+      "copied_sha256": "ed91f79549f0bfa59054dbb039470f832a28ae5038b0a46d2e34a956b27a69d1",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Cassette_v37_MODEL_ONLY.3mf",
+      "source_sha256": "ed91f79549f0bfa59054dbb039470f832a28ae5038b0a46d2e34a956b27a69d1"
+    },
+    "3mf/Rad_Dad_Floppy_v19_A1_MINI_0.4_PROJECT.3mf": {
+      "copied_sha256": "6d566e99db28e78b3a5d43dfbc5c68e4807d51b938b77277dd529ca32fc6eb0e",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Floppy_v19_A1_MINI_0.4_PROJECT.3mf",
+      "source_sha256": "6d566e99db28e78b3a5d43dfbc5c68e4807d51b938b77277dd529ca32fc6eb0e"
+    },
+    "3mf/Rad_Dad_Floppy_v19_MODEL_ONLY.3mf": {
+      "copied_sha256": "dcc6aeb4fab10e185aaacac3bd9913b1d64a4f7e6532ebded90e62490153868c",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Floppy_v19_MODEL_ONLY.3mf",
+      "source_sha256": "dcc6aeb4fab10e185aaacac3bd9913b1d64a4f7e6532ebded90e62490153868c"
+    },
+    "3mf/Rad_Dad_Mini_VHS_v4_A1_MINI_0.4_PROJECT.3mf": {
+      "copied_sha256": "b9f36d5e7e1c452c928def7f128aa660b3bcdc434bba506630147a7ef6791d5b",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Mini_VHS_v4_A1_MINI_0.4_PROJECT.3mf",
+      "source_sha256": "b9f36d5e7e1c452c928def7f128aa660b3bcdc434bba506630147a7ef6791d5b"
+    },
+    "3mf/Rad_Dad_Mini_VHS_v4_MODEL_ONLY.3mf": {
+      "copied_sha256": "2e2692646dde6a67bd5e78f99d36a8f478a619b01ebbf70a938ed10a8a3a5759",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Mini_VHS_v4_MODEL_ONLY.3mf",
+      "source_sha256": "2e2692646dde6a67bd5e78f99d36a8f478a619b01ebbf70a938ed10a8a3a5759"
+    },
+    "3mf/Rad_Dad_Retro_Riot_v7_ALL_FOUR_MODEL_ONLY.3mf": {
+      "copied_sha256": "09d9c25333db90d52b134fe6ffb1f363251f69a2e4db68ec3826ac8e377463b0",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Rad_Dad_Retro_Riot_v7_ALL_FOUR_MODEL_ONLY.3mf",
+      "source_sha256": "09d9c25333db90d52b134fe6ffb1f363251f69a2e4db68ec3826ac8e377463b0"
+    },
+    "3mf/Trailer_Swift_v5_Bobblehead_NFC_A1_MINI_0.4_PROJECT.3mf": {
+      "copied_sha256": "450badc2012c1f687a4189581b5abfcdf27ae791650e94a07eed9611f5e844dd",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Trailer_Swift_v5_Bobblehead_NFC_A1_MINI_0.4_PROJECT.3mf",
+      "source_sha256": "450badc2012c1f687a4189581b5abfcdf27ae791650e94a07eed9611f5e844dd"
+    },
+    "3mf/Trailer_Swift_v5_Bobblehead_NFC_MODEL_ONLY.3mf": {
+      "copied_sha256": "af5ac6856843c9e1f174a9a93ca9e6c12e408e166b8e7ac61c07f0bf29db3b46",
+      "geometry_changed": false,
+      "source": "release/v7/3mf/Trailer_Swift_v5_Bobblehead_NFC_MODEL_ONLY.3mf",
+      "source_sha256": "af5ac6856843c9e1f174a9a93ca9e6c12e408e166b8e7ac61c07f0bf29db3b46"
+    },
+    "stl/Rad_Dad_Cassette_v37_BINARY.stl": {
+      "copied_sha256": "31f4ae42b8f910715698f76b7711b13f4dd46c2dbe1bb8d28e5d37b785d6d053",
+      "geometry_changed": false,
+      "source": "release/v7/stl/Rad_Dad_Cassette_v37_BINARY.stl",
+      "source_sha256": "31f4ae42b8f910715698f76b7711b13f4dd46c2dbe1bb8d28e5d37b785d6d053"
+    },
+    "stl/Rad_Dad_Floppy_v19_BINARY.stl": {
+      "copied_sha256": "10d7d80ed0d85cced581882d613785db61ed0de3dcb06fde7bbd6414d9484e5f",
+      "geometry_changed": false,
+      "source": "release/v7/stl/Rad_Dad_Floppy_v19_BINARY.stl",
+      "source_sha256": "10d7d80ed0d85cced581882d613785db61ed0de3dcb06fde7bbd6414d9484e5f"
+    },
+    "stl/Rad_Dad_Mini_VHS_v4_BINARY.stl": {
+      "copied_sha256": "7808ace93ddef3f646ea6694251fcc36925eb9f23c0772f70821c3646df936b9",
+      "geometry_changed": false,
+      "source": "release/v7/stl/Rad_Dad_Mini_VHS_v4_BINARY.stl",
+      "source_sha256": "7808ace93ddef3f646ea6694251fcc36925eb9f23c0772f70821c3646df936b9"
+    },
+    "stl/Trailer_Swift_v5_Bobblehead_NFC_BINARY.stl": {
+      "copied_sha256": "cf32d03beff2ff6770c4e10db34b206790588c2c566a800201b1e77eeb29460b",
+      "geometry_changed": false,
+      "source": "release/v7/stl/Trailer_Swift_v5_Bobblehead_NFC_BINARY.stl",
+      "source_sha256": "cf32d03beff2ff6770c4e10db34b206790588c2c566a800201b1e77eeb29460b"
+    }
+  },
+  "reason": "Interaction method changed; geometry, dimensions, eyelets, and print profiles did not.",
+  "release": "Rad Dad Retro Riot v8: QR Edition",
+  "schema": "rad-dad-model-reuse-v1",
+  "source_release": "release/v7"
+}

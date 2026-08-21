@@ -1,0 +1,33 @@
+{
+  "all_four_plate": {
+    "bambu_project_3mf": "3mf/Rad_Dad_Retro_Riot_v7_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf",
+    "minimum_spacing_mm": 10.0,
+    "model_only_core_3mf": "3mf/Rad_Dad_Retro_Riot_v7_ALL_FOUR_MODEL_ONLY.3mf"
+  },
+  "individual_products": {
+    "Rad_Dad_Cassette_v37": {
+      "bambu_project_3mf": "3mf/Rad_Dad_Cassette_v37_A1_MINI_0.4_PROJECT.3mf",
+      "model_only_core_3mf": "3mf/Rad_Dad_Cassette_v37_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Cassette_v37_BINARY.stl"
+    },
+    "Rad_Dad_Floppy_v19": {
+      "bambu_project_3mf": "3mf/Rad_Dad_Floppy_v19_A1_MINI_0.4_PROJECT.3mf",
+      "model_only_core_3mf": "3mf/Rad_Dad_Floppy_v19_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Floppy_v19_BINARY.stl"
+    },
+    "Rad_Dad_Mini_VHS_v4": {
+      "bambu_project_3mf": "3mf/Rad_Dad_Mini_VHS_v4_A1_MINI_0.4_PROJECT.3mf",
+      "model_only_core_3mf": "3mf/Rad_Dad_Mini_VHS_v4_MODEL_ONLY.3mf",
+      "stl": "stl/Rad_Dad_Mini_VHS_v4_BINARY.stl"
+    },
+    "Trailer_Swift_v5_Bobblehead_NFC": {
+      "bambu_project_3mf": "3mf/Trailer_Swift_v5_Bobblehead_NFC_A1_MINI_0.4_PROJECT.3mf",
+      "model_only_core_3mf": "3mf/Trailer_Swift_v5_Bobblehead_NFC_MODEL_ONLY.3mf",
+      "stl": "stl/Trailer_Swift_v5_Bobblehead_NFC_BINARY.stl"
+    }
+  },
+  "packaging_load_mode": "direct-import",
+  "physical_validation": "required-before-batch-production",
+  "release": "Rad Dad Retro Riot v7: Micro Replica Edition",
+  "schema": "rad-dad-micro-replica-build-index-v1"
+}

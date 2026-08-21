@@ -1,0 +1,60 @@
+{
+  "determinism_note": "Core 3MF, STL, manifests, and ZIP ordering are deterministic. Bambu project bytes may vary with the installed Bambu Studio version.",
+  "fallback_policy": "MODEL_ONLY files remain authoritative geometry when a verified Bambu project cannot be created.",
+  "guaranteed_minimum_spacing_mm": 10.0,
+  "guaranteed_spacing_file": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf",
+  "helper_importable": true,
+  "packaging_load_mode": "direct-import",
+  "projects": {
+    "Rad_Dad_Cassette_v38": {
+      "bambu_studio_version": "02.07.01.62",
+      "file": "3mf/Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf",
+      "matches_rad_dad_v7_base_profile": true,
+      "model_instance_count": 1,
+      "plate_count": 1,
+      "status": "verified-bambu-project",
+      "support_mode": "off"
+    },
+    "Rad_Dad_Floppy_v22": {
+      "bambu_studio_version": "02.07.01.62",
+      "file": "3mf/Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf",
+      "matches_rad_dad_v7_base_profile": true,
+      "model_instance_count": 1,
+      "plate_count": 1,
+      "status": "verified-bambu-project",
+      "support_mode": "off"
+    },
+    "Rad_Dad_Mini_VHS_v5": {
+      "bambu_studio_version": "02.07.01.62",
+      "file": "3mf/Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf",
+      "matches_rad_dad_v7_base_profile": true,
+      "model_instance_count": 1,
+      "plate_count": 1,
+      "status": "verified-bambu-project",
+      "support_mode": "off"
+    },
+    "Rad_Dad_Retro_Riot_v9_ALL_FOUR": {
+      "bambu_studio_version": "02.07.01.62",
+      "file": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf",
+      "matches_rad_dad_v7_base_profile": true,
+      "model_instance_count": 4,
+      "plate_count": 1,
+      "status": "verified-bambu-project",
+      "support_mode": "organic_build_plate_only"
+    },
+    "Trailer_Swift_v16_Strat_Style_Punk_QR": {
+      "bambu_studio_version": "02.07.01.62",
+      "file": "3mf/Trailer_Swift_v16_Strat_Style_Punk_QR_A1_MINI_0.4_PROJECT.3mf",
+      "matches_rad_dad_v7_base_profile": true,
+      "model_instance_count": 1,
+      "plate_count": 1,
+      "status": "verified-bambu-project",
+      "support_mode": "organic_build_plate_only"
+    }
+  },
+  "requested_mode": "auto",
+  "requested_project_count": 5,
+  "required_satisfied": true,
+  "schema": "rad-dad-bambu-project-status-v1",
+  "verified_project_count": 5
+}

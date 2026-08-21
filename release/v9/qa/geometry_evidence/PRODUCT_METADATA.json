@@ -1,0 +1,163 @@
+{
+  "design_language": "One-color, print-safe micro replicas of authentic media hardware",
+  "nfc_abrasion_protection": "clear nonmetal overlaminate required for key carry",
+  "nfc_overlay_stock": "non-metal paper or vinyl only",
+  "printer_target": "Bambu Lab A1 mini with 0.4 mm nozzle",
+  "products": {
+    "cassette": {
+      "artifact_stem": "Rad_Dad_Cassette_v38",
+      "bambu_product_kind": "cassette",
+      "capacity_easter_egg": "C-69",
+      "display_name": "Rad Dad Compact Cassette v38 Authentic Edge",
+      "easter_egg_location": "small lower-right cassette marking",
+      "exact_envelope_mm": [
+        58.162,
+        30.26,
+        6.685
+      ],
+      "keyring": {
+        "axis": "z",
+        "center_mm": [
+          27.0,
+          0.3
+        ],
+        "inner_diameter_mm": 6.0,
+        "maximum_protrusion_mm": 7.8,
+        "outer_diameter_mm": 12.0,
+        "two_sided_entrance_chamfer": true
+      },
+      "measured_envelope_mm": [
+        58.163513,
+        30.259871,
+        6.6853
+      ],
+      "nfc_landing": {
+        "abrasion_protection": "clear nonmetal overlaminate required",
+        "diameter_mm": 25.0,
+        "flat": true,
+        "location": "flat rear 1-inch QR sticker landing",
+        "registration_zone_diameter_mm": 26.0
+      },
+      "one_color_print": true,
+      "orientation": "flat",
+      "physical_validation": "required-before-batch-production",
+      "recognition_goal": "identifiable within two seconds without reading text",
+      "source_builder": "media_micro_v9.build_cassette_v9",
+      "support_intent": "off"
+    },
+    "floppy": {
+      "artifact_stem": "Rad_Dad_Floppy_v22",
+      "bambu_product_kind": "floppy",
+      "capacity_easter_egg": "3.69 MB",
+      "display_name": "Rad Dad 3.5-Inch Floppy v22 High-Contrast Capacity",
+      "easter_egg_location": "front writable label",
+      "exact_envelope_mm": [
+        44.36,
+        36.916,
+        4.13
+      ],
+      "keyring": {
+        "axis": "z",
+        "center_mm": [
+          20.3,
+          0.0
+        ],
+        "inner_diameter_mm": 6.0,
+        "maximum_protrusion_mm": 7.8,
+        "outer_diameter_mm": 12.0,
+        "two_sided_entrance_chamfer": true
+      },
+      "measured_envelope_mm": [
+        44.359999,
+        36.916,
+        4.13
+      ],
+      "nfc_landing": {
+        "abrasion_protection": "clear nonmetal overlaminate required",
+        "diameter_mm": 25.0,
+        "flat": true,
+        "location": "rear faux-hub 1-inch QR sticker landing",
+        "registration_zone_diameter_mm": 26.0
+      },
+      "one_color_print": true,
+      "orientation": "flat",
+      "physical_validation": "required-before-batch-production",
+      "recognition_goal": "identifiable within two seconds without reading text",
+      "source_builder": "media_micro_v9.build_floppy_v22",
+      "support_intent": "off"
+    },
+    "trailer_swift": {
+      "artifact_stem": "Trailer_Swift_v16_Strat_Style_Punk_QR",
+      "bambu_product_kind": "trailer_swift",
+      "capacity_easter_egg": null,
+      "display_name": "Trailer Swift v16 Strat-Style Punk Collectible",
+      "easter_egg_location": null,
+      "exact_envelope_mm": [
+        45.0,
+        45.0,
+        64.4
+      ],
+      "measured_envelope_mm": [
+        45.0,
+        45.0,
+        64.4
+      ],
+      "nfc_landing": {
+        "abrasion_protection": "clear nonmetal overlaminate required",
+        "diameter_mm": 25.0,
+        "flat": true,
+        "location": "underside 1-inch QR sticker landing",
+        "registration_zone_diameter_mm": 27.0
+      },
+      "one_color_print": true,
+      "orientation": "upright",
+      "physical_validation": "required-before-batch-production",
+      "recognition_goal": "identifiable within two seconds without reading text",
+      "source_builder": "trailer_swift_v9_sculpt.build_trailer_swift_v16",
+      "support_intent": "organic, build plate only"
+    },
+    "vhs": {
+      "artifact_stem": "Rad_Dad_Mini_VHS_v5",
+      "bambu_product_kind": "vhs",
+      "capacity_easter_egg": "T-369",
+      "display_name": "Rad Dad Mini VHS v5 Authentic Shell",
+      "easter_egg_location": "lower center label",
+      "exact_envelope_mm": [
+        65.8,
+        31.9,
+        7.0
+      ],
+      "keyring": {
+        "axis": "z",
+        "center_mm": [
+          30.8,
+          -7.0
+        ],
+        "inner_diameter_mm": 6.0,
+        "maximum_protrusion_mm": 7.8,
+        "outer_diameter_mm": 12.0,
+        "two_sided_entrance_chamfer": true
+      },
+      "measured_envelope_mm": [
+        65.799999,
+        31.9,
+        7.0
+      ],
+      "nfc_landing": {
+        "abrasion_protection": "clear nonmetal overlaminate required",
+        "diameter_mm": 25.0,
+        "flat": true,
+        "location": "central rear 1-inch QR sticker landing",
+        "registration_zone_diameter_mm": 26.0
+      },
+      "one_color_print": true,
+      "orientation": "flat",
+      "physical_validation": "required-before-batch-production",
+      "recognition_goal": "identifiable within two seconds without reading text",
+      "source_builder": "media_micro_v9.build_vhs_v9",
+      "support_intent": "off"
+    }
+  },
+  "release": "Rad Dad Retro Riot v9: Authenticity + QR Edition",
+  "schema": "rad-dad-micro-replica-product-metadata-v1"
+}

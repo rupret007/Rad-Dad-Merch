@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="25.0mm" height="25.0mm" viewBox="0 0 25.0 25.0">
+<title>T-369 25 mm non-metal NFC overlay</title>
+<metadata>PRINT NFC OVERLAYS ONLY ON NON-METALLIC PAPER OR VINYL. NEVER USE FOIL, METALLIC INK, OR METAL-BACKED LABEL STOCK.</metadata>
+<circle cx="12.5" cy="12.5" r="12.5" fill="#050B12"/>
+<circle cx="12.5" cy="12.5" r="10.95" fill="none" stroke="#FF3476" stroke-width="0.48"/>
+<text x="12.5" y="3.35" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.78" font-weight="900" font-stretch="condensed" fill="#FF3476" textLength="7.8" lengthAdjust="spacingAndGlyphs">T-369</text>
+<text x="12.5" y="5.25" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.92" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="12.8" lengthAdjust="spacingAndGlyphs">RAD DAD</text>
+<rect x="2.95" y="6.25" width="19.1" height="11.85" fill="#0C1722" stroke="#F5F1E8" stroke-width="0.48" rx="0.85"/>
+<rect x="3.45" y="6.8" width="18.1" height="2.2" fill="#555E68" stroke="#FF3476" stroke-width="0.38" rx="0.35"/>
+<text x="12.5" y="7.92" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.58" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="5.0" lengthAdjust="spacingAndGlyphs">VHS</text>
+<rect x="4.15" y="9.5" width="7.6" height="5.55" fill="#050B12" stroke="#F5F1E8" stroke-width="0.34" rx="0.5"/>
+<circle cx="7.95" cy="12.28" r="2.0" fill="none" stroke="#FF3476" stroke-width="0.62"/>
+<circle cx="7.95" cy="12.28" r="0.67" fill="#F5F1E8"/>
+<rect x="13.25" y="9.5" width="7.6" height="5.55" fill="#050B12" stroke="#F5F1E8" stroke-width="0.34" rx="0.5"/>
+<circle cx="17.05" cy="12.28" r="2.0" fill="none" stroke="#FF3476" stroke-width="0.62"/>
+<circle cx="17.05" cy="12.28" r="0.67" fill="#F5F1E8"/>
+<polygon points="3.85,15.65 21.15,15.65 19.7,17.35 5.3,17.35" fill="#F5F1E8" stroke="#F5F1E8" stroke-width="0.34" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="6.15,16.5 18.85,16.5" fill="none" stroke="#0C1722" stroke-width="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="12.5" y="19.55" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="3.1" font-weight="900" font-stretch="condensed" fill="#FF3476" textLength="7.5" lengthAdjust="spacingAndGlyphs">TAP</text>
+<text x="12.5" y="22.1" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.6" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="8.0" lengthAdjust="spacingAndGlyphs">TO PLAY</text>
+</svg>

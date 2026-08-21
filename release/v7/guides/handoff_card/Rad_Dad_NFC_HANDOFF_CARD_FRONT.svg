@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="95.25mm" height="57.15mm" viewBox="0 0 95.25 57.15">
+<title>Rad Dad NFC handoff card front, 3.5 x 2 inch trim plus 0.125 inch bleed</title>
+<metadata>PRINT NFC OVERLAYS ONLY ON NON-METALLIC PAPER OR VINYL. NEVER USE FOIL, METALLIC INK, OR METAL-BACKED LABEL STOCK.</metadata>
+<rect x="0" y="0" width="95.25" height="57.15" fill="#050B12"/>
+<rect x="3.175" y="3.175" width="88.9" height="50.8" fill="#050B12" rx="3.0"/>
+<rect x="6.375" y="6.375" width="82.5" height="44.4" fill="none" stroke="#A6EF12" stroke-width="0.8" rx="2.0"/>
+<circle cx="13.175" cy="28.575" r="0.9425" fill="#1CB5F4"/>
+<path d="M 14.96041827844441 26.289768814540505 A 2.9 2.9 0 0 1 14.96041827844441 30.860231185459494" fill="none" stroke="#1CB5F4" stroke-width="1.015" stroke-linecap="round"/>
+<path d="M 16.165575616394385 24.747237764355347 A 4.8575 4.8575 0 0 1 16.165575616394385 32.40276223564465" fill="none" stroke="#1CB5F4" stroke-width="1.015" stroke-linecap="round"/>
+<path d="M 17.415368411305472 23.1475759345337 A 6.8875 6.8875 0 0 1 17.415368411305472 34.0024240654663" fill="none" stroke="#1CB5F4" stroke-width="1.015" stroke-linecap="round"/>
+<text x="57.175" y="10.875" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="3.4" font-weight="900" font-stretch="condensed" fill="#FF3476" textLength="61.0" lengthAdjust="spacingAndGlyphs">RAD DAD // MICRO REPLICAS</text>
+<text x="57.175" y="20.375" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="3.65" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="62.0" lengthAdjust="spacingAndGlyphs">Old media. Loud band. One tap.</text>
+<text x="57.175" y="32.875" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="3.3" font-weight="900" font-stretch="condensed" fill="#A6EF12" textLength="63.0" lengthAdjust="spacingAndGlyphs">FIND THE MARKED CIRCLE.</text>
+<text x="57.175" y="39.675" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="2.55" font-weight="900" font-stretch="condensed" fill="#1CB5F4" textLength="65.0" lengthAdjust="spacingAndGlyphs">TOUCH YOUR UNLOCKED PHONE TO IT.</text>
+<text x="57.175" y="47.574999999999996" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="2.7" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="42.0" lengthAdjust="spacingAndGlyphs">RADDADBAND.COM/TAP</text>
+<polyline points="0.35,3.175 2.5749999999999997,3.175" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="3.175,0.35 3.175,2.5749999999999997" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="92.675,3.175 94.9,3.175" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="92.075,0.35 92.075,2.5749999999999997" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="0.35,53.974999999999994 2.5749999999999997,53.974999999999994" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="3.175,54.574999999999996 3.175,56.8" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="92.675,53.974999999999994 94.9,53.974999999999994" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="92.075,54.574999999999996 92.075,56.8" fill="none" stroke="#F5F1E8" stroke-width="0.22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
