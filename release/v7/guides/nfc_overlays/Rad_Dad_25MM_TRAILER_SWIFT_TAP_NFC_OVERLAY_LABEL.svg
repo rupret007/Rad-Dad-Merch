@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="25.0mm" height="25.0mm" viewBox="0 0 25.0 25.0">
+<title>TRAILER SWIFT 25 mm non-metal NFC overlay</title>
+<metadata>PRINT NFC OVERLAYS ONLY ON NON-METALLIC PAPER OR VINYL. NEVER USE FOIL, METALLIC INK, OR METAL-BACKED LABEL STOCK.</metadata>
+<circle cx="12.5" cy="12.5" r="12.5" fill="#050B12"/>
+<circle cx="12.5" cy="12.5" r="10.95" fill="none" stroke="#FFB000" stroke-width="0.48"/>
+<text x="12.5" y="3.6" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.8" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="10.2" lengthAdjust="spacingAndGlyphs">TRAILER</text>
+<text x="12.5" y="6.35" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="2.6" font-weight="900" font-stretch="condensed" fill="#FFB000" textLength="9.8" lengthAdjust="spacingAndGlyphs">SWIFT</text>
+<polygon points="5.2,8.4 9.2,8.4 7.5,12.2 10.2,12.2 5.5,18.0 6.9,13.7 4.5,13.7" fill="#FF3476" stroke="#FF3476" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="19.8,8.4 15.8,8.4 17.5,12.2 14.8,12.2 19.5,18.0 18.1,13.7 20.5,13.7" fill="#FF3476" stroke="#FF3476" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="12.5" y="13.1" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="4.0" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="8.2" lengthAdjust="spacingAndGlyphs">TAP</text>
+<text x="12.5" y="18.0" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="2.2" font-weight="900" font-stretch="condensed" fill="#FFB000" textLength="13.0" lengthAdjust="spacingAndGlyphs">THE BASE</text>
+<text x="12.5" y="21.75" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.65" font-weight="900" font-stretch="condensed" fill="#1CB5F4" textLength="8.4" lengthAdjust="spacingAndGlyphs">RAD DAD</text>
+</svg>

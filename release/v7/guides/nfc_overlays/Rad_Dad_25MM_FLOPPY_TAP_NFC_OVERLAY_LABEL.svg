@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="25.0mm" height="25.0mm" viewBox="0 0 25.0 25.0">
+<title>3.69 MB 25 mm non-metal NFC overlay</title>
+<metadata>PRINT NFC OVERLAYS ONLY ON NON-METALLIC PAPER OR VINYL. NEVER USE FOIL, METALLIC INK, OR METAL-BACKED LABEL STOCK.</metadata>
+<circle cx="12.5" cy="12.5" r="12.5" fill="#050B12"/>
+<circle cx="12.5" cy="12.5" r="10.95" fill="none" stroke="#1CB5F4" stroke-width="0.48"/>
+<text x="12.5" y="3.8" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.75" font-weight="900" font-stretch="condensed" fill="#1CB5F4" textLength="9.8" lengthAdjust="spacingAndGlyphs">3.69 MB</text>
+<circle cx="12.5" cy="11.7" r="5.75" fill="#A9B1B8" stroke="#F5F1E8" stroke-width="0.35"/>
+<circle cx="12.5" cy="11.7" r="4.45" fill="#555E68"/>
+<circle cx="12.5" cy="11.7" r="3.95" fill="#A9B1B8" stroke="#555E68" stroke-width="0.28"/>
+<circle cx="12.5" cy="11.7" r="1.38" fill="#050B12"/>
+<rect x="15.15" y="10.75" width="2.3" height="1.9" fill="#050B12" rx="0.3"/>
+<path d="M 8.104407232872248 9.650301430557608 A 4.85 4.85 0 0 1 16.520832226891955 8.987914418166879" fill="none" stroke="#F5F1E8" stroke-width="0.3" stroke-linecap="round"/>
+<path d="M 16.930695469566615 13.67267271891763 A 4.85 4.85 0 0 1 8.479167773108049 14.412085581833121" fill="none" stroke="#555E68" stroke-width="0.3" stroke-linecap="round"/>
+<text x="12.5" y="18.8" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="1.95" font-weight="900" font-stretch="condensed" fill="#F5F1E8" textLength="13.2" lengthAdjust="spacingAndGlyphs">RAD DAD</text>
+<text x="12.5" y="21.45" text-anchor="middle" dominant-baseline="middle" font-family="DejaVu Sans, sans-serif" font-size="2.8" font-weight="900" font-stretch="condensed" fill="#1CB5F4" textLength="7.4" lengthAdjust="spacingAndGlyphs">TAP</text>
+</svg>

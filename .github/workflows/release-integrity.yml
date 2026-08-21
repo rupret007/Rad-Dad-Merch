@@ -1,0 +1,44 @@
+name: Release integrity
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: pip
+          cache-dependency-path: requirements-v7.txt
+      - name: Install release dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-v7.txt
+      - name: Compile v7 and v8 Python modules
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import py_compile
+
+          modules = sorted(
+              list(Path("src").glob("*v7*.py"))
+              + list(Path("src").glob("*v8*.py"))
+              + list(Path("tools").glob("*v7*.py"))
+              + list(Path("tools").glob("*qr*.py"))
+          )
+          if not modules:
+              raise SystemExit("No release Python modules found")
+          for module in modules:
+              py_compile.compile(str(module), doraise=True)
+          PY
+      - name: Verify release files and checksums
+        run: python3 tools/verify_release.py
+      - name: Verify Retro Riot v7 release
+        run: python3 tools/verify_v7_release.py --release release/v7 --json /tmp/rad-dad-v7-validation.json
+      - name: Verify Retro Riot v8 QR release
+        run: python3 tools/verify_qr_release.py --release release/v8
