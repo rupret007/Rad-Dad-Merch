@@ -36,9 +36,9 @@
       "sha256": "ba64ef78caac100f95e7d24249dd9450c425431bc6a3bece2ab9c8e9eb6bc227"
     },
     {
-      "bytes": 1399359,
+      "bytes": 1391915,
       "path": "3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf",
-      "sha256": "e5f76e167f4c511f0d5ef57ab0c6c73198578f47812625821e50db44ba7be22d"
+      "sha256": "300c93f0ee4eff9d5b540414b2c6d744a1498eb99a6f09d30f8496bddb496838"
     },
     {
       "bytes": 1391900,
@@ -46,9 +46,9 @@
       "sha256": "7f87c5154e840d1db7c2b0830a117ee34e5329e4d46424e477d7a59b0713ba6c"
     },
     {
-      "bytes": 755452,
+      "bytes": 831476,
       "path": "3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf",
-      "sha256": "3aa30ef3c804eea4618898723ae57e594f2f4398260c7e65b0466b546da65750"
+      "sha256": "ea570c696b38a4b441dd0151c0477be0295fd743717b3816293c03edb0d98581"
     },
     {
       "bytes": 561108,
@@ -61,14 +61,14 @@
       "sha256": "17b78ed6e3106d5689155a230d546d9cdefd61b0079838f7c86ab0151d288c25"
     },
     {
-      "bytes": 4133,
+      "bytes": 4457,
       "path": "README.md",
-      "sha256": "a765452739dc085e69e0683623618141b41e05c534e3d50a3ff657301564d762"
+      "sha256": "fb95472bc88df2b5da7a9f594a2122ac652eb023bb263e3186dfd07a0d544db3"
     },
     {
       "bytes": 8113,
       "path": "SHA256SUMS.txt",
-      "sha256": "b4a11ffb7f4b8d5064977aec8aa781dfce85c972512c0470846cfb106770747c"
+      "sha256": "eb899fbe559621e0bfda63f3edee301933728c6ec5784369b413202ec1a28e60"
     },
     {
       "bytes": 785,
@@ -243,7 +243,7 @@
     {
       "bytes": 2661,
       "path": "qa/AUTHENTICITY_SPEC.json",
-      "sha256": "c3e2dff636526c0d87b8b7460107cc3c5e2d08a197306479bcc58a2182111e12"
+      "sha256": "594093fb220cde02356bf16d7a4a7a227a5314e1e332d763c2b7481b891e4484"
     },
     {
       "bytes": 151,
@@ -286,9 +286,9 @@
       "sha256": "0b558b108daa7c052d46a16d322248995b44d294e2e7540d13712309c62380b7"
     },
     {
-      "bytes": 21166,
+      "bytes": 20820,
       "path": "source/build_rad_dad_authentic_qr_v9.py",
-      "sha256": "de115aa659527c87760c4dbd23749c9adbd12cb5d004938641ebdc2e27d96665"
+      "sha256": "b7911b349d419d184c4cd6296ae046b6338216732750e96b77b04d1800563d87"
     },
     {
       "bytes": 31031,
@@ -296,9 +296,9 @@
       "sha256": "1c844df0c0f92544430f9504617612dcb51ea6a3deb4950c3813e929f40c8c0e"
     },
     {
-      "bytes": 7831,
+      "bytes": 18271,
       "path": "source/build_three_device_plate_v9.py",
-      "sha256": "a8b3c51461946416e09be0fae49e5b2e18fd7e3f037957b0f3d96726810f46f7"
+      "sha256": "631233dc6f36287eb0add8b9d09e6b1853247cadccef2996d71d4d8bf2248475"
     },
     {
       "bytes": 6959,

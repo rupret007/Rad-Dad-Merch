@@ -13,7 +13,7 @@ one-inch QR sticker that opens `https://raddadband.com/qr/`.
 | Need | File |
 |---|---|
 | Print the current cassette, v22 floppy, and VHS together | `3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf` |
-| Print all four together | `3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_MODEL_ONLY.3mf` |
+| Print all four together | `3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf` |
 | Print all four with Trailer Swift supports preset | `3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf` |
 | Print on 63-up pre-cut stock | [Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf) |
 | Print at FedEx Office on adhesive paper | [Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf) |
@@ -24,6 +24,11 @@ one-inch QR sticker that opens `https://raddadband.com/qr/`.
 | Send the red master to a vendor | [Rad_Dad_QR_RED_1IN_VENDOR_MASTER.pdf](guides/qr_stickers/Rad_Dad_QR_RED_1IN_VENDOR_MASTER.pdf) |
 | Calibrate and scan-test red first | [Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf](guides/qr_stickers/Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf) |
 | Follow the physical acceptance gate | [Physical QC checklist](qa/PHYSICAL_QC_CHECKLIST.md) |
+
+The three multi-model files listed above are editable, configured Bambu Studio
+projects. They include printer, process, object, and plate metadata and must
+open without the `invalid config, load geometry data only` warning. Files with
+`MODEL_ONLY` in their name intentionally contain geometry without print setup.
 
 ## V9 authenticity changes
 
