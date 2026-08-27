@@ -108,6 +108,9 @@ damage.
 - Verify the 25.4 mm finished diameter and complete white quiet zone.
 - Scan top, center, and bottom samples from every sticker batch before use.
 - Require each sample to open `https://raddadband.com/qr/` on iPhone and Android.
+- If using the official red fallback, print as color, confirm modules are
+  pure `#FF0000` on white, and require the `Rad_Dad_QR_RED_PRINT_CALIBRATION`
+  page to scan on iPhone and Android before the sheet.
 - Center one sticker on the clean protected landing.
 - Scan the completed item three times on each platform in indoor and outdoor
   light.

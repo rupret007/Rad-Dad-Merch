@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail if current merch/QR docs still name superseded production models."""
+"""Fail if current merch/QR docs still name superseded models or hide the red fallback."""
 
 from __future__ import annotations
 
@@ -18,10 +18,21 @@ METADATA = (
     / "geometry_evidence"
     / "PRODUCT_METADATA.json"
 )
+AUTHENTICITY = REPO_ROOT / "release" / "v9" / "qa" / "AUTHENTICITY_SPEC.json"
 QR_STICKERS = REPO_ROOT / "docs" / "QR_STICKERS.md"
 DESIGN = REPO_ROOT / "docs" / "DESIGN.md"
 PRINTING = REPO_ROOT / "docs" / "PRINTING.md"
+README = REPO_ROOT / "README.md"
+NFC = REPO_ROOT / "docs" / "NFC.md"
+VALIDATION = REPO_ROOT / "docs" / "VALIDATION.md"
 TRAILER_PROJECT_DIR = REPO_ROOT / "release" / "v9" / "3mf"
+QR_ART_DIR = REPO_ROOT / "release" / "v9" / "guides" / "qr_stickers"
+RED_FALLBACK_FILES = (
+    "Rad_Dad_QR_RED_1IN_VENDOR_MASTER.svg",
+    "Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf",
+    "Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf",
+    "Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf",
+)
 
 
 def require(condition: bool, message: str) -> None:
@@ -44,6 +55,24 @@ def table_revision(text: str, product: str) -> str | None:
     return match.group(1) if match else None
 
 
+def exact_envelope(values: list[float]) -> str:
+    return f"{values[0]:.3f} x {values[1]:.3f} x {values[2]:.3f} mm"
+
+
+def documents_red_fallback(text: str) -> bool:
+    lowered = text.lower()
+    return (
+        "Rad_Dad_QR_RED_" in text
+        and "fallback" in lowered
+        and ("#ff0000" in lowered or "process red" in lowered or "process-red" in lowered)
+    )
+
+
+def mentions_red_fallback(text: str) -> bool:
+    lowered = text.lower()
+    return "fallback" in lowered and "red" in lowered
+
+
 def _self_check() -> None:
     stale = (
         "| 3.5-inch floppy | v21 | 26.0 mm |\n"
@@ -52,11 +81,29 @@ def _self_check() -> None:
     require(table_revision(stale, "3.5-inch floppy") == "v21", "self-check missed stale floppy")
     require(table_revision(stale, "Trailer Swift") == "v9", "self-check missed stale Trailer Swift")
     require(table_revision("| Mini VHS | v5 | 26.0 mm |", "Mini VHS") == "v5", "self-check missed VHS")
+    require(table_revision("| Rad Dad 3.5-Inch Floppy | v22 | 44.360 x 36.916 x 4.130 mm |", "Rad Dad 3.5-Inch Floppy") == "v22", "self-check missed README floppy")
+    exclusive_bw = (
+        "The interaction layer is a separate, strictly black-and-white "
+        "1-inch QR sticker.\n"
+    )
+    require(not documents_red_fallback(exclusive_bw), "self-check treated exclusive B&W as documented fallback")
+    require(not mentions_red_fallback(exclusive_bw), "self-check treated exclusive B&W as a red mention")
+    documented = (
+        "Preferred production is pure black. The official fallback is "
+        "pure process red `#FF0000` from `Rad_Dad_QR_RED_1IN_VENDOR_MASTER`.\n"
+    )
+    require(documents_red_fallback(documented), "self-check missed documented red fallback")
+    require(mentions_red_fallback(documented), "self-check missed red fallback mention")
+    require(
+        exact_envelope([58.162, 30.26, 6.685]) == "58.162 x 30.260 x 6.685 mm",
+        "self-check formatted cassette envelope incorrectly",
+    )
 
 
 def main() -> int:
     _self_check()
     metadata = json.loads(METADATA.read_text(encoding="utf-8"))
+    authenticity = json.loads(AUTHENTICITY.read_text(encoding="utf-8"))
     products = metadata["products"]
     floppy_rev = revision_from_stem(products["floppy"]["artifact_stem"])
     trailer_rev = revision_from_stem(products["trailer_swift"]["artifact_stem"])
@@ -65,10 +112,19 @@ def main() -> int:
     trailer_project = (
         f"{products['trailer_swift']['artifact_stem']}_A1_MINI_0.4_PROJECT.3mf"
     )
+    envelopes = {
+        "cassette": exact_envelope(products["cassette"]["exact_envelope_mm"]),
+        "floppy": exact_envelope(products["floppy"]["exact_envelope_mm"]),
+        "vhs": exact_envelope(products["vhs"]["exact_envelope_mm"]),
+        "trailer_swift": exact_envelope(products["trailer_swift"]["exact_envelope_mm"]),
+    }
 
     qr = QR_STICKERS.read_text(encoding="utf-8")
     design = DESIGN.read_text(encoding="utf-8")
     printing = PRINTING.read_text(encoding="utf-8")
+    readme = README.read_text(encoding="utf-8")
+    nfc = NFC.read_text(encoding="utf-8")
+    validation = VALIDATION.read_text(encoding="utf-8")
 
     require(
         table_revision(qr, "3.5-inch floppy") == floppy_rev,
@@ -103,14 +159,46 @@ def main() -> int:
         table_revision(design, "Trailer Swift") == trailer_rev,
         f"Design current-model table still names Trailer Swift {table_revision(design, 'Trailer Swift')}, not {trailer_rev}",
     )
-    cassette_envelope = products["cassette"]["exact_envelope_mm"]
-    cassette_exact = (
-        f"{cassette_envelope[0]:.3f} x {cassette_envelope[1]:.3f} x "
-        f"{cassette_envelope[2]:.3f} mm"
+    require(
+        f"| Compact cassette | {cassette_rev} | {envelopes['cassette']} |" in design,
+        f"Design current-model table does not use exact cassette envelope {envelopes['cassette']}",
     )
     require(
-        f"| Compact cassette | {cassette_rev} | {cassette_exact} |" in design,
-        f"Design current-model table does not use exact cassette envelope {cassette_exact}",
+        f"| 3.5-inch floppy | {floppy_rev} | {envelopes['floppy']} |" in design,
+        f"Design current-model table does not use exact floppy envelope {envelopes['floppy']}",
+    )
+    require(
+        f"| Mini VHS | {vhs_rev} | {envelopes['vhs']} |" in design,
+        f"Design current-model table does not use exact VHS envelope {envelopes['vhs']}",
+    )
+    require(
+        f"| Trailer Swift | {trailer_rev} | {envelopes['trailer_swift']} |" in design,
+        f"Design current-model table does not use exact Trailer Swift envelope {envelopes['trailer_swift']}",
+    )
+
+    require(
+        table_revision(readme, "Rad Dad Compact Cassette") == cassette_rev,
+        "README current-model table cassette revision drifted",
+    )
+    require(
+        table_revision(readme, "Rad Dad 3.5-Inch Floppy") == floppy_rev,
+        f"README current-model table still names floppy {table_revision(readme, 'Rad Dad 3.5-Inch Floppy')}, not {floppy_rev}",
+    )
+    require(
+        table_revision(readme, "Rad Dad Mini VHS") == vhs_rev,
+        "README current-model table VHS revision drifted",
+    )
+    require(
+        table_revision(readme, "Trailer Swift") == trailer_rev,
+        f"README current-model table still names Trailer Swift {table_revision(readme, 'Trailer Swift')}, not {trailer_rev}",
+    )
+    require(
+        f"| Rad Dad Compact Cassette | {cassette_rev} | {envelopes['cassette']} |" in readme,
+        f"README current-model table does not use exact cassette envelope {envelopes['cassette']}",
+    )
+    require(
+        f"| Rad Dad 3.5-Inch Floppy | {floppy_rev} | {envelopes['floppy']} |" in readme,
+        f"README current-model table does not use exact floppy envelope {envelopes['floppy']}",
     )
 
     require(
@@ -130,10 +218,56 @@ def main() -> int:
         f"Printing troubleshooting does not confirm current floppy {floppy_rev}",
     )
 
+    fallback = authenticity.get("qr", {}).get("color_cartridge_fallback", [])
+    require(
+        "#FF0000" in fallback and "#FFFFFF" in fallback,
+        "Authenticity spec no longer records the official red-on-white fallback",
+    )
+    for name in RED_FALLBACK_FILES:
+        require((QR_ART_DIR / name).is_file(), f"Official red fallback file is missing: {name}")
+
+    require(
+        documents_red_fallback(qr),
+        "QR sticker guide still omits the official Rad_Dad_QR_RED_ process-red fallback",
+    )
+    require(
+        documents_red_fallback(readme),
+        "Root README still omits the official Rad_Dad_QR_RED_ process-red fallback",
+    )
+    require(
+        mentions_red_fallback(design),
+        "Design QR standard still describes only a solid-black sticker",
+    )
+    require(
+        mentions_red_fallback(nfc),
+        "NFC legacy notice still describes v9 stickers as exclusively black-and-white",
+    )
+    require(
+        mentions_red_fallback(printing),
+        "Printing guide QR installation still omits the official red fallback",
+    )
+    require(
+        mentions_red_fallback(validation),
+        "Validation QR gate still omits official red-fallback scan checks",
+    )
+    require(
+        "strictly black-and-white" not in qr.lower(),
+        "QR sticker guide still claims exclusive black-and-white production",
+    )
+    require(
+        "strictly black-and-white" not in readme.lower(),
+        "Root README still claims exclusive black-and-white production",
+    )
+    require(
+        "strictly black-and-white" not in nfc.lower(),
+        "NFC legacy notice still claims exclusive black-and-white production",
+    )
+
     print(
         "Current merch/QR model docs match "
         f"cassette {cassette_rev}, floppy {floppy_rev}, "
-        f"VHS {vhs_rev}, Trailer Swift {trailer_rev}."
+        f"VHS {vhs_rev}, Trailer Swift {trailer_rev}, "
+        "and document the official red QR fallback."
     )
     return 0
 

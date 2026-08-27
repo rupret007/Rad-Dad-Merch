@@ -110,7 +110,9 @@ watertight body. Supports must be removable without breaking the character.
 ## QR interaction standard
 
 The current production interaction is a visible 25.4 mm / 1-inch matte-white
-sticker with a solid-black QR code. NFC hardware is not installed.
+sticker. Preferred artwork is a solid-black QR. The official fallback, when
+black ink is unavailable, is pure process red `#FF0000` on white from the
+existing `Rad_Dad_QR_RED_` files. NFC hardware is not installed.
 
 - Canonical destination: `https://raddadband.com/qr/`
 - Legacy ordered stickers using `/tap/` remain valid through a permanent

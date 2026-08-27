@@ -117,8 +117,16 @@ def verify_qr(root: Path) -> None:
     require(module_pitch >= 0.44, "QR module pitch is too small")
     artwork = root / "guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER_600DPI.png"
     sheet = root / "guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER_600DPI.png"
+    red_artwork = root / "guides/qr_stickers/Rad_Dad_QR_RED_1IN_VENDOR_MASTER_600DPI.png"
+    red_sheet = root / "guides/qr_stickers/Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER_600DPI.png"
     require(png_size(artwork) == (600, 600), "Vendor QR PNG is not 600 x 600")
     require(png_size(sheet) == (5100, 6600), "63-up QR sheet is not US Letter at 600 DPI")
+    require(
+        qr.get("color_cartridge_fallback") == ["#FF0000", "#FFFFFF"],
+        "Authenticity spec no longer records the official red-on-white fallback",
+    )
+    require(png_size(red_artwork) == (600, 600), "Red vendor QR PNG is not 600 x 600")
+    require(png_size(red_sheet) == (5100, 6600), "Red 63-up QR sheet is not US Letter at 600 DPI")
 
 
 def verify(root: Path) -> None:
