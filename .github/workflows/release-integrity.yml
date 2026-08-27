@@ -36,6 +36,8 @@ jobs:
           for module in modules:
               py_compile.compile(str(module), doraise=True)
           PY
+      - name: Verify current merch/QR model docs
+        run: python3 tools/verify_current_model_docs.py
       - name: Verify release files and checksums
         run: python3 tools/verify_release.py
       - name: Verify Retro Riot v7 release

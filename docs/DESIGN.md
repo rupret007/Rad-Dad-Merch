@@ -12,10 +12,10 @@ nozzle. Do not scale them to solve text, eyelet, or sticker-fit problems.
 
 | Product | Revision | Exact envelope | Use | Keyring bore | QR landing |
 |---|---:|---:|---|---:|---:|
-| Compact cassette | v38 | 58.163 x 30.260 x 6.685 mm | Keychain | 6.0 mm | 26.0 mm rear |
-| 3.5-inch floppy | v21 | 44.360 x 36.916 x 4.130 mm | Keychain | 6.0 mm | 26.0 mm rear |
+| Compact cassette | v38 | 58.162 x 30.260 x 6.685 mm | Keychain | 6.0 mm | 26.0 mm rear |
+| 3.5-inch floppy | v22 | 44.360 x 36.916 x 4.130 mm | Keychain | 6.0 mm | 26.0 mm rear |
 | Mini VHS | v5 | 65.800 x 31.900 x 7.000 mm | Keychain | 6.0 mm | 26.0 mm rear |
-| Trailer Swift | v9 | 45.000 x 45.000 x 64.400 mm | Desk collectible | None | 27.0 mm underside |
+| Trailer Swift | v16 | 45.000 x 45.000 x 64.400 mm | Desk collectible | None | 27.0 mm underside |
 
 The cassette, floppy, and VHS eyelets use two-sided lead-ins around a nominal
 6.0 mm cylindrical opening. The reinforced neck must remain thick enough for

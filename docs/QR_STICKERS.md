@@ -26,9 +26,9 @@ V9 deepens authentic device details without changing the proven sticker fit:
 | Product | Model revision | Protected landing | Sticker | Radial clearance |
 |---|---|---:|---:|---:|
 | Compact cassette | v38 | 26.0 mm | 25.4 mm | 0.3 mm |
-| 3.5-inch floppy | v21 | 26.0 mm | 25.4 mm | 0.3 mm |
+| 3.5-inch floppy | v22 | 26.0 mm | 25.4 mm | 0.3 mm |
 | Mini VHS | v5 | 26.0 mm | 25.4 mm | 0.3 mm |
-| Trailer Swift | v9 | 27.0 mm | 25.4 mm | 0.8 mm |
+| Trailer Swift | v16 | 27.0 mm | 25.4 mm | 0.8 mm |
 
 Cassette v38 directly preserves the audited narrow tape-entry edge from the
 successful earlier body, including its stepped shell and asymmetric transport
