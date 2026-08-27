@@ -98,12 +98,12 @@ def verify_geometry(root: Path) -> None:
     require(qa.get("mesh_qa_pass") is True, "Mesh QA did not pass")
     models = {model["name"]: model for model in qa.get("models", [])}
     floppy = models.get("Rad_Dad_Floppy_v22")
-    require(floppy is not None, "V21 floppy is absent from model QA")
-    require(floppy.get("digital_qa_pass") is True, "V21 floppy digital QA failed")
-    require(all(floppy.get("checks", {}).values()), "V21 floppy has a failed geometry check")
+    require(floppy is not None, "V22 floppy is absent from model QA")
+    require(floppy.get("digital_qa_pass") is True, "V22 floppy digital QA failed")
+    require(all(floppy.get("checks", {}).values()), "V22 floppy has a failed geometry check")
     expected = (44.36, 36.916, 4.13)
     actual = tuple(float(value) for value in floppy["dimensions_mm"])
-    require(all(abs(a - e) <= 0.001 for a, e in zip(actual, expected)), f"V21 floppy envelope changed: {actual}")
+    require(all(abs(a - e) <= 0.001 for a, e in zip(actual, expected)), f"V22 floppy envelope changed: {actual}")
 
 
 def verify_qr(root: Path) -> None:

@@ -10,7 +10,7 @@ geometry but do not carry the complete Bambu printer intent.
 | Cassette only | `Rad_Dad_Cassette_v38_A1_MINI_0.4_PROJECT.3mf` |
 | Floppy only | `Rad_Dad_Floppy_v22_A1_MINI_0.4_PROJECT.3mf` |
 | VHS only | `Rad_Dad_Mini_VHS_v5_A1_MINI_0.4_PROJECT.3mf` |
-| Trailer Swift only | `Trailer_Swift_v9_Signature_Punk_QR_A1_MINI_0.4_PROJECT.3mf` |
+| Trailer Swift only | `Trailer_Swift_v16_Strat_Style_Punk_QR_A1_MINI_0.4_PROJECT.3mf` |
 | Current cassette, floppy, and VHS together | `Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf` |
 | All four with Trailer Swift support | `Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf` |
 
@@ -139,7 +139,7 @@ through the website's permanent redirect. Do not discard them.
 
 | Symptom | Required response |
 |---|---|
-| `3.69 MB` is incomplete | Confirm v21, 100% scale, 0.4 mm nozzle, 0.16 mm Arachne profile, and slow detail speeds; hold the batch if any character remains incomplete |
+| `3.69 MB` is incomplete | Confirm v22, 100% scale, 0.4 mm nozzle, 0.16 mm Arachne profile, and slow detail speeds; hold the batch if any character remains incomplete |
 | Eyelet is tight | Confirm elephant-foot compensation, remove loose brim only, and reject cracked or undersized parts |
 | Cassette bottom looks solid | Confirm the v38 project and rear-down orientation; do not substitute an earlier simplified cassette |
 | VHS resembles an audio cassette | Confirm v5 and inspect the independent reel windows, door, label, and VHS marks |
