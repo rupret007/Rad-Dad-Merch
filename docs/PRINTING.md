@@ -123,7 +123,10 @@ Applies to cassette, floppy, and VHS:
 
 ## QR sticker installation
 
-1. Use a 25.4 mm matte-white permanent-adhesive sticker with a pure-black QR.
+1. Use a 25.4 mm matte-white permanent-adhesive sticker. Preferred artwork is
+   a pure-black QR. If black ink is unavailable, use the official
+   `Rad_Dad_QR_RED_` fallback, print it as color rather than grayscale, and
+   scan-test the red calibration page first.
 2. Confirm it opens `https://raddadband.com/qr/` before installation.
 3. Clean and dry the protected rear or underside landing.
 4. Center the sticker without covering an edge, opening, or raised detail.

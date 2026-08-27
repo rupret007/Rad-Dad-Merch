@@ -1,8 +1,10 @@
 # NFC workflow: legacy archive
 
 NFC is not part of the recommended Rad Dad Retro Riot v9 production workflow.
-V9 uses a visible, strictly black-and-white 25.4 mm / 1-inch QR sticker that a
-recipient can recognize and scan with the normal phone camera.
+V9 uses a visible 25.4 mm / 1-inch QR sticker that a recipient can recognize
+and scan with the normal phone camera. Preferred production is pure black on
+white; the v9 pack also includes an official process-red fallback when black
+ink is unavailable.
 
 ## Why NFC became legacy
 

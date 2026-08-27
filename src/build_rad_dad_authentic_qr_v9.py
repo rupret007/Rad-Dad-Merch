@@ -219,8 +219,9 @@ def _write_release_documents(output: Path, geometry_hashes: dict[str, str]) -> N
 This release restores the physical cues that make the cassette, floppy disk,
 and VHS recognizable while keeping the Trailer Swift collectible funny rather
 than frightening. Every exterior envelope and attachment opening remains the
-same size as v7. The NFC workflow is replaced by a visible, black-and-white,
-one-inch QR sticker that opens `{QR_URL}`.
+same size as v7. The NFC workflow is replaced by a visible one-inch QR
+sticker that opens `{QR_URL}`. Preferred artwork is black on white; the pack
+also includes a pure process-red fallback when black ink is unavailable.
 
 ## Start here
 
@@ -455,7 +456,7 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         exclude=(archive, sidecar),
         metadata={
             "collection": "Authenticity + QR Edition",
-            "interaction": "visible black-and-white 1-inch QR sticker",
+            "interaction": "visible 1-inch QR sticker; preferred black, official red fallback",
             "destination_url": QR_URL,
             "geometry_changed_from_v7": True,
             "external_envelopes_changed_from_v7": False,

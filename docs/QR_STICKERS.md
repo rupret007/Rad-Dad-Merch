@@ -1,11 +1,17 @@
-# V9 black-and-white QR sticker production
+# V9 QR sticker production
 
 ## Production decision
 
 Rad Dad Retro Riot v9 uses one visible 25.4 mm / 1-inch QR sticker as the
 supported handoff mechanism. The models remain durable one-color prints; the
-separate black-and-white label provides the contrast a camera needs without an
-AMS, filament change, or unreliable shadow-based 3D code.
+separate label provides the contrast a camera needs without an AMS, filament
+change, or unreliable shadow-based 3D code.
+
+Preferred production is pure black modules on matte white. The same v9 pack
+also ships an official pure process-red (`#FF0000`) on white fallback, generated
+by the existing `qr_artwork_v9` path, for printers that are out of black ink.
+That fallback is not a second destination, a decorative color treatment, or a
+second merch app.
 
 NFC is now a legacy experiment, not a production dependency.
 
@@ -39,8 +45,22 @@ Swift v16 retains the protected pocket beneath the solid circular base.
 
 ## Non-negotiable artwork rules
 
+Preferred black masters:
+
 - Use pure black modules on a solid white field.
-- Use no color, gray, tint, gradient, texture, or transparency.
+- Use no gray, tint, gradient, texture, transparency, or decorative color.
+- Keep any `RAD DAD` or `SCAN ME` wording outside the protected QR field and
+  render it in the same ink as the modules.
+
+Official red fallback, only when black ink is unavailable:
+
+- Use the supplied `Rad_Dad_QR_RED_` files. Do not pick a different red.
+- Modules and cut guides are pure process red `#FF0000` on solid white.
+- Print as color, never grayscale or a printer-selected red.
+- Approve only after the red calibration page scans from two phones.
+
+Shared rules for both colors:
+
 - Preserve a four-module white quiet zone on every side.
 - Keep the printed QR square at 16.5 mm. Never make it smaller.
 - Keep every module square, crisp, separated, and approximately 0.446 mm wide.
@@ -48,8 +68,6 @@ Swift v16 retains the protected pocket beneath the solid circular base.
   quiet zone.
 - Do not round, invert, distress, stylize, or partially cover modules.
 - Use matte white adhesive stock to reduce glare.
-- Keep any `RAD DAD` or `SCAN ME` wording outside the protected QR field and
-  render it in solid black only.
 
 The QR is intentionally plain. At this physical size, scan reliability is more
 important than decorative customization.
@@ -64,14 +82,16 @@ release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip
 
 The pack includes three production routes:
 
-| Route | File | Intended use |
+| Route | Preferred black file | Official red fallback |
 |---|---|---|
-| Individual vendor | `Rad_Dad_QR_1IN_VENDOR_MASTER.svg`, PNG, and PDF | Professional sticker vendor or one-off proof |
-| Precut 63-up | `Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf` | Avery 6450 or OnlineLabels OL1025 geometry |
-| FedEx Office full sheet | `Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf` | Matte white full-sheet adhesive stock, then hand or machine cut |
+| Individual vendor | `Rad_Dad_QR_1IN_VENDOR_MASTER.svg`, PNG, and PDF | `Rad_Dad_QR_RED_1IN_VENDOR_MASTER.svg`, PNG, and PDF |
+| Precut 63-up | `Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf` | `Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf` |
+| FedEx Office full sheet | `Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf` | `Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf` |
+| Calibration | `Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf` | `Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf` |
 
-The release also includes a calibration page, placement guide, and physical QC
-checklist. Send a vendor the SVG or PDF master, never a screenshot.
+The release also includes a placement guide and physical QC checklist. Send a
+vendor the SVG or PDF master, never a screenshot. Black remains the preferred
+production color. Use the red files only when black ink is unavailable.
 
 ## Home-printer workflow
 
@@ -82,7 +102,9 @@ checklist. Send a vendor the SVG or PDF master, never a screenshot.
 5. Choose **Actual Size**, **100%**, or **No Scaling**.
 6. Disable fit-to-page, shrink, enlargement, borderless scaling, and photo
    enhancement.
-7. Select the highest available monochrome or black-text quality.
+7. Select the highest available monochrome or black-text quality for preferred
+   black masters. If printing a `Rad_Dad_QR_RED_` file, select color rather
+   than grayscale.
 8. Print one proof and let the ink or toner settle completely.
 9. Measure the 25.4 mm circle and the calibration reference.
 10. Scan the proof before committing sticker stock.
@@ -99,6 +121,8 @@ instructions:
 Print US Letter at Actual Size / 100%.
 Do not fit, shrink, enlarge, crop, or use borderless scaling.
 Print solid black on matte white adhesive stock.
+If black ink is unavailable, use the official Rad_Dad_QR_RED_ full-sheet file
+and print as color, not grayscale.
 Do not laminate or apply a gloss coating.
 Produce one proof sheet before the full order.
 ```
@@ -143,7 +167,9 @@ production batch must pass all of the following:
 
 - The finished circle measures 25.4 mm.
 - The QR square remains 16.5 mm and the quiet zone is intact.
-- Black modules are dense, square, and free of gaps or toner flaking.
+- Black modules are dense, square, and free of gaps or toner flaking. If using
+  the official red fallback, modules are solid `#FF0000` with no gray or mixed
+  red, and the red calibration page has already scanned from two phones.
 - White areas are clean and free of background pattern or adhesive show-through.
 - Top, center, and bottom sheet samples scan before cutting.
 - Every installed product scans after application.
