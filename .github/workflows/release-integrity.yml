@@ -44,3 +44,5 @@ jobs:
         run: python3 tools/verify_v7_release.py --release release/v7 --json /tmp/rad-dad-v7-validation.json
       - name: Verify Retro Riot v8 QR release
         run: python3 tools/verify_qr_release.py --release release/v8
+      - name: Verify Retro Riot v9 release
+        run: python3 tools/verify_v9_release.py --release release/v9
