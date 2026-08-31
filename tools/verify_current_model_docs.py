@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail if current merch/QR docs still name superseded models or hide the red fallback."""
+"""Fail if current merch/QR docs drift on models, color, or label durability."""
 
 from __future__ import annotations
 
@@ -73,6 +73,40 @@ def mentions_red_fallback(text: str) -> bool:
     return "fallback" in lowered and "red" in lowered
 
 
+def documents_removable_proof_boundary(text: str) -> bool:
+    normalized = " ".join(text.lower().replace("-", " ").split())
+    sentences = re.split(r"(?<=[.!?])\s+", normalized)
+
+    def is_positive(pattern: str, sentence: str) -> bool:
+        return (
+            "?" not in sentence
+            and re.search(pattern, sentence) is not None
+            and re.search(
+                r"\b(?:cannot|could|may|might|no|not|never|optional(?:ly)?|"
+                r"perhaps|possibly|should)\b|n['’]t\b",
+                sentence,
+            )
+            is None
+        )
+
+    proof_only = any(
+        is_positive(
+            r"\bavery 6450 is removable adhesive proof only\b",
+            sentence,
+        )
+        for sentence in sentences
+    )
+    permanent_finished_stock = any(
+        is_positive(
+            r"\b(?:finished|giveaway|keychain|carry|installed|carried|production)"
+            r"[^.?!]{0,120}\brequires? permanent adhesive\b",
+            sentence,
+        )
+        for sentence in sentences
+    )
+    return proof_only and permanent_finished_stock
+
+
 def _self_check() -> None:
     stale = (
         "| 3.5-inch floppy | v21 | 26.0 mm |\n"
@@ -94,6 +128,56 @@ def _self_check() -> None:
     )
     require(documents_red_fallback(documented), "self-check missed documented red fallback")
     require(mentions_red_fallback(documented), "self-check missed red fallback mention")
+    removable_proof = (
+        "Avery 6450 is removable-adhesive proof-only stock. Finished pieces require "
+        "permanent adhesive.\n"
+    )
+    require(
+        documents_removable_proof_boundary(removable_proof),
+        "self-check missed removable proof-stock boundary",
+    )
+    require(
+        not documents_removable_proof_boundary(
+            "Avery 6450 is removable, but it is not proof-only; permanent "
+            "finished stock is optional.\n"
+        ),
+        "self-check accepted guidance that hides removable proof stock",
+    )
+    require(
+        not documents_removable_proof_boundary(
+            "Avery 6450 is removable-adhesive proof-only stock. Finished "
+            "pieces do not require permanent adhesive.\n"
+        ),
+        "self-check accepted a negated permanent-stock requirement",
+    )
+    require(
+        not documents_removable_proof_boundary(
+            "Avery 6450 removable proof-only? No. Permanent stock is not "
+            "required for finished pieces.\n"
+        ),
+        "self-check accepted question-and-negation guidance",
+    )
+    require(
+        not documents_removable_proof_boundary(
+            "Avery 6450 is removable-adhesive proof-only stock. Finished "
+            "pieces don't require permanent adhesive.\n"
+        ),
+        "self-check accepted a contracted stock-requirement negation",
+    )
+    require(
+        not documents_removable_proof_boundary(
+            "Avery 6450 is removable-adhesive proof-only? Finished pieces "
+            "require permanent adhesive?\n"
+        ),
+        "self-check accepted questions as affirmative requirements",
+    )
+    require(
+        not documents_removable_proof_boundary(
+            "Avery 6450 is removable-adhesive proof-only stock. Finished "
+            "pieces optionally require permanent adhesive.\n"
+        ),
+        "self-check accepted an optional permanent-stock requirement",
+    )
     require(
         exact_envelope([58.162, 30.26, 6.685]) == "58.162 x 30.260 x 6.685 mm",
         "self-check formatted cassette envelope incorrectly",
@@ -262,12 +346,21 @@ def main() -> int:
         "strictly black-and-white" not in nfc.lower(),
         "NFC legacy notice still claims exclusive black-and-white production",
     )
+    require(
+        documents_removable_proof_boundary(qr),
+        "QR sticker guide does not mark Avery 6450 removable stock as proof-only",
+    )
+    require(
+        documents_removable_proof_boundary(printing),
+        "Printing guide does not reject Avery 6450 removable stock for production",
+    )
 
     print(
         "Current merch/QR model docs match "
         f"cassette {cassette_rev}, floppy {floppy_rev}, "
         f"VHS {vhs_rev}, Trailer Swift {trailer_rev}, "
-        "and document the official red QR fallback."
+        "document the official red QR fallback, and keep removable Avery 6450 "
+        "stock proof-only."
     )
     return 0
 

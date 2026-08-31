@@ -80,12 +80,14 @@ The completed v9 pack is generated at:
 release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip
 ```
 
-The pack includes three production routes:
+The pack includes three print layouts. A layout proves geometry, not adhesive
+durability; qualify the stock separately before installing a label on a
+finished piece.
 
 | Route | Preferred black file | Official red fallback |
 |---|---|---|
 | Individual vendor | `Rad_Dad_QR_1IN_VENDOR_MASTER.svg`, PNG, and PDF | `Rad_Dad_QR_RED_1IN_VENDOR_MASTER.svg`, PNG, and PDF |
-| Precut 63-up | `Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf` | `Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf` |
+| Precut 63-up geometry | `Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf` | `Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER.pdf` |
 | FedEx Office full sheet | `Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf` | `Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf` |
 | Calibration | `Rad_Dad_QR_PRINT_CALIBRATION_US_LETTER.pdf` | `Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER.pdf` |
 
@@ -93,10 +95,20 @@ The release also includes a placement guide and physical QC checklist. Send a
 vendor the SVG or PDF master, never a screenshot. Black remains the preferred
 production color. Use the red files only when black ink is unavailable.
 
+Avery 6450 is removable-adhesive proof-only matte paper. Every giveaway,
+keychain, or carry-production piece requires permanent adhesive. Use the same
+63-up geometry for a finished piece only with a documented permanent,
+weatherproof matte-white OL1025-compatible material, or have the individual
+master professionally printed on permanent matte-white vinyl. Confirm the
+actual material and adhesive specification before printing: layout compatibility
+does not make removable stock permanent.
+
 ## Home-printer workflow
 
 1. Confirm that the label stock matches the printer technology.
-2. Use matte white adhesive stock.
+2. Choose stock for the job. Avery 6450 removable labels are proof-only; an
+   installed or carried piece requires permanent, weatherproof matte-white
+   stock.
 3. Print the calibration page on ordinary paper first.
 4. Open the supplied PDF in a PDF reader.
 5. Choose **Actual Size**, **100%**, or **No Scaling**.
@@ -109,8 +121,10 @@ production color. Use the red files only when black ink is unavailable.
 9. Measure the 25.4 mm circle and the calibration reference.
 10. Scan the proof before committing sticker stock.
 
-The 63-up file is only for the specified precut geometry. Use the dedicated
-full-sheet file for uncut adhesive paper.
+The 63-up file is only for the specified precut geometry. Avery 6450 may prove
+alignment and scanning, but its removable adhesive is not production stock.
+Use a permanent, weatherproof OL1025-compatible material for finished pieces,
+or use the dedicated full-sheet file for uncut permanent adhesive stock.
 
 ## FedEx Office workflow
 
@@ -186,6 +200,7 @@ assume another person's phone will compensate for a marginal print.
 | Stage | Stock | Notes |
 |---|---|---|
 | Fit proof | Ordinary white paper | Confirm size and scan behavior before using adhesive stock |
+| Precut proof | Avery 6450 removable matte-white paper labels | Confirm 63-up alignment and scanning only; do not install on a carry piece |
 | Home prototype | Matte white full-sheet adhesive paper | Protect only after scanning; clear tape is a temporary proof method |
 | Home batch | Weatherproof matte white adhesive stock | Better abrasion and moisture resistance with lower glare |
 | Production batch | Professionally printed matte white vinyl | Request crisp black output, permanent adhesive, and a physical proof |
