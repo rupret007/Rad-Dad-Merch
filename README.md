@@ -32,6 +32,8 @@ https://raddadband.com/qr/
 | I want to... | Use this |
 |---|---|
 | Download the complete release | [`release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip`](release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip) |
+| Preview the current cassette, floppy, and VHS together | [Current Three digital PETG material study](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png) |
+| Print the current cassette, floppy, and VHS together | [`release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf`](release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf) |
 | Print the four models | [`release/v9/3mf/`](release/v9/3mf) or [`release/v9/stl/`](release/v9/stl) |
 | Send one sticker to a professional vendor | `release/v9/guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.svg` or its PDF master |
 | Print precut Avery 6450 / OL1025 labels | `release/v9/guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf` |
@@ -42,6 +44,24 @@ https://raddadband.com/qr/
 
 The v9 ZIP is the canonical handoff. The paths above are the generated v9
 release layout already present in this repository.
+
+### Current Three material study
+
+[![Digital PETG material study of the current Rad Dad cassette, floppy, and mini VHS](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png)](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png)
+
+This preview is generated directly from the three current sealed v9 STL files
+with one shared orthographic camera, so their relative sizes remain honest.
+The lime, blue, and pink surfaces are example one-color satin PETG treatments;
+the image is not a photo, slicer preview, printability result, or substitute for
+the physical acceptance checklist. Its source hashes, measured envelopes,
+renderer identity, digital-only status, and output hash are recorded in the
+[provenance file](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.json).
+Regenerate or verify it with:
+
+```bash
+python3 tools/render_current_three_material_study.py
+python3 tools/render_current_three_material_study.py --check
+```
 
 ## What changed in v9
 
