@@ -1,5 +1,15 @@
 # Changelog
 
+## Current Three material-study preview
+
+- Added a dedicated cassette v38, floppy v22, and mini VHS v5 overview rendered
+  directly from the current sealed STL files at true relative scale.
+- Reused the existing software-rendering conventions while adding restrained
+  satin-PETG shading, specular response, grounded shadows, and a 25 mm reference
+  without altering printable geometry or the sealed v9 package.
+- Added machine-readable source/output/renderer provenance and a CI smoke render
+  that fails closed if the preview loses its digital-only disclaimer.
+
 ## Trailer Swift v16 Strat-style guitar rebuild
 
 - Replaced the generic double-cutaway with a rounded Strat-style perimeter:

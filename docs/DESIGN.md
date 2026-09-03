@@ -22,6 +22,21 @@ The cassette, floppy, and VHS eyelets use two-sided lead-ins around a nominal
 split-ring installation and normal key carry. The media products print flat
 with their detailed faces up. Trailer Swift prints upright with tree support.
 
+### Current Three preview truth
+
+`docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png` is the dedicated
+visual overview for the current cassette v38, floppy v22, and mini VHS v5. The
+renderer reads their checked-in v9 binary STL files directly and uses a shared
+orthographic camera so the relative scale is not editorially distorted. The
+three colors visualize separate one-color satin PETG prints; they do not claim
+an exact filament, surface finish, layer result, or successful physical print.
+
+The adjacent JSON records the three source hashes and measured envelopes, the
+renderer hash, the output hash, and `physical_proof: false`. CI checks all of
+that provenance and performs a disposable smoke render. The study does not
+change, regenerate, or validate any STL, 3MF, Bambu profile, release archive,
+QR artwork, or physical acceptance step.
+
 ## Shared design hierarchy
 
 Every media replica follows the same priority order:

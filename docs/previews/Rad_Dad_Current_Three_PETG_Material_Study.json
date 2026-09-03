@@ -1,0 +1,78 @@
+{
+  "camera": {
+    "direction": [
+      0.38,
+      -0.78,
+      1.28
+    ],
+    "projection": "orthographic",
+    "up": [
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "disclaimer": "DIGITAL RENDER \u2014 NOT A PHOTO OR PHYSICAL PRINT. COLOR, LAYER LINES, AND FINISH WILL VARY.",
+  "models": [
+    {
+      "key": "cassette",
+      "label": "COMPACT CASSETTE",
+      "material_visualization": "single-color satin PETG",
+      "preview_color": "#A6EF12",
+      "revision": "V38",
+      "source": "release/v9/stl/Rad_Dad_Cassette_v38_BINARY.stl",
+      "source_bytes": 1292084,
+      "source_extents_mm": [
+        58.164,
+        30.26,
+        6.685
+      ],
+      "source_sha256": "80a336b02ed1e16f4f133c97c451aa7851c4091bcde0b7de65861d7f0892b94d"
+    },
+    {
+      "key": "floppy",
+      "label": "3.5-INCH FLOPPY",
+      "material_visualization": "single-color satin PETG",
+      "preview_color": "#1CB5F4",
+      "revision": "V22",
+      "source": "release/v9/stl/Rad_Dad_Floppy_v22_BINARY.stl",
+      "source_bytes": 702684,
+      "source_extents_mm": [
+        44.36,
+        36.916,
+        4.13
+      ],
+      "source_sha256": "064f4e4d3c0a811eeed7d320a103b080124c0695a875b1e6ed7795e8b034fea5"
+    },
+    {
+      "key": "vhs",
+      "label": "MINI VHS",
+      "material_visualization": "single-color satin PETG",
+      "preview_color": "#FF3476",
+      "revision": "V5",
+      "source": "release/v9/stl/Rad_Dad_Mini_VHS_v5_BINARY.stl",
+      "source_bytes": 1928184,
+      "source_extents_mm": [
+        65.8,
+        31.9,
+        7.0
+      ],
+      "source_sha256": "ea4e0f57229a827f6c24474b1a2d13c269cd1adc7891ddcb8ad63a3c0d8e7d77"
+    }
+  ],
+  "output": {
+    "height": 1100,
+    "path": "docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png",
+    "sha256": "9db9cb9d07ad7693392857b07d1ad23764d38762ea6016167d1a7daedfa63496",
+    "width": 1800
+  },
+  "physical_proof": false,
+  "relative_scale": true,
+  "render_type": "digital_material_study",
+  "renderer": {
+    "path": "tools/render_current_three_material_study.py",
+    "sha256": "982da14824dc6cd0cb3d169189c5fb382ff87dd93d3a6e06a07ee8f0860e943b"
+  },
+  "schema_version": 1,
+  "title": "Rad Dad Current Three PETG Material Study"
+}
