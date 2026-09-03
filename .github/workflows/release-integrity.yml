@@ -40,6 +40,8 @@ jobs:
         run: python3 tools/verify_current_model_docs.py
       - name: Verify Current Three material-study provenance
         run: python3 tools/render_current_three_material_study.py --check
+      - name: Verify digital merch desk
+        run: python3 tools/verify_digital_merch.py
       - name: Verify release files and checksums
         run: python3 tools/verify_release.py
       - name: Verify Retro Riot v7 release

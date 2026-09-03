@@ -33,6 +33,7 @@ https://raddadband.com/qr/
 |---|---|
 | Download the complete release | [`release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip`](release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip) |
 | Preview the current cassette, floppy, and VHS together | [Current Three digital PETG material study](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png) |
+| Browse or hold those digital studies | `python3 tools/serve_digital_merch.py` then open `/catalog` |
 | Print the current cassette, floppy, and VHS together | [`release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf`](release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf) |
 | Print the four models | [`release/v9/3mf/`](release/v9/3mf) or [`release/v9/stl/`](release/v9/stl) |
 | Send one sticker to a professional vendor | `release/v9/guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.svg` or its PDF master |
@@ -61,7 +62,16 @@ Regenerate or verify it with:
 ```bash
 python3 tools/render_current_three_material_study.py
 python3 tools/render_current_three_material_study.py --check
+python3 tools/serve_digital_merch.py
+python3 tools/verify_digital_merch.py
 ```
+
+The digital merch desk turns that leftover study into a shopper catalog, cart,
+and admin publish/hold path. It accepts digital study requests only. It does
+not take payment, ship an object, start a Bambu job, change the QR destination,
+or post merch. The public merch path serves the study image and catalog copy;
+it does not serve STL, 3MF, renderer, or release files. Admin stays locked
+until `RAD_DAD_MERCH_ADMIN_TOKEN` is set.
 
 ## What changed in v9
 
@@ -270,6 +280,7 @@ sticker because the landing dimensions did not change.
 | `release/v9/` | Recommended Authenticity + QR release |
 | `release/v8/` | Historical first QR release |
 | `release/v7/` | Historical NFC release |
+| `src/digital_merch/` | Digital merch desk: catalog, cart, admin, public-path security |
 | `docs/QR_STICKERS.md` | QR artwork, printing, installation, and physical QC |
 | `docs/NFC.md` | Legacy NFC retirement notice |
 | `CHANGELOG.md` | Release history and revision details |

@@ -1,5 +1,18 @@
 # Changelog
 
+## Digital merch desk
+
+- Added a shopper catalog, cart, and request-hold flow bound to the leftover
+  Current Three PETG material study.
+- Added an admin publish/hold desk with token auth, CSRF, and rate-limited
+  sign-in. Unpublished cards leave the public catalog and cannot enter a cart.
+- Locked the public merch path to an allowlist so STL, 3MF, renderer, and
+  release files are not served as shop assets. Checkout rejects shipping,
+  payment, printer, and pitch fields.
+- Added `tools/serve_digital_merch.py`, `tools/verify_digital_merch.py`, and a
+  release-integrity CI step. No prices, print jobs, QR destination change, or
+  merch auto-post.
+
 ## Current Three material-study preview
 
 - Added a dedicated cassette v38, floppy v22, and mini VHS v5 overview rendered

@@ -7,3 +7,4 @@ dist/
 *.tmp
 *.bak
 result.json
+var/digital_merch/
