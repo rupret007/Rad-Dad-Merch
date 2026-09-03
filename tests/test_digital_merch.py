@@ -168,6 +168,10 @@ class MerchPathTests(unittest.TestCase):
         self.assertIn("Published digital studies", html)
         self.assertIn("Add digital study", html)
         self.assertIn("Digital study only", html)
+        self.assertIn("C-69", html)
+        self.assertIn("3.69 MB", html)
+        self.assertIn("T-369", html)
+        self.assertNotIn('href="/admin"', html)
         self.assertNotIn("Tweet", html)
         self.assertNotIn("stripe", html.lower())
         self.assertNotIn("Buy now and ship", html)
@@ -181,7 +185,9 @@ class MerchPathTests(unittest.TestCase):
         html = body.decode("utf-8")
         self.assertTrue(status.startswith("200"))
         self.assertIn("The cart is empty", html)
-        self.assertIn("disabled", html)
+        self.assertIn("Browse published studies", html)
+        self.assertNotIn("Request digital study", html)
+        self.assertNotIn('href="/admin"', html)
 
     def test_add_to_cart_and_checkout_without_spend(self):
         _, _, catalog = self.client.get("/catalog")

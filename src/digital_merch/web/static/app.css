@@ -157,7 +157,11 @@ footer,
 }
 
 .card {
-  border-top: 4px solid var(--sku, var(--lime));
+  border-top: 4px solid var(--accent, var(--lime));
+}
+
+.card .eyebrow {
+  color: var(--accent, var(--lime));
 }
 
 .card h2 {
@@ -216,6 +220,16 @@ button:disabled {
 button:disabled {
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.button-link {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .facts {

@@ -254,11 +254,13 @@ class MerchApp:
 
     def _page(self, session, title: str, body: str, *, flash: str = "", error: str = "") -> bytes:
         cart_count = self.store.cart_for(session).line_count()
+        admin_nav = '<a href="/admin">Admin</a>' if session.admin else ""
         template = (TEMPLATE_ROOT / "base.html").read_text(encoding="utf-8")
         html = (
             template.replace("{{title}}", escape(title))
             .replace("{{csrf}}", escape(session.csrf))
             .replace("{{cart_count}}", str(cart_count))
+            .replace("{{admin_nav}}", admin_nav)
             .replace("{{flash}}", _banner(flash, "notice") + _banner(error, "error"))
             .replace("{{body}}", body)
             .replace("{{disclaimer}}", escape(self.store.catalog.disclaimer))
@@ -300,16 +302,16 @@ class MerchApp:
                 "digital study to request a hold. Checkout stays disabled until then.</p>"
             )
             checkout = (
-                '<button type="submit" disabled aria-disabled="true">Request digital study</button>'
+                '<p><a class="button-link" href="/catalog">Browse published studies</a></p>'
             )
         else:
             rows = "".join(_cart_row(line, session.csrf) for line in cart.lines(self.store.catalog))
-            checkout = '<button type="submit">Request digital study</button>'
+            checkout = (TEMPLATE_ROOT / "checkout_form.html").read_text(encoding="utf-8")
+            checkout = checkout.replace("{{csrf}}", escape(session.csrf))
         body = (TEMPLATE_ROOT / "cart.html").read_text(encoding="utf-8")
         body = (
             body.replace("{{rows}}", rows)
-            .replace("{{csrf}}", escape(session.csrf))
-            .replace("{{checkout_button}}", checkout)
+            .replace("{{checkout_block}}", checkout)
             .replace("{{disabled_class}}", "is-empty" if cart.is_empty() else "")
         )
         return self._page(session, "Digital merch cart", body, flash=notice, error=error)
@@ -388,7 +390,7 @@ def _extents_label(extents: list[float] | None) -> str:
 
 def _sku_card(sku, csrf: str) -> str:
     return f"""
-<article class="card" style="--sku:{escape(sku.color)}">
+<article class="card" style="--accent:{escape(sku.color)}">
   <p class="eyebrow">{escape(sku.revision)} · digital study</p>
   <h2><a href="/product/{escape(sku.sku)}">{escape(sku.title)}</a></h2>
   <p>{escape(sku.description)}</p>
@@ -456,7 +458,7 @@ def _admin_sku_row(sku, csrf: str) -> str:
 
 
 def _admin_request_row(request: StudyRequest) -> str:
-    items = ", ".join(f"{escape(sku)}×{qty}" for sku, qty in request.items.items())
+    items = ", ".join(f"{escape(sku)} × {qty}" for sku, qty in request.items.items())
     contact = escape(request.contact) if request.contact else "not given"
     note = escape(request.note) if request.note else "—"
     return f"""

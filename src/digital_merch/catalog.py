@@ -106,9 +106,9 @@ SKU_SPECS: tuple[SkuSpec, ...] = (
         key="cassette",
         title="Compact Cassette digital study",
         description=(
-            "Digital study card for Compact Cassette v38. The listing uses the "
-            "leftover Current Three PETG material study. It is not a photograph, "
-            "slicer preview, or a shippable print."
+            "Cassette v38 study card: authentic-edge transport shell, unequal "
+            "tape packs, and the C-69 mark. Shared Current Three render. Not a "
+            "photo or a shippable print."
         ),
     ),
     SkuSpec(
@@ -116,9 +116,9 @@ SKU_SPECS: tuple[SkuSpec, ...] = (
         key="floppy",
         title="3.5-inch Floppy digital study",
         description=(
-            "Digital study card for 3.5-inch Floppy v22. The listing uses the "
-            "leftover Current Three PETG material study. It is not a photograph, "
-            "slicer preview, or a shippable print."
+            "Floppy v22 study card: shutter, write-protect cues, and the 3.69 MB "
+            "capacity joke. Shared Current Three render. Not a photo or a "
+            "shippable print."
         ),
     ),
     SkuSpec(
@@ -126,9 +126,8 @@ SKU_SPECS: tuple[SkuSpec, ...] = (
         key="vhs",
         title="Mini VHS digital study",
         description=(
-            "Digital study card for Mini VHS v5. The listing uses the leftover "
-            "Current Three PETG material study. It is not a photograph, slicer "
-            "preview, or a shippable print."
+            "Mini VHS v5 study card: reel, tape-door, and T-369 cues. Shared "
+            "Current Three render. Not a photo or a shippable print."
         ),
     ),
     SkuSpec(
