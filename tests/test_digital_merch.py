@@ -114,6 +114,14 @@ class CatalogTests(unittest.TestCase):
         blob = json.dumps(payload)
         for fragment in ("release/", ".stl", ".3mf", "source_sha256", "renderer"):
             self.assertNotIn(fragment, blob)
+        by_key = {item["key"]: item for item in payload}
+        self.assertEqual(by_key["cassette"]["identity"], "Cassette")
+        self.assertEqual(by_key["cassette"]["study_frame"], "cassette")
+        self.assertEqual(by_key["cassette"]["study_image"], "/assets/study/cassette.png")
+        self.assertEqual(by_key["floppy"]["study_image"], "/assets/study/floppy.png")
+        self.assertEqual(by_key["vhs"]["study_image"], "/assets/study/vhs.png")
+        self.assertEqual(by_key["current-three"]["study_frame"], "current-three")
+        self.assertEqual(by_key["current-three"]["study_image"], "/assets/study/current-three.png")
 
     def test_unpublished_sku_hidden_from_public_catalog(self):
         catalog = DigitalCatalog()
@@ -166,11 +174,21 @@ class MerchPathTests(unittest.TestCase):
         self.assertTrue(status.startswith("200"))
         self.assertIn("skip-link", html)
         self.assertIn("Published digital studies", html)
-        self.assertIn("Add digital study", html)
+        self.assertIn("Add Cassette study", html)
+        self.assertIn("Add Floppy study", html)
+        self.assertIn("Add Mini VHS study", html)
         self.assertIn("Digital study only", html)
+        self.assertIn("Digital study hold · no charge", html)
+        self.assertIn("visually distinct", html)
         self.assertIn("C-69", html)
         self.assertIn("3.69 MB", html)
         self.assertIn("T-369", html)
+        self.assertIn("study-crop is-object", html)
+        self.assertIn("study-crop is-full", html)
+        self.assertIn("/assets/study/cassette.png", html)
+        self.assertIn("/assets/study/floppy.png", html)
+        self.assertIn("/assets/study/vhs.png", html)
+        self.assertIn("/assets/study/current-three.png", html)
         self.assertNotIn('href="/admin"', html)
         self.assertNotIn("Tweet", html)
         self.assertNotIn("stripe", html.lower())
@@ -184,9 +202,10 @@ class MerchPathTests(unittest.TestCase):
         status, _, body = self.client.get("/cart")
         html = body.decode("utf-8")
         self.assertTrue(status.startswith("200"))
-        self.assertIn("The cart is empty", html)
+        self.assertIn("The hold cart is empty", html)
         self.assertIn("Browse published studies", html)
-        self.assertNotIn("Request digital study", html)
+        self.assertNotIn("Request digital hold", html)
+        self.assertNotIn("confirm_digital_hold", html)
         self.assertNotIn('href="/admin"', html)
 
     def test_add_to_cart_and_checkout_without_spend(self):
@@ -201,17 +220,42 @@ class MerchPathTests(unittest.TestCase):
         self.assertEqual(headers["location"], "/cart")
         status, _, cart_page = self.client.get("/cart")
         self.assertTrue(status.startswith("200"))
-        self.assertIn("digital-cassette-v38", cart_page.decode("utf-8"))
+        cart_html = cart_page.decode("utf-8")
+        self.assertIn("digital-cassette-v38", cart_html)
+        self.assertIn("Cassette · digital hold", cart_html)
+        self.assertIn("qty-stepper", cart_html)
+        self.assertIn("This is a digital study hold, not a purchase", cart_html)
         csrf = self.client.csrf_from(cart_page)
-        status, _, thanks = self.client.post(
+        status, _, denied = self.client.post(
             "/checkout",
             {"action": "request", "contact": "bandmate", "note": "digital hold only"},
             csrf=csrf,
         )
+        self.assertTrue(status.startswith("400"))
+        self.assertIn("not a purchase", denied.decode("utf-8"))
+        csrf = self.client.csrf_from(denied)
+        status, headers, _ = self.client.post(
+            "/checkout",
+            {
+                "action": "request",
+                "contact": "bandmate",
+                "note": "digital hold only",
+                "confirm_digital_hold": "1",
+            },
+            csrf=csrf,
+        )
+        self.assertTrue(status.startswith("303"))
+        location = headers["location"]
+        self.assertTrue(location.startswith("/hold/"))
+        status, _, thanks = self.client.get(location)
+        receipt = thanks.decode("utf-8")
         self.assertTrue(status.startswith("200"))
-        self.assertIn("Nothing was printed, shipped, posted, or charged", thanks.decode("utf-8"))
+        self.assertIn("Nothing was printed, shipped, posted, or charged", receipt)
+        self.assertIn("digital-cassette-v38", receipt)
+        self.assertIn("Cassette", receipt)
+        self.assertIn(location.rsplit("/", 1)[1], receipt)
         _, _, empty = self.client.get("/cart")
-        self.assertIn("The cart is empty", empty.decode("utf-8"))
+        self.assertIn("The hold cart is empty", empty.decode("utf-8"))
 
     def test_checkout_rejects_shipping_and_csrf_failures(self):
         _, _, catalog = self.client.get("/catalog")
@@ -270,6 +314,44 @@ class MerchPathTests(unittest.TestCase):
         self.assertTrue(status.startswith("403") or status.startswith("401"))
         self.assertNotIn("Study requests", body.decode("utf-8"))
 
+    def test_product_pages_use_matching_study_crops(self):
+        _, _, cassette = self.client.get("/product/digital-cassette-v38")
+        html = cassette.decode("utf-8")
+        self.assertIn("Cassette · V38", html)
+        self.assertIn("study-crop is-object study-crop-product", html)
+        self.assertIn("/assets/study/cassette.png", html)
+        self.assertIn("this listing is the Cassette", html)
+        self.assertIn("Add Cassette study to hold cart", html)
+        _, _, combined = self.client.get("/product/digital-current-three-study")
+        combined_html = combined.decode("utf-8")
+        self.assertIn("study-crop is-full", combined_html)
+        self.assertIn("All three current studies", combined_html)
+
+    def test_hold_receipt_stays_on_the_owning_session(self):
+        _, _, catalog = self.client.get("/catalog")
+        csrf = self.client.csrf_from(catalog)
+        self.client.post(
+            "/cart",
+            {"action": "add", "sku": "digital-floppy-v22", "qty": "1"},
+            csrf=csrf,
+        )
+        _, _, cart_page = self.client.get("/cart")
+        csrf = self.client.csrf_from(cart_page)
+        _, headers, _ = self.client.post(
+            "/checkout",
+            {"action": "request", "confirm_digital_hold": "1"},
+            csrf=csrf,
+        )
+        receipt = headers["location"]
+        stranger = Client(self.client.app)
+        status, _, body = stranger.get(receipt)
+        self.assertTrue(status.startswith("404"))
+        self.assertIn("not available in this merch session", body.decode("utf-8"))
+        self.assertNotIn("digital-floppy-v22", body.decode("utf-8"))
+        status, _, missing = self.client.get("/hold/0123456789abcdef")
+        self.assertTrue(status.startswith("404"))
+        self.assertIn("Nothing was charged", missing.decode("utf-8"))
+
     def test_public_path_blocks_print_files_and_traversal(self):
         blocked = (
             "/release/v9/stl/Rad_Dad_Cassette_v38_BINARY.stl",
@@ -279,6 +361,10 @@ class MerchPathTests(unittest.TestCase):
             "/assets/../../../release/v9/3mf/secret.3mf",
             "/product/../../admin",
             "/catalog/%2e%2e/release/v9/stl/x.stl",
+            "/hold/../release/v9/stl/x.stl",
+            "/hold/not-a-real-hold-id",
+            "/assets/study/../release/v9/stl/x.stl",
+            "/assets/study/cassette.stl",
         )
         for path in blocked:
             status, _, body = self.client.get(path)
@@ -296,6 +382,34 @@ class MerchPathTests(unittest.TestCase):
         self.assertTrue(status.startswith("200"))
         self.assertEqual(headers["content-type"], "image/png")
         self.assertEqual(body, STUDY_PNG.read_bytes())
+        status, headers, combined = self.client.get("/assets/study/current-three.png")
+        self.assertTrue(status.startswith("200"))
+        self.assertEqual(headers["content-type"], "image/png")
+        self.assertEqual(combined, STUDY_PNG.read_bytes())
+
+    def test_study_crops_keep_the_named_object_dominant(self):
+        from io import BytesIO
+        import numpy as np
+        from PIL import Image
+
+        def counts(body: bytes) -> dict[str, int]:
+            arr = np.asarray(Image.open(BytesIO(body)).convert("RGB"), dtype=np.int16)
+            red, green, blue = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
+            return {
+                "lime": int(((green > 140) & (green > red + 40) & (blue < 120)).sum()),
+                "blue": int(((blue > 160) & (blue > green) & (red < 80)).sum()),
+                "pink": int(((red > 180) & (red > blue + 40) & (green < 100)).sum()),
+            }
+
+        winners = {}
+        for frame in ("cassette", "floppy", "vhs"):
+            status, headers, body = self.client.get(f"/assets/study/{frame}.png")
+            self.assertTrue(status.startswith("200"), frame)
+            self.assertEqual(headers["content-type"], "image/png")
+            tallies = counts(body)
+            winners[frame] = max(tallies, key=tallies.get)
+            self.assertGreater(tallies[winners[frame]], 8000, frame)
+        self.assertEqual(winners, {"cassette": "lime", "floppy": "blue", "vhs": "pink"})
 
     def test_api_cart_accepts_csrf_header(self):
         _, _, catalog = self.client.get("/catalog")
@@ -310,11 +424,53 @@ class MerchPathTests(unittest.TestCase):
         payload = json.loads(body)
         self.assertEqual(payload["count"], 1)
         self.assertTrue(payload["digital_only"])
+        self.assertEqual(payload["items"][0]["identity"], "Current Three")
+
+    def test_api_checkout_requires_hold_confirmation(self):
+        _, _, catalog = self.client.get("/catalog")
+        csrf = self.client.csrf_from(catalog)
+        self.client.post(
+            "/api/cart",
+            {"action": "add", "sku": "digital-vhs-v5", "qty": "1"},
+            csrf=csrf,
+            header_csrf=True,
+        )
+        status, _, body = self.client.post(
+            "/api/checkout",
+            {"action": "request"},
+            csrf=csrf,
+            header_csrf=True,
+        )
+        self.assertTrue(status.startswith("400"))
+        self.assertIn("not a purchase", json.loads(body)["error"])
+        status, _, body = self.client.post(
+            "/api/checkout",
+            {"action": "request", "confirm_digital_hold": "1"},
+            csrf=csrf,
+            header_csrf=True,
+        )
+        self.assertTrue(status.startswith("200"))
+        payload = json.loads(body)
+        self.assertTrue(payload["ok"])
+        self.assertTrue(payload["digital_only"])
+        self.assertFalse(payload["charged"])
+        self.assertTrue(payload["receipt_path"].startswith("/hold/"))
+        _, _, receipt = self.client.get(payload["receipt_path"])
+        self.assertIn("Mini VHS", receipt.decode("utf-8"))
 
     def test_security_headers_cover_json_too(self):
         _, headers, _ = self.client.get("/api/catalog")
         for name in SECURITY_HEADERS:
             self.assertIn(name.lower(), headers)
+
+    def test_phone_layout_keeps_44px_controls(self):
+        status, _, body = self.client.get("/assets/app.css")
+        css = body.decode("utf-8")
+        self.assertTrue(status.startswith("200"))
+        self.assertIn("min-height: 44px", css)
+        self.assertIn("grid-template-columns: 1fr;", css)
+        self.assertIn(".qty-stepper", css)
+        self.assertIn("@media (max-width: 720px)", css)
 
 
 if __name__ == "__main__":

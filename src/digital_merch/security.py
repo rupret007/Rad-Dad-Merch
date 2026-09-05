@@ -54,7 +54,11 @@ ADMIN_EXACT_PATHS = {
 }
 
 PRODUCT_PATH = re.compile(r"^/product/([a-z0-9-]{3,64})$")
+HOLD_PATH = re.compile(r"^/hold/([a-f0-9]{16})$")
+STUDY_CROP_PATH = re.compile(r"^/assets/study/(cassette|floppy|vhs|current-three)\.png$")
 ADMIN_SKU_PATH = re.compile(r"^/admin/sku/([a-z0-9-]{3,64})/(publish|unpublish)$")
+ALLOWED_CHECKOUT_FIELDS = {"csrf", "note", "contact", "action", "confirm_digital_hold"}
+DIGITAL_HOLD_CONFIRM_VALUES = {"1", "on", "yes"}
 
 SECURITY_HEADERS = {
     "Content-Security-Policy": (
@@ -132,7 +136,12 @@ def normalize_request_path(raw_path: str) -> str:
 
 
 def classify_path(path: str) -> str:
-    if path in PUBLIC_EXACT_PATHS or PRODUCT_PATH.match(path):
+    if (
+        path in PUBLIC_EXACT_PATHS
+        or PRODUCT_PATH.match(path)
+        or HOLD_PATH.match(path)
+        or STUDY_CROP_PATH.match(path)
+    ):
         return "public"
     if path in ADMIN_EXACT_PATHS or ADMIN_SKU_PATH.match(path):
         return "admin"
@@ -141,6 +150,16 @@ def classify_path(path: str) -> str:
 
 def product_sku_from_path(path: str) -> str | None:
     match = PRODUCT_PATH.match(path)
+    return match.group(1) if match else None
+
+
+def hold_id_from_path(path: str) -> str | None:
+    match = HOLD_PATH.match(path)
+    return match.group(1) if match else None
+
+
+def study_frame_from_path(path: str) -> str | None:
+    match = STUDY_CROP_PATH.match(path)
     return match.group(1) if match else None
 
 
@@ -227,15 +246,15 @@ def reject_forbidden_fields(fields: Iterable[str]) -> None:
                 raise SecurityError("Physical, payment, or pitch fields are not accepted.")
 
 
-def checkout_fields(form: dict[str, str]) -> tuple[str, str]:
+def checkout_fields(form: dict[str, str]) -> tuple[str, str, str]:
     reject_forbidden_fields(form)
-    allowed = {"csrf", "note", "contact", "action"}
-    extra = set(form) - allowed
+    extra = set(form) - ALLOWED_CHECKOUT_FIELDS
     if extra:
         raise SecurityError("Unexpected checkout fields.")
     contact = sanitize_text(form.get("contact"), max_chars=MAX_CONTACT_CHARS, field="Contact")
     note = sanitize_text(form.get("note"), max_chars=MAX_NOTE_CHARS, field="Note")
-    return contact, note
+    confirm = sanitize_text(form.get("confirm_digital_hold"), max_chars=8, field="Hold confirmation")
+    return contact, note, confirm.lower()
 
 
 def json_bytes(payload: object) -> bytes:

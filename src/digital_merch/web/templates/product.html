@@ -1,7 +1,9 @@
 <article class="product">
-  <p class="eyebrow" style="color:{{color}}">{{revision}} · digital study</p>
+  <p class="eyebrow" style="color:{{color}}">{{identity}} · {{revision}} · digital study</p>
   <h1>{{title}}</h1>
+  <p class="chip">Digital study hold · no charge</p>
   <p class="lede">{{description}}</p>
+  {{study_crop}}
   <dl class="facts">
     <div>
       <dt>SKU</dt>
@@ -17,22 +19,15 @@
     </div>
     <div>
       <dt>Fulfillment</dt>
-      <dd>Digital study request only</dd>
+      <dd>Digital study hold only</dd>
     </div>
   </dl>
-  <figure class="study-frame">
-    <img src="/assets/material-study.png" width="1800" height="1100" alt="Shared Current Three digital PETG material study used by this listing">
-    <figcaption>This listing reuses the shared Current Three study. It does not invent a unique product photo.</figcaption>
-  </figure>
-  <form method="post" action="/cart" class="panel stack">
+  <form method="post" action="/cart" class="panel stack add-form">
     <input type="hidden" name="csrf" value="{{csrf}}">
     <input type="hidden" name="action" value="add">
     <input type="hidden" name="sku" value="{{sku}}">
-    <label>
-      Quantity
-      <input type="number" name="qty" min="1" max="3" value="1">
-    </label>
-    <button type="submit">Add digital study to cart</button>
-    <p class="hint">No charge, shipment, or printer job is created when you add this card.</p>
+    <input type="hidden" name="qty" value="1">
+    <button type="submit">Add {{identity}} study to hold cart</button>
+    <p class="hint">No charge, shipment, or printer job is created when you add this card. Change quantity on the cart if you need more than one.</p>
   </form>
 </article>

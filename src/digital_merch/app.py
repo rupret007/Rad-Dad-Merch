@@ -10,9 +10,10 @@ from typing import Callable, Iterable
 from urllib.parse import parse_qs
 
 from .cart import CartError
-from .catalog import CatalogError, DigitalCatalog, STUDY_IMAGE_PATH
+from .catalog import CatalogError, DigitalCatalog, STUDY_FRAMES, STUDY_IMAGE_PATH, crop_study_image
 from .security import (
     CSRF_HEADER,
+    DIGITAL_HOLD_CONFIRM_VALUES,
     SECURITY_HEADERS,
     SESSION_COOKIE,
     SecurityError,
@@ -21,7 +22,9 @@ from .security import (
     checkout_fields,
     classify_path,
     expired_session_cookie,
+    hold_id_from_path,
     json_bytes,
+    study_frame_from_path,
     normalize_request_path,
     parse_cookies,
     product_sku_from_path,
@@ -40,6 +43,7 @@ TEMPLATE_ROOT = WEB_ROOT / "templates"
 class MerchApp:
     def __init__(self, store: MerchStore) -> None:
         self.store = store
+        self._crop_cache: dict[str, bytes] = {}
 
     def __call__(self, environ: dict, start_response: Callable) -> Iterable[bytes]:
         method = (environ.get("REQUEST_METHOD") or "GET").upper()
@@ -114,12 +118,16 @@ class MerchApp:
             return "200 OK", "text/html; charset=utf-8", self._render_cart(session), []
         if method == "GET" and path.startswith("/product/"):
             return self._product_page(session, product_sku_from_path(path) or "")
+        if method == "GET" and path.startswith("/hold/"):
+            return self._hold_page(session, hold_id_from_path(path) or "")
         if method == "GET" and path == "/assets/app.css":
             return self._static("app.css", "text/css; charset=utf-8")
         if method == "GET" and path == "/assets/app.js":
             return self._static("app.js", "text/javascript; charset=utf-8")
         if method == "GET" and path == "/assets/material-study.png":
             return self._study_image()
+        if method == "GET" and path.startswith("/assets/study/"):
+            return self._study_crop_image(study_frame_from_path(path) or "")
         if method == "GET" and path == "/api/catalog":
             return "200 OK", "application/json", json_bytes(self.store.public_snapshot()), []
         if method == "GET" and path == "/api/cart":
@@ -174,33 +182,31 @@ class MerchApp:
     def _checkout(self, session, form: dict[str, str], *, json_mode: bool):
         cart = self.store.cart_for(session)
         cart.checkoutable(self.store.catalog)
-        contact, note = checkout_fields(form)
+        contact, note, confirm = checkout_fields(form)
+        if confirm not in DIGITAL_HOLD_CONFIRM_VALUES:
+            raise CartError("Confirm this is a digital study hold, not a purchase.")
         request = StudyRequest(
             request_id=token_hex(8),
             created_at=datetime.now(timezone.utc).isoformat(),
             contact=contact,
             note=note,
             items=dict(cart.items),
+            session_sid=session.sid,
         )
         self.store.add_request(request)
         self.store.replace_cart(session, cart.__class__())
+        receipt_path = f"/hold/{request.request_id}"
         payload = {
             "ok": True,
             "request_id": request.request_id,
+            "receipt_path": receipt_path,
             "digital_only": True,
             "physical_proof": False,
+            "charged": False,
         }
         if json_mode:
             return "200 OK", "application/json", json_bytes(payload), []
-        return (
-            "200 OK",
-            "text/html; charset=utf-8",
-            self._render_cart(
-                session,
-                notice=f"Digital study request {request.request_id} is held for admin review. Nothing was printed, shipped, posted, or charged.",
-            ),
-            [],
-        )
+        return self._redirect(receipt_path)
 
     def _admin_login(self, session, form: dict[str, str], environ):
         client = str(environ.get("REMOTE_ADDR") or "unknown")
@@ -227,6 +233,21 @@ class MerchApp:
             )
         return "200 OK", "text/html; charset=utf-8", self._render_product(session, sku), []
 
+    def _hold_page(self, session, request_id: str):
+        request = self.store.owned_request(session, request_id)
+        if request is None:
+            return (
+                "404 Not Found",
+                "text/html; charset=utf-8",
+                self._html_error(
+                    session,
+                    "Hold not on this desk",
+                    "That digital study hold is not available in this merch session. Nothing was charged.",
+                ),
+                [],
+            )
+        return "200 OK", "text/html; charset=utf-8", self._render_hold(session, request), []
+
     def _static(self, name: str, content_type: str):
         path = (STATIC_ROOT / name).resolve()
         if not str(path).startswith(str(STATIC_ROOT.resolve())) or not path.is_file():
@@ -238,6 +259,20 @@ class MerchApp:
         if path != STUDY_IMAGE_PATH.resolve() or not path.is_file():
             raise SecurityError("Material study image is not available.")
         return "200 OK", "image/png", path.read_bytes(), [("Cache-Control", "no-store")]
+
+    def _study_crop_image(self, frame: str):
+        if frame not in STUDY_FRAMES:
+            raise SecurityError("Study crop is not public.")
+        if frame == "current-three":
+            return self._study_image()
+        if frame not in self._crop_cache:
+            from io import BytesIO
+
+            cropped = crop_study_image(frame)
+            buffer = BytesIO()
+            cropped.save(buffer, format="PNG")
+            self._crop_cache[frame] = buffer.getvalue()
+        return "200 OK", "image/png", self._crop_cache[frame], [("Cache-Control", "no-store")]
 
     def _redirect(self, location: str):
         return "303 See Other", "text/plain; charset=utf-8", b"", [("Location", location)]
@@ -285,11 +320,13 @@ class MerchApp:
         body = (
             body.replace("{{sku}}", escape(sku.sku))
             .replace("{{title}}", escape(sku.title))
+            .replace("{{identity}}", escape(sku.identity))
             .replace("{{revision}}", escape(sku.revision))
             .replace("{{color}}", escape(sku.color))
             .replace("{{material}}", escape(sku.material))
             .replace("{{description}}", escape(sku.description))
             .replace("{{extents}}", escape(_extents_label(sku.extents_mm)))
+            .replace("{{study_crop}}", _study_crop(sku, kind="product"))
             .replace("{{csrf}}", escape(session.csrf))
         )
         return self._page(session, sku.title, body)
@@ -298,7 +335,7 @@ class MerchApp:
         cart = self.store.cart_for(session)
         if cart.is_empty():
             rows = (
-                '<p class="empty-state" role="status">The cart is empty. Add a published '
+                '<p class="empty-state" role="status">The hold cart is empty. Add a published '
                 "digital study to request a hold. Checkout stays disabled until then.</p>"
             )
             checkout = (
@@ -315,6 +352,28 @@ class MerchApp:
             .replace("{{disabled_class}}", "is-empty" if cart.is_empty() else "")
         )
         return self._page(session, "Digital merch cart", body, flash=notice, error=error)
+
+    def _render_hold(self, session, request: StudyRequest) -> bytes:
+        lines = []
+        for sku_id, qty in request.items.items():
+            sku = self.store.catalog.get(sku_id)
+            identity = sku.identity if sku else sku_id
+            title = sku.title if sku else sku_id
+            lines.append(
+                f"<li class='hold-line'><strong>{escape(identity)}</strong>"
+                f"<p>{escape(title)} · {escape(sku_id)} · qty {int(qty)}</p></li>"
+            )
+        contact = escape(request.contact) if request.contact else "not given"
+        note = escape(request.note) if request.note else "none"
+        body = (TEMPLATE_ROOT / "hold.html").read_text(encoding="utf-8")
+        body = (
+            body.replace("{{request_id}}", escape(request.request_id))
+            .replace("{{created_at}}", escape(request.created_at))
+            .replace("{{lines}}", "".join(lines))
+            .replace("{{contact}}", contact)
+            .replace("{{note}}", note)
+        )
+        return self._page(session, "Digital study hold", body)
 
     def _render_admin_login(self, session, error: str = "") -> bytes:
         body = (TEMPLATE_ROOT / "admin_login.html").read_text(encoding="utf-8")
@@ -388,22 +447,46 @@ def _extents_label(extents: list[float] | None) -> str:
     return f"{extents[0]:.3f} x {extents[1]:.3f} x {extents[2]:.3f} mm study envelope"
 
 
+def _study_crop(sku, *, kind: str) -> str:
+    zoom = "is-full" if sku.study_frame == "current-three" else "is-object"
+    caption = (
+        "Shared Current Three study at true relative size."
+        if sku.study_frame == "current-three"
+        else f"Cropped leftover Current Three study so this listing is the {escape(sku.identity)}."
+    )
+    alt = (
+        "Digital PETG material study of the current Rad Dad cassette, floppy, and mini VHS at true relative size"
+        if sku.study_frame == "current-three"
+        else (
+            f"{escape(sku.identity)} digital study cropped from the shared Current Three "
+            "PETG material render"
+        )
+    )
+    return f"""
+<figure class="study-crop {zoom} study-crop-{kind}" style="--accent:{escape(sku.color)}">
+  <div class="study-crop-window">
+    <img src="{escape(sku.study_image)}" alt="{alt}">
+  </div>
+  <figcaption>{caption} Digital render only.</figcaption>
+</figure>
+"""
+
+
 def _sku_card(sku, csrf: str) -> str:
     return f"""
 <article class="card" style="--accent:{escape(sku.color)}">
-  <p class="eyebrow">{escape(sku.revision)} · digital study</p>
+  {_study_crop(sku, kind="card")}
+  <p class="eyebrow">{escape(sku.identity)} · {escape(sku.revision)}</p>
   <h2><a href="/product/{escape(sku.sku)}">{escape(sku.title)}</a></h2>
+  <p class="chip">Digital study hold · no charge</p>
   <p>{escape(sku.description)}</p>
   <p class="meta">{escape(_extents_label(sku.extents_mm))}</p>
-  <form method="post" action="/cart" class="stack">
+  <form method="post" action="/cart" class="stack add-form">
     <input type="hidden" name="csrf" value="{escape(csrf)}">
     <input type="hidden" name="action" value="add">
     <input type="hidden" name="sku" value="{escape(sku.sku)}">
-    <label>
-      Quantity
-      <input type="number" name="qty" min="1" max="3" value="1">
-    </label>
-    <button type="submit">Add digital study</button>
+    <input type="hidden" name="qty" value="1">
+    <button type="submit">Add {escape(sku.identity)} study</button>
   </form>
 </article>
 """
@@ -411,28 +494,34 @@ def _sku_card(sku, csrf: str) -> str:
 
 def _cart_row(line: dict[str, object], csrf: str) -> str:
     sku = escape(str(line["sku"]))
+    qty = int(line["qty"])
+    minus = max(qty - 1, 0)
+    plus = min(qty + 1, 3)
+    plus_disabled = " disabled" if qty >= 3 else ""
+    minus_label = "Remove" if qty == 1 else "Decrease quantity"
     return f"""
 <li class="cart-line">
   <div>
+    <p class="eyebrow">{escape(str(line["identity"]))} · digital hold</p>
     <strong>{escape(str(line["title"]))}</strong>
-    <p>{escape(str(line["revision"]))} · {sku}</p>
+    <p>{escape(str(line["revision"]))} · {sku} · no charge</p>
   </div>
-  <form method="post" action="/cart" class="qty-form">
-    <input type="hidden" name="csrf" value="{escape(csrf)}">
-    <input type="hidden" name="action" value="set">
-    <input type="hidden" name="sku" value="{sku}">
-    <label>
-      Quantity
-      <input type="number" name="qty" min="0" max="3" value="{int(line["qty"])}">
-    </label>
-    <button type="submit">Update</button>
-  </form>
-  <form method="post" action="/cart">
-    <input type="hidden" name="csrf" value="{escape(csrf)}">
-    <input type="hidden" name="action" value="remove">
-    <input type="hidden" name="sku" value="{sku}">
-    <button type="submit" class="ghost">Remove</button>
-  </form>
+  <div class="cart-actions">
+    <form method="post" action="/cart" class="qty-stepper">
+      <input type="hidden" name="csrf" value="{escape(csrf)}">
+      <input type="hidden" name="action" value="set">
+      <input type="hidden" name="sku" value="{sku}">
+      <button type="submit" name="qty" value="{minus}" aria-label="{minus_label}">−</button>
+      <span aria-live="polite">{qty}</span>
+      <button type="submit" name="qty" value="{plus}" aria-label="Increase quantity"{plus_disabled}>+</button>
+    </form>
+    <form method="post" action="/cart">
+      <input type="hidden" name="csrf" value="{escape(csrf)}">
+      <input type="hidden" name="action" value="remove">
+      <input type="hidden" name="sku" value="{sku}">
+      <button type="submit" class="ghost">Remove</button>
+    </form>
+  </div>
 </li>
 """
 

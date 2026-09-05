@@ -22,6 +22,9 @@
       }
       event.preventDefault();
       var data = new URLSearchParams(new FormData(form));
+      if (event.submitter && event.submitter.name) {
+        data.set(event.submitter.name, event.submitter.value);
+      }
       fetch("/api/cart", {
         method: "POST",
         headers: {
@@ -42,7 +45,7 @@
             return;
           }
           refreshCount(result.payload.count || 0);
-          announce("Digital study cart updated. Nothing was printed or posted.");
+          announce("Digital study hold cart updated. Nothing was charged, printed, or posted.");
           if (window.location.pathname === "/cart") {
             window.location.reload();
           }
