@@ -27,17 +27,19 @@ PUBLIC_CATALOG_KEYS = (
     "material",
     "description",
     "study_frame",
-    "study_position",
+    "study_image",
     "digital_only",
     "physical_proof",
     "fulfillment",
 )
 
+# Pixel windows into the leftover #8 1800x1100 study. Neighbors may peek
+# because the three models share one render; the named object stays dominant.
 STUDY_FRAMES = {
-    "cassette": "29% 36%",
-    "floppy": "50% 47%",
-    "vhs": "70% 62%",
-    "current-three": "50% 42%",
+    "cassette": (250, 160, 850, 760),
+    "floppy": (650, 250, 1250, 850),
+    "vhs": (960, 420, 1620, 1080),
+    "current-three": None,
 }
 
 FORBIDDEN_PUBLIC_FRAGMENTS = (
@@ -87,7 +89,7 @@ class Sku:
     material: str
     description: str
     study_frame: str
-    study_position: str
+    study_image: str
     digital_only: bool = True
     physical_proof: bool = False
     fulfillment: str = ALLOWED_FULFILLMENT
@@ -106,7 +108,7 @@ class Sku:
             "material": self.material,
             "description": self.description,
             "study_frame": self.study_frame,
-            "study_position": self.study_position,
+            "study_image": self.study_image,
             "digital_only": True,
             "physical_proof": False,
             "fulfillment": ALLOWED_FULFILLMENT,
@@ -176,7 +178,7 @@ SKU_SPECS: tuple[SkuSpec, ...] = (
 
 def study_window(frame: str) -> tuple[str, str]:
     require(frame in STUDY_FRAMES, f"unknown study frame: {frame}")
-    return frame, STUDY_FRAMES[frame]
+    return frame, f"/assets/study/{frame}.png"
 
 
 def require(condition: bool, message: str) -> None:
@@ -240,7 +242,7 @@ class DigitalCatalog:
         built: list[Sku] = []
         for spec in SKU_SPECS:
             validate_sku_id(spec.sku)
-            frame, position = study_window(spec.study_frame or spec.key)
+            frame, image_path = study_window(spec.study_frame or spec.key)
             if spec.key == "current-three":
                 built.append(
                     Sku(
@@ -256,7 +258,7 @@ class DigitalCatalog:
                         material=spec.material or "digital PETG material study",
                         description=spec.description,
                         study_frame=frame,
-                        study_position=position,
+                        study_image=image_path,
                     )
                 )
                 continue
@@ -282,7 +284,7 @@ class DigitalCatalog:
                     material=str(model.get("material_visualization") or "digital PETG material study"),
                     description=spec.description,
                     study_frame=frame,
-                    study_position=position,
+                    study_image=image_path,
                 )
             )
         return built
@@ -335,3 +337,24 @@ def assert_public_payload_safe(payload: Iterable[dict[str, Any]]) -> None:
         extra_keys.update(set(item) - set(PUBLIC_CATALOG_KEYS))
     if extra_keys:
         raise CatalogError(f"public catalog has extra keys: {sorted(extra_keys)}")
+
+
+def study_crop_box(frame: str) -> tuple[int, int, int, int] | None:
+    require(frame in STUDY_FRAMES, f"unknown study frame: {frame}")
+    return STUDY_FRAMES[frame]
+
+
+def crop_study_image(frame: str, source=None):
+    """Return a PIL crop of the leftover study. current-three is the full image."""
+    from PIL import Image
+
+    require(STUDY_IMAGE_PATH.is_file(), f"leftover #8 study image missing: {STUDY_IMAGE_PATH}")
+    image = source if source is not None else Image.open(STUDY_IMAGE_PATH).convert("RGB")
+    require(image.size == (1800, 1100), "leftover #8 study size drifted")
+    box = study_crop_box(frame)
+    if box is None:
+        return image
+    left, top, right, bottom = box
+    require(0 <= left < right <= image.size[0], f"{frame} crop x drifted")
+    require(0 <= top < bottom <= image.size[1], f"{frame} crop y drifted")
+    return image.crop(box)

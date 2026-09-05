@@ -10,7 +10,7 @@ from typing import Callable, Iterable
 from urllib.parse import parse_qs
 
 from .cart import CartError
-from .catalog import CatalogError, DigitalCatalog, STUDY_IMAGE_PATH
+from .catalog import CatalogError, DigitalCatalog, STUDY_FRAMES, STUDY_IMAGE_PATH, crop_study_image
 from .security import (
     CSRF_HEADER,
     DIGITAL_HOLD_CONFIRM_VALUES,
@@ -24,6 +24,7 @@ from .security import (
     expired_session_cookie,
     hold_id_from_path,
     json_bytes,
+    study_frame_from_path,
     normalize_request_path,
     parse_cookies,
     product_sku_from_path,
@@ -42,6 +43,7 @@ TEMPLATE_ROOT = WEB_ROOT / "templates"
 class MerchApp:
     def __init__(self, store: MerchStore) -> None:
         self.store = store
+        self._crop_cache: dict[str, bytes] = {}
 
     def __call__(self, environ: dict, start_response: Callable) -> Iterable[bytes]:
         method = (environ.get("REQUEST_METHOD") or "GET").upper()
@@ -124,6 +126,8 @@ class MerchApp:
             return self._static("app.js", "text/javascript; charset=utf-8")
         if method == "GET" and path == "/assets/material-study.png":
             return self._study_image()
+        if method == "GET" and path.startswith("/assets/study/"):
+            return self._study_crop_image(study_frame_from_path(path) or "")
         if method == "GET" and path == "/api/catalog":
             return "200 OK", "application/json", json_bytes(self.store.public_snapshot()), []
         if method == "GET" and path == "/api/cart":
@@ -255,6 +259,20 @@ class MerchApp:
         if path != STUDY_IMAGE_PATH.resolve() or not path.is_file():
             raise SecurityError("Material study image is not available.")
         return "200 OK", "image/png", path.read_bytes(), [("Cache-Control", "no-store")]
+
+    def _study_crop_image(self, frame: str):
+        if frame not in STUDY_FRAMES:
+            raise SecurityError("Study crop is not public.")
+        if frame == "current-three":
+            return self._study_image()
+        if frame not in self._crop_cache:
+            from io import BytesIO
+
+            cropped = crop_study_image(frame)
+            buffer = BytesIO()
+            cropped.save(buffer, format="PNG")
+            self._crop_cache[frame] = buffer.getvalue()
+        return "200 OK", "image/png", self._crop_cache[frame], [("Cache-Control", "no-store")]
 
     def _redirect(self, location: str):
         return "303 See Other", "text/plain; charset=utf-8", b"", [("Location", location)]
@@ -445,9 +463,9 @@ def _study_crop(sku, *, kind: str) -> str:
         )
     )
     return f"""
-<figure class="study-crop {zoom} study-crop-{kind}" style="--pos:{escape(sku.study_position)}; --accent:{escape(sku.color)}">
+<figure class="study-crop {zoom} study-crop-{kind}" style="--accent:{escape(sku.color)}">
   <div class="study-crop-window">
-    <img src="/assets/material-study.png" width="1800" height="1100" alt="{alt}">
+    <img src="{escape(sku.study_image)}" alt="{alt}">
   </div>
   <figcaption>{caption} Digital render only.</figcaption>
 </figure>
@@ -456,7 +474,7 @@ def _study_crop(sku, *, kind: str) -> str:
 
 def _sku_card(sku, csrf: str) -> str:
     return f"""
-<article class="card" style="--accent:{escape(sku.color)}; --pos:{escape(sku.study_position)}">
+<article class="card" style="--accent:{escape(sku.color)}">
   {_study_crop(sku, kind="card")}
   <p class="eyebrow">{escape(sku.identity)} · {escape(sku.revision)}</p>
   <h2><a href="/product/{escape(sku.sku)}">{escape(sku.title)}</a></h2>

@@ -26,6 +26,7 @@ def extra_gates() -> None:
         FORBIDDEN_CHECKOUT_FIELDS,
         HOLD_PATH,
         PUBLIC_EXACT_PATHS,
+        STUDY_CROP_PATH,
     )
 
     metadata = load_study_metadata()
@@ -46,6 +47,10 @@ def extra_gates() -> None:
         raise RuntimeError("hold receipt path is not allowlisted")
     if HOLD_PATH.match("/hold/../release/v9/stl/x.stl") is not None:
         raise RuntimeError("hold receipt path accepted a traversal")
+    if STUDY_CROP_PATH.match("/assets/study/cassette.png") is None:
+        raise RuntimeError("study crop path is not allowlisted")
+    if STUDY_CROP_PATH.match("/assets/study/../release/v9/stl/x.stl") is not None:
+        raise RuntimeError("study crop path accepted a traversal")
     if "stripe" in FORBIDDEN_CHECKOUT_FIELDS and "shipping" in FORBIDDEN_CHECKOUT_FIELDS:
         return
     raise RuntimeError("checkout still accepts spend or shipping fields")

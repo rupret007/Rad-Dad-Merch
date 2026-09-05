@@ -117,10 +117,11 @@ class CatalogTests(unittest.TestCase):
         by_key = {item["key"]: item for item in payload}
         self.assertEqual(by_key["cassette"]["identity"], "Cassette")
         self.assertEqual(by_key["cassette"]["study_frame"], "cassette")
-        self.assertEqual(by_key["cassette"]["study_position"], "29% 36%")
-        self.assertEqual(by_key["floppy"]["study_position"], "50% 47%")
-        self.assertEqual(by_key["vhs"]["study_position"], "70% 62%")
+        self.assertEqual(by_key["cassette"]["study_image"], "/assets/study/cassette.png")
+        self.assertEqual(by_key["floppy"]["study_image"], "/assets/study/floppy.png")
+        self.assertEqual(by_key["vhs"]["study_image"], "/assets/study/vhs.png")
         self.assertEqual(by_key["current-three"]["study_frame"], "current-three")
+        self.assertEqual(by_key["current-three"]["study_image"], "/assets/study/current-three.png")
 
     def test_unpublished_sku_hidden_from_public_catalog(self):
         catalog = DigitalCatalog()
@@ -184,9 +185,10 @@ class MerchPathTests(unittest.TestCase):
         self.assertIn("T-369", html)
         self.assertIn("study-crop is-object", html)
         self.assertIn("study-crop is-full", html)
-        self.assertIn("--pos:29% 36%", html)
-        self.assertIn("--pos:50% 47%", html)
-        self.assertIn("--pos:70% 62%", html)
+        self.assertIn("/assets/study/cassette.png", html)
+        self.assertIn("/assets/study/floppy.png", html)
+        self.assertIn("/assets/study/vhs.png", html)
+        self.assertIn("/assets/study/current-three.png", html)
         self.assertNotIn('href="/admin"', html)
         self.assertNotIn("Tweet", html)
         self.assertNotIn("stripe", html.lower())
@@ -317,7 +319,7 @@ class MerchPathTests(unittest.TestCase):
         html = cassette.decode("utf-8")
         self.assertIn("Cassette · V38", html)
         self.assertIn("study-crop is-object study-crop-product", html)
-        self.assertIn("--pos:29% 36%", html)
+        self.assertIn("/assets/study/cassette.png", html)
         self.assertIn("this listing is the Cassette", html)
         self.assertIn("Add Cassette study to hold cart", html)
         _, _, combined = self.client.get("/product/digital-current-three-study")
@@ -361,6 +363,8 @@ class MerchPathTests(unittest.TestCase):
             "/catalog/%2e%2e/release/v9/stl/x.stl",
             "/hold/../release/v9/stl/x.stl",
             "/hold/not-a-real-hold-id",
+            "/assets/study/../release/v9/stl/x.stl",
+            "/assets/study/cassette.stl",
         )
         for path in blocked:
             status, _, body = self.client.get(path)
@@ -378,6 +382,34 @@ class MerchPathTests(unittest.TestCase):
         self.assertTrue(status.startswith("200"))
         self.assertEqual(headers["content-type"], "image/png")
         self.assertEqual(body, STUDY_PNG.read_bytes())
+        status, headers, combined = self.client.get("/assets/study/current-three.png")
+        self.assertTrue(status.startswith("200"))
+        self.assertEqual(headers["content-type"], "image/png")
+        self.assertEqual(combined, STUDY_PNG.read_bytes())
+
+    def test_study_crops_keep_the_named_object_dominant(self):
+        from io import BytesIO
+        import numpy as np
+        from PIL import Image
+
+        def counts(body: bytes) -> dict[str, int]:
+            arr = np.asarray(Image.open(BytesIO(body)).convert("RGB"), dtype=np.int16)
+            red, green, blue = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
+            return {
+                "lime": int(((green > 140) & (green > red + 40) & (blue < 120)).sum()),
+                "blue": int(((blue > 160) & (blue > green) & (red < 80)).sum()),
+                "pink": int(((red > 180) & (red > blue + 40) & (green < 100)).sum()),
+            }
+
+        winners = {}
+        for frame in ("cassette", "floppy", "vhs"):
+            status, headers, body = self.client.get(f"/assets/study/{frame}.png")
+            self.assertTrue(status.startswith("200"), frame)
+            self.assertEqual(headers["content-type"], "image/png")
+            tallies = counts(body)
+            winners[frame] = max(tallies, key=tallies.get)
+            self.assertGreater(tallies[winners[frame]], 8000, frame)
+        self.assertEqual(winners, {"cassette": "lime", "floppy": "blue", "vhs": "pink"})
 
     def test_api_cart_accepts_csrf_header(self):
         _, _, catalog = self.client.get("/catalog")

@@ -55,6 +55,7 @@ ADMIN_EXACT_PATHS = {
 
 PRODUCT_PATH = re.compile(r"^/product/([a-z0-9-]{3,64})$")
 HOLD_PATH = re.compile(r"^/hold/([a-f0-9]{16})$")
+STUDY_CROP_PATH = re.compile(r"^/assets/study/(cassette|floppy|vhs|current-three)\.png$")
 ADMIN_SKU_PATH = re.compile(r"^/admin/sku/([a-z0-9-]{3,64})/(publish|unpublish)$")
 ALLOWED_CHECKOUT_FIELDS = {"csrf", "note", "contact", "action", "confirm_digital_hold"}
 DIGITAL_HOLD_CONFIRM_VALUES = {"1", "on", "yes"}
@@ -135,7 +136,12 @@ def normalize_request_path(raw_path: str) -> str:
 
 
 def classify_path(path: str) -> str:
-    if path in PUBLIC_EXACT_PATHS or PRODUCT_PATH.match(path) or HOLD_PATH.match(path):
+    if (
+        path in PUBLIC_EXACT_PATHS
+        or PRODUCT_PATH.match(path)
+        or HOLD_PATH.match(path)
+        or STUDY_CROP_PATH.match(path)
+    ):
         return "public"
     if path in ADMIN_EXACT_PATHS or ADMIN_SKU_PATH.match(path):
         return "admin"
@@ -149,6 +155,11 @@ def product_sku_from_path(path: str) -> str | None:
 
 def hold_id_from_path(path: str) -> str | None:
     match = HOLD_PATH.match(path)
+    return match.group(1) if match else None
+
+
+def study_frame_from_path(path: str) -> str | None:
+    match = STUDY_CROP_PATH.match(path)
     return match.group(1) if match else None
 
 
