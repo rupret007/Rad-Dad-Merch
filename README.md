@@ -67,11 +67,14 @@ python3 tools/verify_digital_merch.py
 ```
 
 The digital merch desk turns that leftover study into a shopper catalog, cart,
-and admin publish/hold path. It accepts digital study requests only. It does
-not take payment, ship an object, start a Bambu job, change the QR destination,
-or post merch. The public merch path serves the study image and catalog copy;
-it does not serve STL, 3MF, renderer, or release files. Admin stays locked
-until `RAD_DAD_MERCH_ADMIN_TOKEN` is set.
+and admin publish/hold path. Catalog cards crop the shared render so cassette,
+floppy, and mini VHS are identifiable on a phone. Checkout cannot run until the
+shopper confirms a digital hold, then it opens a session-owned receipt. It
+accepts digital study requests only. It does not take payment, ship an object,
+start a Bambu job, change the QR destination, or post merch. The public merch
+path serves the study image and catalog copy; it does not serve STL, 3MF,
+renderer, or release files. Admin stays locked until
+`RAD_DAD_MERCH_ADMIN_TOKEN` is set.
 
 ## What changed in v9
 

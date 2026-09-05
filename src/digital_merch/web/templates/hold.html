@@ -1,0 +1,28 @@
+<section class="hold panel">
+  <p class="eyebrow">Digital study hold · no charge</p>
+  <h1>Hold {{request_id}}</h1>
+  <p class="lede">This request is held for admin review. Nothing was printed, shipped, posted, or charged. Keep this receipt if you need the hold id.</p>
+  <ul class="hold-list">
+    {{lines}}
+  </ul>
+  <dl class="facts">
+    <div>
+      <dt>Requested</dt>
+      <dd>{{created_at}}</dd>
+    </div>
+    <div>
+      <dt>Contact</dt>
+      <dd>{{contact}}</dd>
+    </div>
+    <div>
+      <dt>Note</dt>
+      <dd>{{note}}</dd>
+    </div>
+    <div>
+      <dt>Fulfillment</dt>
+      <dd>Digital study hold only</dd>
+    </div>
+  </dl>
+  <p class="hint">Closing this page does not create a purchase or a print job.</p>
+  <p><a class="button-link" href="/catalog">Back to published studies</a></p>
+</section>

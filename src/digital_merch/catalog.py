@@ -18,6 +18,7 @@ PUBLIC_CATALOG_KEYS = (
     "sku",
     "key",
     "title",
+    "identity",
     "revision",
     "kind",
     "published",
@@ -25,10 +26,19 @@ PUBLIC_CATALOG_KEYS = (
     "extents_mm",
     "material",
     "description",
+    "study_frame",
+    "study_position",
     "digital_only",
     "physical_proof",
     "fulfillment",
 )
+
+STUDY_FRAMES = {
+    "cassette": "29% 36%",
+    "floppy": "50% 47%",
+    "vhs": "70% 62%",
+    "current-three": "50% 42%",
+}
 
 FORBIDDEN_PUBLIC_FRAGMENTS = (
     "release/",
@@ -54,11 +64,13 @@ class SkuSpec:
     sku: str
     key: str
     title: str
+    identity: str
     description: str
     revision: str | None = None
     color: str | None = None
     extents_mm: list[float] | None = None
     material: str | None = None
+    study_frame: str | None = None
 
 
 @dataclass
@@ -66,6 +78,7 @@ class Sku:
     sku: str
     key: str
     title: str
+    identity: str
     revision: str
     kind: str
     published: bool
@@ -73,6 +86,8 @@ class Sku:
     extents_mm: list[float] | None
     material: str
     description: str
+    study_frame: str
+    study_position: str
     digital_only: bool = True
     physical_proof: bool = False
     fulfillment: str = ALLOWED_FULFILLMENT
@@ -82,6 +97,7 @@ class Sku:
             "sku": self.sku,
             "key": self.key,
             "title": self.title,
+            "identity": self.identity,
             "revision": self.revision,
             "kind": self.kind,
             "published": self.published,
@@ -89,6 +105,8 @@ class Sku:
             "extents_mm": list(self.extents_mm) if self.extents_mm is not None else None,
             "material": self.material,
             "description": self.description,
+            "study_frame": self.study_frame,
+            "study_position": self.study_position,
             "digital_only": True,
             "physical_proof": False,
             "fulfillment": ALLOWED_FULFILLMENT,
@@ -105,19 +123,23 @@ SKU_SPECS: tuple[SkuSpec, ...] = (
         sku="digital-cassette-v38",
         key="cassette",
         title="Compact Cassette digital study",
+        identity="Cassette",
         description=(
             "Cassette v38 study card: authentic-edge transport shell, unequal "
-            "tape packs, and the C-69 mark. Shared Current Three render. Not a "
-            "photo or a shippable print."
+            "tape packs, and the C-69 mark. Cropped from the shared Current "
+            "Three render so this card is the cassette, not the floppy or VHS. "
+            "Not a photo or a shippable print."
         ),
     ),
     SkuSpec(
         sku="digital-floppy-v22",
         key="floppy",
         title="3.5-inch Floppy digital study",
+        identity="Floppy",
         description=(
             "Floppy v22 study card: shutter, write-protect cues, and the 3.69 MB "
-            "capacity joke. Shared Current Three render. Not a photo or a "
+            "capacity joke. Cropped from the shared Current Three render so this "
+            "card is the floppy, not the cassette or VHS. Not a photo or a "
             "shippable print."
         ),
     ),
@@ -125,26 +147,36 @@ SKU_SPECS: tuple[SkuSpec, ...] = (
         sku="digital-vhs-v5",
         key="vhs",
         title="Mini VHS digital study",
+        identity="Mini VHS",
         description=(
-            "Mini VHS v5 study card: reel, tape-door, and T-369 cues. Shared "
-            "Current Three render. Not a photo or a shippable print."
+            "Mini VHS v5 study card: reel, tape-door, and T-369 cues. Cropped "
+            "from the shared Current Three render so this card is the VHS, not "
+            "the cassette or floppy. Not a photo or a shippable print."
         ),
     ),
     SkuSpec(
         sku="digital-current-three-study",
         key="current-three",
         title="Current Three PETG material study",
+        identity="Current Three",
         revision="STUDY",
         color="#F5F1E8",
         extents_mm=None,
         material="digital PETG material study",
+        study_frame="current-three",
         description=(
-            "Combined cassette, floppy, and mini VHS digital study at true "
-            "relative size. Color and finish are illustrative. This request "
-            "does not start a print, slice, or shipment."
+            "All three current studies in one card, at true relative size. "
+            "Choose this only when you want the combined render held. Color "
+            "and finish are illustrative. This request does not start a print, "
+            "slice, or shipment."
         ),
     ),
 )
+
+
+def study_window(frame: str) -> tuple[str, str]:
+    require(frame in STUDY_FRAMES, f"unknown study frame: {frame}")
+    return frame, STUDY_FRAMES[frame]
 
 
 def require(condition: bool, message: str) -> None:
@@ -208,12 +240,14 @@ class DigitalCatalog:
         built: list[Sku] = []
         for spec in SKU_SPECS:
             validate_sku_id(spec.sku)
+            frame, position = study_window(spec.study_frame or spec.key)
             if spec.key == "current-three":
                 built.append(
                     Sku(
                         sku=spec.sku,
                         key=spec.key,
                         title=spec.title,
+                        identity=spec.identity,
                         revision=spec.revision or "STUDY",
                         kind=ALLOWED_SKU_KIND,
                         published=True,
@@ -221,6 +255,8 @@ class DigitalCatalog:
                         extents_mm=spec.extents_mm,
                         material=spec.material or "digital PETG material study",
                         description=spec.description,
+                        study_frame=frame,
+                        study_position=position,
                     )
                 )
                 continue
@@ -237,6 +273,7 @@ class DigitalCatalog:
                     sku=spec.sku,
                     key=spec.key,
                     title=spec.title,
+                    identity=spec.identity,
                     revision=revision,
                     kind=ALLOWED_SKU_KIND,
                     published=True,
@@ -244,6 +281,8 @@ class DigitalCatalog:
                     extents_mm=[float(value) for value in extents],
                     material=str(model.get("material_visualization") or "digital PETG material study"),
                     description=spec.description,
+                    study_frame=frame,
+                    study_position=position,
                 )
             )
         return built

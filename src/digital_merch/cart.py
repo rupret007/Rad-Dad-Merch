@@ -37,10 +37,14 @@ class Cart:
                 {
                     "sku": sku.sku,
                     "title": sku.title,
+                    "identity": sku.identity,
                     "revision": sku.revision,
                     "qty": qty,
                     "color": sku.color,
                     "kind": sku.kind,
+                    "study_frame": sku.study_frame,
+                    "digital_only": True,
+                    "fulfillment": sku.fulfillment,
                 }
             )
         return rows

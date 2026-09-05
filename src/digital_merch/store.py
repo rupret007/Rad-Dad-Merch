@@ -18,6 +18,8 @@ class StudyRequest:
     contact: str
     note: str
     items: dict[str, int]
+    session_sid: str
+    digital_only: bool = True
 
 
 @dataclass
@@ -54,6 +56,12 @@ class MerchStore:
     def add_request(self, request: StudyRequest) -> StudyRequest:
         self.requests.append(request)
         return request
+
+    def owned_request(self, session: Session, request_id: str) -> StudyRequest | None:
+        for request in self.requests:
+            if request.request_id == request_id and request.session_sid == session.sid:
+                return request
+        return None
 
     def login_allowed(self, client_key: str, now: float | None = None) -> bool:
         bucket = self.login_limits.setdefault(client_key, RateLimit())

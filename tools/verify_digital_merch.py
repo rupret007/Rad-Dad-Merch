@@ -21,7 +21,12 @@ def extra_gates() -> None:
         assert_public_payload_safe,
         load_study_metadata,
     )
-    from digital_merch.security import FORBIDDEN_CHECKOUT_FIELDS, PUBLIC_EXACT_PATHS
+    from digital_merch.security import (
+        ALLOWED_CHECKOUT_FIELDS,
+        FORBIDDEN_CHECKOUT_FIELDS,
+        HOLD_PATH,
+        PUBLIC_EXACT_PATHS,
+    )
 
     metadata = load_study_metadata()
     if metadata.get("physical_proof") is not False:
@@ -35,6 +40,12 @@ def extra_gates() -> None:
             raise RuntimeError(f"public catalog leaked {fragment}")
     if any(path.endswith((".stl", ".3mf")) or "release/" in path for path in PUBLIC_EXACT_PATHS):
         raise RuntimeError("public merch path allowlist includes print files")
+    if "confirm_digital_hold" not in ALLOWED_CHECKOUT_FIELDS:
+        raise RuntimeError("checkout dropped the digital-hold confirmation field")
+    if HOLD_PATH.match("/hold/0123456789abcdef") is None:
+        raise RuntimeError("hold receipt path is not allowlisted")
+    if HOLD_PATH.match("/hold/../release/v9/stl/x.stl") is not None:
+        raise RuntimeError("hold receipt path accepted a traversal")
     if "stripe" in FORBIDDEN_CHECKOUT_FIELDS and "shipping" in FORBIDDEN_CHECKOUT_FIELDS:
         return
     raise RuntimeError("checkout still accepts spend or shipping fields")
@@ -50,8 +61,8 @@ def main() -> int:
     if not result.wasSuccessful():
         return 1
     print(
-        "Digital merch verified: leftover #8 catalog, cart rules, admin lock, "
-        "and public-path security passed."
+        "Digital merch verified: leftover #8 catalog identity, hold receipts, "
+        "cart rules, admin lock, and public-path security passed."
     )
     return 0
 

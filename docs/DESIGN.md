@@ -39,11 +39,14 @@ QR artwork, or physical acceptance step.
 
 The digital merch desk in `src/digital_merch/` uses that leftover study as the
 only public catalog source. Shoppers can view published digital study cards,
-add them to a cart, and request a hold. Admin can publish or unpublish those
-cards. The public merch path is an allowlist: it can serve the study image and
-sanitized catalog fields, not source hashes, STL paths, 3MF projects, or the
-renderer. Checkout rejects shipping, payment, printer, and social-post fields.
-This desk is not a second QR destination and it does not prove a physical print.
+tell cassette, floppy, and mini VHS apart by cropped study windows, add them to
+a hold cart, and request a hold. A confirmed request opens a session-owned
+receipt; other sessions cannot read it. Admin can publish or unpublish those
+cards. The public merch path is an allowlist: it can serve the study image,
+catalog copy, and hold receipts, not source hashes, STL paths, 3MF projects, or
+the renderer. Checkout rejects shipping, payment, printer, and social-post
+fields and requires an explicit digital-hold confirmation. This desk is not a
+second QR destination and it does not prove a physical print.
 
 ## Shared design hierarchy
 
