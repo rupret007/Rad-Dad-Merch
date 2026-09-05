@@ -2,9 +2,9 @@
 
 ## Digital merch desk
 
-- Catalog cards and product pages now crop the leftover Current Three study so
-  cassette, floppy, and mini VHS are visually distinct on a phone. Combined
-  study stays the full render.
+- Catalog cards and product pages now serve leftover-#8 crops of the Current
+  Three study so cassette, floppy, and mini VHS are visually distinct on a
+  phone. Combined study stays the original render bytes.
 - Checkout requires an explicit digital-hold confirmation and redirects to a
   session-owned receipt. Empty carts still have no checkout. Nothing is priced,
   charged, printed, shipped, or posted.
