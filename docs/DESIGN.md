@@ -37,6 +37,14 @@ that provenance and performs a disposable smoke render. The study does not
 change, regenerate, or validate any STL, 3MF, Bambu profile, release archive,
 QR artwork, or physical acceptance step.
 
+The digital merch desk in `src/digital_merch/` uses that leftover study as the
+only public catalog source. Shoppers can view published digital study cards,
+add them to a cart, and request a hold. Admin can publish or unpublish those
+cards. The public merch path is an allowlist: it can serve the study image and
+sanitized catalog fields, not source hashes, STL paths, 3MF projects, or the
+renderer. Checkout rejects shipping, payment, printer, and social-post fields.
+This desk is not a second QR destination and it does not prove a physical print.
+
 ## Shared design hierarchy
 
 Every media replica follows the same priority order:

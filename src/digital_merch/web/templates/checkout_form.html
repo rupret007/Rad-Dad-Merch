@@ -1,0 +1,14 @@
+<form method="post" action="/checkout" class="panel stack checkout-form">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <input type="hidden" name="action" value="request">
+  <label>
+    Contact, optional
+    <input type="text" name="contact" maxlength="120" autocomplete="off" placeholder="How admin can reach you">
+  </label>
+  <label>
+    Note, optional
+    <textarea name="note" maxlength="280" rows="3" placeholder="Keep this digital. Do not ask for a print or shipment."></textarea>
+  </label>
+  <button type="submit">Request digital study</button>
+  <p class="hint">Shipping, payment, printer, and social-post fields are rejected on this path.</p>
+</form>
