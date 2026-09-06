@@ -45,6 +45,10 @@ class Cart:
                     "study_frame": sku.study_frame,
                     "digital_only": True,
                     "fulfillment": sku.fulfillment,
+                    "available": (
+                        sku.published and sku.digital_only and not sku.physical_proof
+                        and sku.kind == ALLOWED_SKU_KIND and sku.fulfillment == ALLOWED_FULFILLMENT
+                    ),
                 }
             )
         return rows

@@ -35,6 +35,7 @@ https://raddadband.com/qr/
 | Preview the current cassette, floppy, and VHS together | [Current Three digital PETG material study](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png) |
 | Browse or hold those digital studies | `python3 tools/serve_digital_merch.py` then open `/catalog` |
 | Check a cart change after a connection problem | Use **Review current hold cart**; see [cart updates and recovery](docs/DIGITAL_CART.md) |
+| Recover when another tab changed the cart before confirmation | Review current quantities, then confirm again; see [review-bound holds](docs/DIGITAL_HOLD_REVIEW.md) |
 | Reopen or withdraw a digital hold | Open **Your holds** at `/holds` in the same browser session; see [digital holds](docs/DIGITAL_HOLDS.md) |
 | Print the current cassette, floppy, and VHS together | [`release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf`](release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf) |
 | Print the four models | [`release/v9/3mf/`](release/v9/3mf) or [`release/v9/stl/`](release/v9/stl) |
@@ -89,6 +90,11 @@ Cart updates show a visible result and pause further edits while pending. If a
 response is lost, the browser never resends the change automatically: use
 **Review current hold cart** to load the server's current quantities before
 editing or requesting a hold. See [cart updates and recovery](docs/DIGITAL_CART.md).
+Hold confirmation is also bound to the cart that was actually reviewed. A
+changed or stale review creates no hold: the cart shows its current contents,
+retains valid unsent contact/note text on that response, and requires fresh
+confirmation. Empty or unavailable carts cannot submit. See
+[review-bound holds](docs/DIGITAL_HOLD_REVIEW.md) for the API and recovery limits.
 Digital verification uses Python 3.9+ and Node.js 18+; the JavaScript checks
 use Node's standard library and require no npm packages.
 

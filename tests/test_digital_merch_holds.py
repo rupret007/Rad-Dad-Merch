@@ -18,9 +18,11 @@ class HoldLifecycleTests(unittest.TestCase):
         _, _, page = client.get('/catalog')
         csrf = client.csrf_from(page)
         client.post('/cart', {'action': 'add', 'sku': sku, 'qty': '1'}, csrf)
+        _, _, reviewed = client.get('/cart')
         status, headers, _ = client.post('/checkout', {
             'action': 'request', 'confirm_digital_hold': '1',
             'contact': 'Synthetic contact', 'note': note,
+            'checkout_review': client.review_from(reviewed),
         }, csrf)
         self.assertEqual(status, '303 See Other')
         return headers['location']

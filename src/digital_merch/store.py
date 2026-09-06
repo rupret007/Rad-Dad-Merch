@@ -4,11 +4,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from hashlib import sha256
+import hmac
+from secrets import compare_digest
+from threading import RLock
 from typing import Any
 
 from .cart import Cart
 from .catalog import DigitalCatalog
-from .security import RateLimit, Session, new_session
+from .security import RateLimit, Session, json_bytes, new_session
 
 
 @dataclass
@@ -34,6 +38,9 @@ class MerchStore:
     published_overrides: dict[str, bool] = field(default_factory=dict)
     requests: list[StudyRequest] = field(default_factory=list)
     login_limits: dict[str, RateLimit] = field(default_factory=dict)
+    # The desk is in-memory and single-process. Its WSGI boundary holds this
+    # lock across review generation or validation and the resulting mutation.
+    lock: Any = field(default_factory=RLock, repr=False, compare=False)
 
     def session(self, sid: str | None) -> Session:
         if sid and sid in self.sessions:
@@ -48,7 +55,29 @@ class MerchStore:
 
     def replace_cart(self, session: Session, cart: Cart) -> Cart:
         self.carts[session.sid] = cart
+        session.cart_revision += 1
         return cart
+
+    def checkout_review(self, session: Session) -> str:
+        cart = self.cart_for(session)
+        snapshot = {
+            "purpose": "digital-hold-review-v1",
+            "session": session.sid,
+            "revision": session.cart_revision,
+            "items": [
+                [sku, qty, self.catalog.require_sku(sku).public_dict()]
+                for sku, qty in sorted(cart.items.items())
+            ],
+        }
+        # No optional contact/note, private asset paths or signing material is
+        # exposed. A cleared/refilled identical cart has a different revision.
+        return hmac.new(self.secret, json_bytes(snapshot), sha256).hexdigest()
+
+    def review_matches(self, session: Session, submitted: str | None) -> bool:
+        if (not isinstance(submitted, str) or len(submitted) != 64
+                or any(char not in "0123456789abcdef" for char in submitted)):
+            return False
+        return compare_digest(self.checkout_review(session), submitted)
 
     def set_published(self, sku_id: str, published: bool) -> None:
         self.catalog.require_sku(sku_id)

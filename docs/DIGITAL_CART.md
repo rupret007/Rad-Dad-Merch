@@ -29,9 +29,10 @@ continues to work with the pressed quantity button's value.
 ## Scope and verification
 
 This prevents automatic retry of an uncertain cart POST in the current page.
-It does not promise a transaction across multiple tabs, prevent every manual
-repeat, or make the server's in-memory session durable. Creating a digital hold
-still requires the existing explicit checkout confirmation; receipt history
+It does not make every cart edit transactional across tabs or make the
+server's in-memory session durable. Final hold creation additionally uses a
+[review-bound confirmation](DIGITAL_HOLD_REVIEW.md): another tab's changed cart
+or a reused old form cannot silently create an unreviewed hold. Receipt history
 and withdrawal are unchanged.
 
 Run `python3 tools/verify_digital_merch.py` with Python 3.9+ and Node.js 18+.

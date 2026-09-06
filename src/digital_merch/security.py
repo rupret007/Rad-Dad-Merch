@@ -59,7 +59,7 @@ HOLD_PATH = re.compile(r"^/hold/([a-f0-9]{16})$")
 HOLD_WITHDRAW_PATH = re.compile(r"^/hold/([a-f0-9]{16})/withdraw$")
 STUDY_CROP_PATH = re.compile(r"^/assets/study/(cassette|floppy|vhs|current-three)\.png$")
 ADMIN_SKU_PATH = re.compile(r"^/admin/sku/([a-z0-9-]{3,64})/(publish|unpublish)$")
-ALLOWED_CHECKOUT_FIELDS = {"csrf", "note", "contact", "action", "confirm_digital_hold"}
+ALLOWED_CHECKOUT_FIELDS = {"csrf", "note", "contact", "action", "confirm_digital_hold", "checkout_review"}
 DIGITAL_HOLD_CONFIRM_VALUES = {"1", "on", "yes"}
 
 SECURITY_HEADERS = {
@@ -103,6 +103,7 @@ class Session:
     csrf: str
     admin: bool = False
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    cart_revision: int = 0
 
 
 @dataclass

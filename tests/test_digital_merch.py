@@ -88,6 +88,12 @@ class Client:
             raise AssertionError("page is missing a CSRF token")
         return match.group(1).decode("ascii")
 
+    def review_from(self, body: bytes) -> str:
+        match = re.search(rb'name="checkout_review"\s+value="([^"]+)"', body)
+        if not match:
+            raise AssertionError("page is missing an explicit checkout review")
+        return match.group(1).decode("ascii")
+
 
 def app_with_token(token: str = "admin-test-token"):
     return create_app(secret=b"unit-test-secret-value-32bytesxx", admin_token=token)
@@ -226,9 +232,11 @@ class MerchPathTests(unittest.TestCase):
         self.assertIn("qty-stepper", cart_html)
         self.assertIn("This is a digital study hold, not a purchase", cart_html)
         csrf = self.client.csrf_from(cart_page)
+        reviewed = self.client.review_from(cart_page)
         status, _, denied = self.client.post(
             "/checkout",
-            {"action": "request", "contact": "bandmate", "note": "digital hold only"},
+            {"action": "request", "contact": "bandmate", "note": "digital hold only",
+             "checkout_review": reviewed},
             csrf=csrf,
         )
         self.assertTrue(status.startswith("400"))
@@ -241,6 +249,7 @@ class MerchPathTests(unittest.TestCase):
                 "contact": "bandmate",
                 "note": "digital hold only",
                 "confirm_digital_hold": "1",
+                "checkout_review": self.client.review_from(denied),
             },
             csrf=csrf,
         )
@@ -339,7 +348,8 @@ class MerchPathTests(unittest.TestCase):
         csrf = self.client.csrf_from(cart_page)
         _, headers, _ = self.client.post(
             "/checkout",
-            {"action": "request", "confirm_digital_hold": "1"},
+            {"action": "request", "confirm_digital_hold": "1",
+             "checkout_review": self.client.review_from(cart_page)},
             csrf=csrf,
         )
         receipt = headers["location"]
@@ -435,17 +445,21 @@ class MerchPathTests(unittest.TestCase):
             csrf=csrf,
             header_csrf=True,
         )
+        _, _, cart_page = self.client.get("/api/cart")
+        reviewed = json.loads(cart_page)["checkout_review"]
         status, _, body = self.client.post(
             "/api/checkout",
-            {"action": "request"},
+            {"action": "request", "checkout_review": reviewed},
             csrf=csrf,
             header_csrf=True,
         )
         self.assertTrue(status.startswith("400"))
         self.assertIn("not a purchase", json.loads(body)["error"])
+        _, _, cart_page = self.client.get("/api/cart")
         status, _, body = self.client.post(
             "/api/checkout",
-            {"action": "request", "confirm_digital_hold": "1"},
+            {"action": "request", "confirm_digital_hold": "1",
+             "checkout_review": json.loads(cart_page)["checkout_review"]},
             csrf=csrf,
             header_csrf=True,
         )
