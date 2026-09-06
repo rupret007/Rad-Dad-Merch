@@ -34,6 +34,7 @@ https://raddadband.com/qr/
 | Download the complete release | [`release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip`](release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip) |
 | Preview the current cassette, floppy, and VHS together | [Current Three digital PETG material study](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png) |
 | Browse or hold those digital studies | `python3 tools/serve_digital_merch.py` then open `/catalog` |
+| Reopen or withdraw a digital hold | Open **Your holds** at `/holds` in the same browser session; see [digital holds](docs/DIGITAL_HOLDS.md) |
 | Print the current cassette, floppy, and VHS together | [`release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf`](release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf) |
 | Print the four models | [`release/v9/3mf/`](release/v9/3mf) or [`release/v9/stl/`](release/v9/stl) |
 | Send one sticker to a professional vendor | `release/v9/guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.svg` or its PDF master |
@@ -75,6 +76,13 @@ start a Bambu job, change the QR destination, or post merch. The public merch
 path serves the study image and catalog copy; it does not serve STL, 3MF,
 renderer, or release files. Admin stays locked until
 `RAD_DAD_MERCH_ADMIN_TOKEN` is set.
+
+**Your holds** lists this browser session's receipts, newest first. A shopper can
+reopen a receipt and explicitly confirm withdrawal; the admin sees the same
+withdrawn status. The original receipt stays readable. Holds live only in the
+running server's memory: a server restart clears them, and clearing or losing
+the session cookie removes access. See [digital holds](docs/DIGITAL_HOLDS.md)
+for the flow and verification.
 
 ## What changed in v9
 

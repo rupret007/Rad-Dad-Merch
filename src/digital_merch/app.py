@@ -23,6 +23,7 @@ from .security import (
     classify_path,
     expired_session_cookie,
     hold_id_from_path,
+    withdrawal_id_from_path,
     json_bytes,
     study_frame_from_path,
     normalize_request_path,
@@ -118,7 +119,9 @@ class MerchApp:
             return "200 OK", "text/html; charset=utf-8", self._render_cart(session), []
         if method == "GET" and path.startswith("/product/"):
             return self._product_page(session, product_sku_from_path(path) or "")
-        if method == "GET" and path.startswith("/hold/"):
+        if method == "GET" and path == "/holds":
+            return "200 OK", "text/html; charset=utf-8", self._render_holds(session), []
+        if method == "GET" and hold_id_from_path(path):
             return self._hold_page(session, hold_id_from_path(path) or "")
         if method == "GET" and path == "/assets/app.css":
             return self._static("app.css", "text/css; charset=utf-8")
@@ -148,6 +151,8 @@ class MerchApp:
             return self._mutate_cart(session, form, json_mode=path.startswith("/api/"))
         if method == "POST" and path in {"/checkout", "/api/checkout"}:
             return self._checkout(session, form, json_mode=path.startswith("/api/"))
+        if method == "POST" and withdrawal_id_from_path(path):
+            return self._withdraw_hold(session, withdrawal_id_from_path(path), form)
         if method == "POST" and path == "/admin/login":
             return self._admin_login(session, form, environ)
         if method == "POST" and path == "/admin/logout":
@@ -247,6 +252,22 @@ class MerchApp:
                 [],
             )
         return "200 OK", "text/html; charset=utf-8", self._render_hold(session, request), []
+
+    def _withdraw_hold(self, session, request_id: str, form: dict[str, str]):
+        # An unknown hold and another session's hold have the same response.
+        if self.store.owned_request(session, request_id) is None:
+            return self._hold_page(session, request_id)
+        if set(form) - {"csrf", "confirm_withdraw"}:
+            raise SecurityError("Unexpected withdrawal fields.")
+        if form.get("confirm_withdraw") != "1":
+            return (
+                "400 Bad Request", "text/html; charset=utf-8",
+                self._render_hold(session, self.store.owned_request(session, request_id),
+                                  error="Confirm that you want to withdraw this digital hold."),
+                [],
+            )
+        self.store.withdraw_owned_request(session, request_id)
+        return self._redirect(f"/hold/{request_id}")
 
     def _static(self, name: str, content_type: str):
         path = (STATIC_ROOT / name).resolve()
@@ -353,7 +374,31 @@ class MerchApp:
         )
         return self._page(session, "Digital merch cart", body, flash=notice, error=error)
 
-    def _render_hold(self, session, request: StudyRequest) -> bytes:
+    def _render_holds(self, session) -> bytes:
+        requests = self.store.owned_requests(session)
+        if requests:
+            rows = []
+            for request in requests:
+                items = []
+                for sku_id, qty in request.items.items():
+                    sku = self.store.catalog.get(sku_id)
+                    items.append(f"{escape(sku.identity if sku else sku_id)} × {int(qty)}")
+                rows.append(
+                    f'<li class="hold-history-row">'
+                    f'<p class="hold-status">{_hold_status_label(request)}</p>'
+                    f'<h2><a href="/hold/{escape(request.request_id)}">Hold {escape(request.request_id)}</a></h2>'
+                    f'<p>{" · ".join(items)}</p>'
+                    f'<p class="meta">Requested {_hold_time(request.created_at)}</p>'
+                    f'<a class="button-link" href="/hold/{escape(request.request_id)}">Review hold</a></li>'
+                )
+            content = '<ol class="hold-history">' + "".join(rows) + '</ol>'
+        else:
+            content = '<p class="empty-state" role="status">No digital holds in this session yet.</p><p><a class="button-link" href="/catalog">Browse digital studies</a></p>'
+        body = (TEMPLATE_ROOT / "holds.html").read_text(encoding="utf-8")
+        body = body.replace("{{holds}}", content)
+        return self._page(session, "Your digital holds", body)
+
+    def _render_hold(self, session, request: StudyRequest, *, error: str = "") -> bytes:
         lines = []
         for sku_id, qty in request.items.items():
             sku = self.store.catalog.get(sku_id)
@@ -365,15 +410,30 @@ class MerchApp:
             )
         contact = escape(request.contact) if request.contact else "not given"
         note = escape(request.note) if request.note else "none"
+        if request.status == "withdrawn":
+            status_detail = "You withdrew this digital hold. It is no longer waiting for admin review. Nothing was printed, shipped, posted, or charged."
+            withdrawal = f'<p class="hint">Withdrawn {_hold_time(request.withdrawn_at or request.created_at)}. To make a new request, return to the catalog.</p>'
+        else:
+            status_detail = "This request is held for admin review. Nothing was printed, shipped, posted, or charged."
+            withdrawal = f'''<form method="post" action="/hold/{escape(request.request_id)}/withdraw" class="stack withdraw-form">
+<h2>Changed your mind?</h2>
+<label class="confirm"><input type="checkbox" name="confirm_withdraw" value="1" required><span>I no longer want admin to review this digital hold.</span></label>
+<input type="hidden" name="csrf" value="{escape(session.csrf)}">
+<button type="submit" class="ghost">Withdraw digital hold</button>
+<p class="hint">Your receipt will remain here marked Withdrawn.</p></form>'''
+
         body = (TEMPLATE_ROOT / "hold.html").read_text(encoding="utf-8")
         body = (
             body.replace("{{request_id}}", escape(request.request_id))
-            .replace("{{created_at}}", escape(request.created_at))
+            .replace("{{created_at}}", _hold_time(request.created_at))
+            .replace("{{status}}", _hold_status_label(request))
+            .replace("{{status_detail}}", status_detail)
+            .replace("{{withdrawal}}", withdrawal)
             .replace("{{lines}}", "".join(lines))
             .replace("{{contact}}", contact)
             .replace("{{note}}", note)
         )
-        return self._page(session, "Digital study hold", body)
+        return self._page(session, "Digital study hold", body, error=error)
 
     def _render_admin_login(self, session, error: str = "") -> bytes:
         body = (TEMPLATE_ROOT / "admin_login.html").read_text(encoding="utf-8")
@@ -546,6 +606,16 @@ def _admin_sku_row(sku, csrf: str) -> str:
 """
 
 
+def _hold_status_label(request: StudyRequest) -> str:
+    return "Withdrawn" if request.status == "withdrawn" else "Held for admin review"
+
+
+def _hold_time(value: str) -> str:
+    timestamp = datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
+    label = timestamp.strftime("%b %d, %Y at %H:%M UTC")
+    return f'<time datetime="{escape(value)}">{escape(label)}</time>'
+
+
 def _admin_request_row(request: StudyRequest) -> str:
     items = ", ".join(f"{escape(sku)} × {qty}" for sku, qty in request.items.items())
     contact = escape(request.contact) if request.contact else "not given"
@@ -553,6 +623,7 @@ def _admin_request_row(request: StudyRequest) -> str:
     return f"""
 <article class="request">
   <p class="eyebrow">{escape(request.request_id)} · {escape(request.created_at)}</p>
+  <p class="hold-status">{_hold_status_label(request)}</p>
   <p>Contact: {contact}</p>
   <p>Items: {items}</p>
   <p>Note: {note}</p>

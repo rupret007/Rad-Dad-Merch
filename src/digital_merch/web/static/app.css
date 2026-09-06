@@ -491,3 +491,17 @@ footer {
     justify-content: space-between;
   }
 }
+
+/* Session hold management keeps receipt facts and actions readable on phones. */
+nav { flex-wrap: wrap; }
+.holds h1, .hold h1 { overflow-wrap: anywhere; }
+.holds, .hold, .request { min-width: 0; overflow-wrap: anywhere; }
+.hold-history { list-style: none; padding: 0; display: grid; gap: 1rem; }
+.hold-history-row { background: #09131d; padding: 1rem; border-radius: 14px; }
+.hold-history-row h2 { font-size: 1.15rem; margin: 0.4rem 0; }
+.hold-history-row h2 a { display: inline-flex; align-items: center; min-height: 44px; }
+.hold-status { color: var(--lime); font-weight: 700; }
+.withdraw-form { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1.5rem; }
+.withdraw-form h2 { margin: 0; font-size: 1.2rem; }
+.withdraw-form button { justify-self: start; }
+.button-link.secondary { background: #223241; color: var(--cream); }
