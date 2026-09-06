@@ -1,7 +1,8 @@
 <section class="hold panel">
   <p class="eyebrow">Digital study hold · no charge</p>
   <h1>Hold {{request_id}}</h1>
-  <p class="lede">This request is held for admin review. Nothing was printed, shipped, posted, or charged. Keep this receipt if you need the hold id.</p>
+  <p class="hold-status">{{status}}</p>
+  <p class="lede">{{status_detail}}</p>
   <ul class="hold-list">
     {{lines}}
   </ul>
@@ -23,6 +24,8 @@
       <dd>Digital study hold only</dd>
     </div>
   </dl>
-  <p class="hint">Closing this page does not create a purchase or a print job.</p>
+  {{withdrawal}}
+  <p class="hint">Your holds are available only in this browser session while this desk is running. Clearing cookies or restarting the desk removes access.</p>
+  <p><a class="button-link secondary" href="/holds">Your holds</a></p>
   <p><a class="button-link" href="/catalog">Back to published studies</a></p>
 </section>

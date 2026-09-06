@@ -2,6 +2,12 @@
 
 ## Digital merch desk
 
+- Added **Your holds** navigation with the current session's receipts, newest
+  first, and explicit confirmed withdrawal from each active receipt. Withdrawn
+  status is shared with the admin desk; retries keep the first withdrawal time.
+- Kept receipt details after withdrawal and stated the in-memory/session access
+  limits. Added owner-isolation, CSRF, confirmation, retry, and lifecycle tests.
+
 - Catalog cards and product pages now serve leftover-#8 crops of the Current
   Three study so cassette, floppy, and mini VHS are visually distinct on a
   phone. Combined study stays the original render bytes.

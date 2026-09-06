@@ -39,6 +39,7 @@ PUBLIC_EXACT_PATHS = {
     "/catalog",
     "/cart",
     "/checkout",
+    "/holds",
     "/api/catalog",
     "/api/cart",
     "/api/checkout",
@@ -55,6 +56,7 @@ ADMIN_EXACT_PATHS = {
 
 PRODUCT_PATH = re.compile(r"^/product/([a-z0-9-]{3,64})$")
 HOLD_PATH = re.compile(r"^/hold/([a-f0-9]{16})$")
+HOLD_WITHDRAW_PATH = re.compile(r"^/hold/([a-f0-9]{16})/withdraw$")
 STUDY_CROP_PATH = re.compile(r"^/assets/study/(cassette|floppy|vhs|current-three)\.png$")
 ADMIN_SKU_PATH = re.compile(r"^/admin/sku/([a-z0-9-]{3,64})/(publish|unpublish)$")
 ALLOWED_CHECKOUT_FIELDS = {"csrf", "note", "contact", "action", "confirm_digital_hold"}
@@ -140,6 +142,7 @@ def classify_path(path: str) -> str:
         path in PUBLIC_EXACT_PATHS
         or PRODUCT_PATH.match(path)
         or HOLD_PATH.match(path)
+        or HOLD_WITHDRAW_PATH.match(path)
         or STUDY_CROP_PATH.match(path)
     ):
         return "public"
@@ -155,6 +158,11 @@ def product_sku_from_path(path: str) -> str | None:
 
 def hold_id_from_path(path: str) -> str | None:
     match = HOLD_PATH.match(path)
+    return match.group(1) if match else None
+
+
+def withdrawal_id_from_path(path: str) -> str | None:
+    match = HOLD_WITHDRAW_PATH.match(path)
     return match.group(1) if match else None
 
 
