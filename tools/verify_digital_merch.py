@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
+import subprocess
 import sys
 import unittest
 
@@ -65,9 +67,21 @@ def main() -> int:
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     if not result.wasSuccessful():
         return 1
+    node = shutil.which("node")
+    if node is None:
+        print("Digital merch verification requires Node.js 18+ for offline cart transport tests.", file=sys.stderr)
+        return 1
+    transport = subprocess.run(
+        [node, str(REPO_ROOT / "tests" / "test_cart_transport.js")],
+        cwd=REPO_ROOT,
+        check=False,
+        timeout=30,
+    )
+    if transport.returncode != 0:
+        return 1
     print(
         "Digital merch verified: leftover #8 catalog identity, hold receipts, "
-        "cart rules, admin lock, and public-path security passed."
+        "cart rules, browser transport, admin lock, and public-path security passed."
     )
     return 0
 

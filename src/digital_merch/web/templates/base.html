@@ -21,13 +21,16 @@
   </header>
   <main id="main" tabindex="-1">
     {{flash}}
+    <div id="cart-update-status" class="cart-update-status" tabindex="-1" hidden>
+      <p aria-live="polite" id="live-status"></p>
+      <a id="cart-review-link" href="/cart" hidden>Review current hold cart</a>
+    </div>
     {{body}}
   </main>
   <footer>
     <p>{{disclaimer}}</p>
     <p>Digital study only. No print job, shipment, payment, or merch pitch is created here.</p>
   </footer>
-  <div class="sr-only" aria-live="polite" id="live-status"></div>
   <script src="/assets/app.js" defer></script>
 </body>
 </html>

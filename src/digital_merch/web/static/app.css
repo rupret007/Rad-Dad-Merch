@@ -505,3 +505,10 @@ nav { flex-wrap: wrap; }
 .withdraw-form h2 { margin: 0; font-size: 1.2rem; }
 .withdraw-form button { justify-self: start; }
 .button-link.secondary { background: #223241; color: var(--cream); }
+
+.cart-update-status { border: 2px solid var(--blue); border-radius: 14px; padding: 1rem; margin-bottom: 1rem; overflow-wrap: anywhere; }
+.cart-update-status[hidden], #cart-review-link[hidden] { display: none; }
+.cart-update-status p { margin: 0; }
+.cart-update-status a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 0.5rem; }
+.cart-update-status:focus { outline: 3px solid var(--lime); outline-offset: 3px; }
+.cart-update-status[data-state="unknown"], .cart-update-status[data-state="error"] { border-color: var(--pink); }
