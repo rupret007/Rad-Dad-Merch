@@ -2,6 +2,11 @@
 
 ## Digital merch desk
 
+- Cart updates now show pending, success, rejection, and uncertain outcomes.
+  Pending changes pause other cart edits and hold submission. Lost responses
+  never trigger another mutation; an explicit current-cart link provides
+  recovery. Quantity-button intent and native no-JavaScript forms are preserved.
+
 - Added **Your holds** navigation with the current session's receipts, newest
   first, and explicit confirmed withdrawal from each active receipt. Withdrawn
   status is shared with the admin desk; retries keep the first withdrawal time.
