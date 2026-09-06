@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from html import escape
 from pathlib import Path
+import re
 from secrets import token_hex
 from typing import Callable, Iterable
 from urllib.parse import parse_qs
@@ -47,6 +48,12 @@ class MerchApp:
         self._crop_cache: dict[str, bytes] = {}
 
     def __call__(self, environ: dict, start_response: Callable) -> Iterable[bytes]:
+        # A second tab/request cannot change the cart between a validated
+        # review and request creation, or between rendered rows and their token.
+        with self.store.lock:
+            return self._respond(environ, start_response)
+
+    def _respond(self, environ: dict, start_response: Callable) -> Iterable[bytes]:
         method = (environ.get("REQUEST_METHOD") or "GET").upper()
         if method == "HEAD":
             method = "GET"
@@ -167,7 +174,7 @@ class MerchApp:
         raise SecurityError("Method not allowed on this merch path.")
 
     def _mutate_cart(self, session, form: dict[str, str], *, json_mode: bool):
-        cart = self.store.cart_for(session)
+        cart = self.store.cart_for(session).copy()
         action = form.get("action") or "add"
         sku_id = form.get("sku") or ""
         qty = _parse_qty(form.get("qty") or "1")
@@ -185,11 +192,20 @@ class MerchApp:
         return self._redirect("/cart")
 
     def _checkout(self, session, form: dict[str, str], *, json_mode: bool):
-        cart = self.store.cart_for(session)
-        cart.checkoutable(self.store.catalog)
         contact, note, confirm = checkout_fields(form)
         if confirm not in DIGITAL_HOLD_CONFIRM_VALUES:
-            raise CartError("Confirm this is a digital study hold, not a purchase.")
+            return self._checkout_rejected(session, json_mode, contact, note,
+                "Confirm this is a digital study hold, not a purchase.", status="400 Bad Request")
+        if not self.store.review_matches(session, form.get("checkout_review")):
+            return self._checkout_rejected(session, json_mode, contact, note,
+                "Your cart needs a fresh review. No hold was created. Review the current studies "
+                "and quantities, then confirm again.")
+        cart = self.store.cart_for(session)
+        try:
+            cart.checkoutable(self.store.catalog)
+        except CartError as exc:
+            return self._checkout_rejected(session, json_mode, contact, note,
+                str(exc), status="400 Bad Request")
         request = StudyRequest(
             request_id=token_hex(8),
             created_at=datetime.now(timezone.utc).isoformat(),
@@ -212,6 +228,18 @@ class MerchApp:
         if json_mode:
             return "200 OK", "application/json", json_bytes(payload), []
         return self._redirect(receipt_path)
+
+    def _checkout_rejected(self, session, json_mode, contact, note, message,
+                           *, status="409 Conflict"):
+        if json_mode:
+            return status, "application/json", json_bytes({
+                "ok": False, "error": message,
+                "code": "cart_review_required" if status.startswith("409") else "checkout_rejected",
+                "review_path": "/cart", "digital_only": True, "charged": False,
+            }), []
+        retained = " Your unsent details are kept below." if contact or note else ""
+        return status, "text/html; charset=utf-8", self._render_cart(
+            session, error=message + retained, contact=contact, note=note), []
 
     def _admin_login(self, session, form: dict[str, str], environ):
         client = str(environ.get("REMOTE_ADDR") or "unknown")
@@ -306,21 +334,19 @@ class MerchApp:
             "empty": cart.is_empty(),
             "csrf": session.csrf,
             "digital_only": True,
+            "checkout_review": self.store.checkout_review(session),
         }
 
     def _page(self, session, title: str, body: str, *, flash: str = "", error: str = "") -> bytes:
         cart_count = self.store.cart_for(session).line_count()
         admin_nav = '<a href="/admin">Admin</a>' if session.admin else ""
         template = (TEMPLATE_ROOT / "base.html").read_text(encoding="utf-8")
-        html = (
-            template.replace("{{title}}", escape(title))
-            .replace("{{csrf}}", escape(session.csrf))
-            .replace("{{cart_count}}", str(cart_count))
-            .replace("{{admin_nav}}", admin_nav)
-            .replace("{{flash}}", _banner(flash, "notice") + _banner(error, "error"))
-            .replace("{{body}}", body)
-            .replace("{{disclaimer}}", escape(self.store.catalog.disclaimer))
-        )
+        html = _fill_template(template, {
+            "title": escape(title), "csrf": escape(session.csrf),
+            "cart_count": str(cart_count), "admin_nav": admin_nav,
+            "flash": _banner(flash, "notice") + _banner(error, "error"),
+            "body": body, "disclaimer": escape(self.store.catalog.disclaimer),
+        })
         return html.encode("utf-8")
 
     def _render_catalog(self, session) -> bytes:
@@ -352,8 +378,10 @@ class MerchApp:
         )
         return self._page(session, sku.title, body)
 
-    def _render_cart(self, session, error: str = "", notice: str = "") -> bytes:
+    def _render_cart(self, session, error: str = "", notice: str = "",
+                     *, contact: str = "", note: str = "") -> bytes:
         cart = self.store.cart_for(session)
+        lines = cart.lines(self.store.catalog)
         if cart.is_empty():
             rows = (
                 '<p class="empty-state" role="status">The hold cart is empty. Add a published '
@@ -363,15 +391,26 @@ class MerchApp:
                 '<p><a class="button-link" href="/catalog">Browse published studies</a></p>'
             )
         else:
-            rows = "".join(_cart_row(line, session.csrf) for line in cart.lines(self.store.catalog))
-            checkout = (TEMPLATE_ROOT / "checkout_form.html").read_text(encoding="utf-8")
-            checkout = checkout.replace("{{csrf}}", escape(session.csrf))
+            rows = "".join(_cart_row(line, session.csrf) for line in lines)
+            if all(line["available"] for line in lines):
+                checkout = (TEMPLATE_ROOT / "checkout_form.html").read_text(encoding="utf-8")
+                checkout = _fill_template(checkout, {
+                    "csrf": escape(session.csrf),
+                    "checkout_review": self.store.checkout_review(session),
+                    "contact": escape(contact), "note": escape(note),
+                })
+            else:
+                checkout = '<p class="banner banner-error">Remove unavailable studies before requesting a hold. No hold has been created.</p>'
+        if (cart.is_empty() or not all(line["available"] for line in lines)) and (contact or note):
+            checkout += (f'<section class="panel unsent-details"><h2>Your unsent details</h2>'
+                         f'<p>Copy these before leaving this page. Nothing was submitted.</p>'
+                         f'<dl><dt>Contact</dt><dd>{escape(contact) or "Not given"}</dd>'
+                         f'<dt>Note</dt><dd>{escape(note) or "None"}</dd></dl></section>')
         body = (TEMPLATE_ROOT / "cart.html").read_text(encoding="utf-8")
-        body = (
-            body.replace("{{rows}}", rows)
-            .replace("{{checkout_block}}", checkout)
-            .replace("{{disabled_class}}", "is-empty" if cart.is_empty() else "")
-        )
+        body = _fill_template(body, {
+            "rows": rows, "checkout_block": checkout,
+            "disabled_class": "is-empty" if cart.is_empty() else "",
+        })
         return self._page(session, "Digital merch cart", body, flash=notice, error=error)
 
     def _render_holds(self, session) -> bytes:
@@ -423,16 +462,13 @@ class MerchApp:
 <p class="hint">Your receipt will remain here marked Withdrawn.</p></form>'''
 
         body = (TEMPLATE_ROOT / "hold.html").read_text(encoding="utf-8")
-        body = (
-            body.replace("{{request_id}}", escape(request.request_id))
-            .replace("{{created_at}}", _hold_time(request.created_at))
-            .replace("{{status}}", _hold_status_label(request))
-            .replace("{{status_detail}}", status_detail)
-            .replace("{{withdrawal}}", withdrawal)
-            .replace("{{lines}}", "".join(lines))
-            .replace("{{contact}}", contact)
-            .replace("{{note}}", note)
-        )
+        body = _fill_template(body, {
+            "request_id": escape(request.request_id),
+            "created_at": _hold_time(request.created_at),
+            "status": _hold_status_label(request), "status_detail": status_detail,
+            "withdrawal": withdrawal, "lines": "".join(lines),
+            "contact": contact, "note": note,
+        })
         return self._page(session, "Digital study hold", body, error=error)
 
     def _render_admin_login(self, session, error: str = "") -> bytes:
@@ -474,6 +510,13 @@ def create_app(
         catalog=catalog or DigitalCatalog(),
     )
     return MerchApp(store)
+
+
+def _fill_template(template: str, values: dict[str, str]) -> str:
+    # One pass: shopper text that resembles a template marker stays text.
+    # Callers escape text values before insertion; generated markup stays markup.
+    return re.sub(r"\{\{([a-z_]+)\}\}",
+                  lambda match: values.get(match.group(1), match.group(0)), template)
 
 
 def _read_form(environ: dict) -> dict[str, str]:
@@ -557,7 +600,10 @@ def _cart_row(line: dict[str, object], csrf: str) -> str:
     qty = int(line["qty"])
     minus = max(qty - 1, 0)
     plus = min(qty + 1, 3)
-    plus_disabled = " disabled" if qty >= 3 else ""
+    available = bool(line["available"])
+    plus_disabled = " disabled" if qty >= 3 or not available else ""
+    minus_disabled = " disabled" if not available else ""
+    availability = '' if available else '<p class="state-unpublished">Unavailable — remove this study to continue.</p>'
     minus_label = "Remove" if qty == 1 else "Decrease quantity"
     return f"""
 <li class="cart-line">
@@ -565,13 +611,14 @@ def _cart_row(line: dict[str, object], csrf: str) -> str:
     <p class="eyebrow">{escape(str(line["identity"]))} · digital hold</p>
     <strong>{escape(str(line["title"]))}</strong>
     <p>{escape(str(line["revision"]))} · {sku} · no charge</p>
+    {availability}
   </div>
   <div class="cart-actions">
     <form method="post" action="/cart" class="qty-stepper">
       <input type="hidden" name="csrf" value="{escape(csrf)}">
       <input type="hidden" name="action" value="set">
       <input type="hidden" name="sku" value="{sku}">
-      <button type="submit" name="qty" value="{minus}" aria-label="{minus_label}">−</button>
+      <button type="submit" name="qty" value="{minus}" aria-label="{minus_label}"{minus_disabled}>−</button>
       <span aria-live="polite">{qty}</span>
       <button type="submit" name="qty" value="{plus}" aria-label="Increase quantity"{plus_disabled}>+</button>
     </form>
