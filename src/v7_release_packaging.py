@@ -39,7 +39,7 @@ from pathlib import Path
 from typing import Any, Protocol, runtime_checkable
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
 DEFAULT_TAP_URL = "https://raddadband.com/tap/"
@@ -887,6 +887,47 @@ def _preview_crease_edges(
     return selected
 
 
+def _apply_preview_grounding_shadow(
+    image: Image.Image,
+    faces: np.ndarray,
+    face_order: np.ndarray,
+    screen_x: np.ndarray,
+    screen_y: np.ndarray,
+    *,
+    scale: float,
+    offset_x: float,
+    offset_y: float,
+) -> None:
+    """Ground the projected mesh with a restrained satin-plastic shadow.
+
+    The shadow is derived from the same visible triangles used by the renderer,
+    so it follows every model without adding device-specific artwork or
+    implying geometry that is not present in the printable mesh.
+    """
+
+    ink = _hex_rgb(BRAND["ink"])
+    shadow_passes = (
+        # A broad, low-opacity cast shadow gives the model a surface to sit on.
+        (12.0, 16.0, 76, 13.0),
+        # A tighter contact shadow preserves the molded-plastic edge definition.
+        (4.0, 7.0, 48, 4.0),
+    )
+    for shift_x, shift_y, opacity, blur_radius in shadow_passes:
+        mask = Image.new("L", image.size, 0)
+        mask_draw = ImageDraw.Draw(mask)
+        for face_index in face_order:
+            points = [
+                (
+                    offset_x + screen_x[vertex] * scale + shift_x,
+                    offset_y - screen_y[vertex] * scale + shift_y,
+                )
+                for vertex in faces[face_index]
+            ]
+            mask_draw.polygon(points, fill=opacity)
+        mask = mask.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+        image.paste(ink, mask=mask)
+
+
 def render_mesh_preview(
     mesh: Any,
     path: str | Path,
@@ -987,6 +1028,16 @@ def render_mesh_preview(
                     0.0,
                     1.0,
                 )
+    _apply_preview_grounding_shadow(
+        image,
+        faces,
+        order,
+        screen_x,
+        screen_y,
+        scale=scale,
+        offset_x=offset_x,
+        offset_y=offset_y,
+    )
     for face_index in order:
         normal = face_normals[face_index]
         directional = max(0.0, float(normal @ light))

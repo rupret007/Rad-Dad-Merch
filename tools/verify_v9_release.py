@@ -445,12 +445,12 @@ def verify_geometry(root: Path) -> None:
     require(qa.get("mesh_qa_pass") is True, "Mesh QA did not pass")
     models = {model["name"]: model for model in qa.get("models", [])}
     floppy = models.get("Rad_Dad_Floppy_v22")
-    require(floppy is not None, "V21 floppy is absent from model QA")
-    require(floppy.get("digital_qa_pass") is True, "V21 floppy digital QA failed")
-    require(all(floppy.get("checks", {}).values()), "V21 floppy has a failed geometry check")
+    require(floppy is not None, "V22 floppy is absent from model QA")
+    require(floppy.get("digital_qa_pass") is True, "V22 floppy digital QA failed")
+    require(all(floppy.get("checks", {}).values()), "V22 floppy has a failed geometry check")
     expected = (44.36, 36.916, 4.13)
     actual = tuple(float(value) for value in floppy["dimensions_mm"])
-    require(all(abs(a - e) <= 0.001 for a, e in zip(actual, expected)), f"V21 floppy envelope changed: {actual}")
+    require(all(abs(a - e) <= 0.001 for a, e in zip(actual, expected)), f"V22 floppy envelope changed: {actual}")
 
 
 def verify_qr(root: Path) -> None:
@@ -464,8 +464,16 @@ def verify_qr(root: Path) -> None:
     require(module_pitch >= 0.44, "QR module pitch is too small")
     artwork = root / "guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER_600DPI.png"
     sheet = root / "guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER_600DPI.png"
+    red_artwork = root / "guides/qr_stickers/Rad_Dad_QR_RED_1IN_VENDOR_MASTER_600DPI.png"
+    red_sheet = root / "guides/qr_stickers/Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER_600DPI.png"
     require(png_size(artwork) == (600, 600), "Vendor QR PNG is not 600 x 600")
     require(png_size(sheet) == (5100, 6600), "63-up QR sheet is not US Letter at 600 DPI")
+    require(
+        qr.get("color_cartridge_fallback") == ["#FF0000", "#FFFFFF"],
+        "Authenticity spec no longer records the official red-on-white fallback",
+    )
+    require(png_size(red_artwork) == (600, 600), "Red vendor QR PNG is not 600 x 600")
+    require(png_size(red_sheet) == (5100, 6600), "Red 63-up QR sheet is not US Letter at 600 DPI")
 
 
 def verify(root: Path) -> None:

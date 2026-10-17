@@ -14,8 +14,8 @@ ridiculous Trailer Swift desk collectible.
 keyring, and QR-fit decisions from earlier releases while restoring or deepening
 the physical details that make each object immediately recognizable.
 
-The models remain one-color prints. The interaction layer is a separate,
-strictly black-and-white 1-inch QR sticker that opens:
+The models remain one-color prints. The interaction layer is a separate
+1-inch QR sticker that opens:
 
 ```text
 https://raddadband.com/qr/
@@ -32,17 +32,72 @@ https://raddadband.com/qr/
 | I want to... | Use this |
 |---|---|
 | Download the complete release | [`release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip`](release/v9/Rad_Dad_Retro_Riot_v9_Authenticity_QR_Print_Pack.zip) |
+| Preview the current cassette, floppy, and VHS together | [Current Three digital PETG material study](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png) |
+| Browse or hold those digital studies | `python3 tools/serve_digital_merch.py` then open `/catalog` |
+| Check a cart change after a connection problem | Use **Review current hold cart**; see [cart updates and recovery](docs/DIGITAL_CART.md) |
+| Recover when another tab changed the cart before confirmation | Review current quantities, then confirm again; see [review-bound holds](docs/DIGITAL_HOLD_REVIEW.md) |
+| Reopen or withdraw a digital hold | Open **Your holds** at `/holds` in the same browser session; see [digital holds](docs/DIGITAL_HOLDS.md) |
 | Print the cassette, floppy, and VHS together | [`release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf`](release/v9/3mf/Rad_Dad_Retro_Riot_v9_CURRENT_THREE_CASSETTE_FLOPPY_VHS_A1_MINI_0.4_PROJECT.3mf) |
 | Print all four as a configured Bambu project | [`release/v9/3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf`](release/v9/3mf/Rad_Dad_Retro_Riot_v9_ALL_FOUR_A1_MINI_0.4_TREE_SUPPORT_PROJECT.3mf) |
 | Browse individual models | [`release/v9/3mf/`](release/v9/3mf) or [`release/v9/stl/`](release/v9/stl) |
 | Send one sticker to a professional vendor | `release/v9/guides/qr_stickers/Rad_Dad_QR_1IN_VENDOR_MASTER.svg` or its PDF master |
 | Print precut Avery 6450 / OL1025 labels | `release/v9/guides/qr_stickers/Rad_Dad_QR_AVERY_6450_OL1025_63UP_US_LETTER.pdf` |
 | Print a full adhesive sheet at FedEx Office | `release/v9/guides/qr_stickers/Rad_Dad_QR_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER.pdf` |
+| Print when black ink is unavailable | Official `Rad_Dad_QR_RED_*` fallback files in `release/v9/guides/qr_stickers/` |
 | Understand sticker production | [QR sticker guide](docs/QR_STICKERS.md) |
 | Review the retired NFC workflow | [NFC legacy notice](docs/NFC.md) |
 
-The v9 ZIP is the canonical handoff. The paths above describe the generated v9
-release layout and become available with the completed release pack.
+The v9 ZIP is the canonical handoff. The paths above are the generated v9
+release layout already present in this repository.
+
+### Current Three material study
+
+[![Digital PETG material study of the current Rad Dad cassette, floppy, and mini VHS](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png)](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png)
+
+This preview is generated directly from the three current sealed v9 STL files
+with one shared orthographic camera, so their relative sizes remain honest.
+The lime, blue, and pink surfaces are example one-color satin PETG treatments;
+the image is not a photo, slicer preview, printability result, or substitute for
+the physical acceptance checklist. Its source hashes, measured envelopes,
+renderer identity, digital-only status, and output hash are recorded in the
+[provenance file](docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.json).
+Regenerate or verify it with:
+
+```bash
+python3 tools/render_current_three_material_study.py
+python3 tools/render_current_three_material_study.py --check
+python3 tools/serve_digital_merch.py
+python3 tools/verify_digital_merch.py
+```
+
+The digital merch desk turns that leftover study into a shopper catalog, cart,
+and admin publish/hold path. Catalog cards crop the shared render so cassette,
+floppy, and mini VHS are identifiable on a phone. Checkout cannot run until the
+shopper confirms a digital hold, then it opens a session-owned receipt. It
+accepts digital study requests only. It does not take payment, ship an object,
+start a Bambu job, change the QR destination, or post merch. The public merch
+path serves the study image and catalog copy; it does not serve STL, 3MF,
+renderer, or release files. Admin stays locked until
+`RAD_DAD_MERCH_ADMIN_TOKEN` is set.
+
+**Your holds** lists this browser session's receipts, newest first. A shopper can
+reopen a receipt and explicitly confirm withdrawal; the admin sees the same
+withdrawn status. The original receipt stays readable. Holds live only in the
+running server's memory: a server restart clears them, and clearing or losing
+the session cookie removes access. See [digital holds](docs/DIGITAL_HOLDS.md)
+for the flow and verification.
+
+Cart updates show a visible result and pause further edits while pending. If a
+response is lost, the browser never resends the change automatically: use
+**Review current hold cart** to load the server's current quantities before
+editing or requesting a hold. See [cart updates and recovery](docs/DIGITAL_CART.md).
+Hold confirmation is also bound to the cart that was actually reviewed. A
+changed or stale review creates no hold: the cart shows its current contents,
+retains valid unsent contact/note text on that response, and requires fresh
+confirmation. Empty or unavailable carts cannot submit. See
+[review-bound holds](docs/DIGITAL_HOLD_REVIEW.md) for the API and recovery limits.
+Digital verification uses Python 3.9+ and Node.js 18+; the JavaScript checks
+use Node's standard library and require no npm packages.
 
 ## What changed in v9
 
@@ -129,10 +184,12 @@ Every v9 design follows the same product rule: authentic first, branded second.
 - Durability, pocket carry, keyring access, and clean one-color printing take
   priority over fragile cosmetic detail.
 
-## Black-and-white QR system
+## QR system
 
-V9 removes color and decorative styling from the QR artwork. The production
-master uses only pure black and pure white:
+V9 removes decorative styling from the QR artwork. Preferred production uses
+only pure black and pure white. The same pack includes an official pure
+process-red (`#FF0000`) on white fallback, generated by the existing
+`qr_artwork_v9` path, for color cartridges when black ink is unavailable:
 
 | Property | V9 production specification |
 |---|---|
@@ -143,15 +200,18 @@ master uses only pure black and pure white:
 | Quiet zone | Four white modules on every side |
 | Printed QR square | 16.5 mm; never scale smaller |
 | Module pitch | Approximately 0.446 mm |
-| Ink | Solid black only, no gray screening |
+| Preferred ink | Solid black only, no gray screening |
+| Official fallback ink | Pure process red `#FF0000` on white; print as color, never grayscale |
 | Stock | Matte white adhesive stock |
 | Individual master | Vendor-ready vector plus 600 DPI raster/PDF |
 | Precut sheet | US Letter, 63-up Avery 6450 / OnlineLabels OL1025 |
 | Copy-center sheet | US Letter full-sheet layout for FedEx Office cutting |
+| Fallback files | `Rad_Dad_QR_RED_1IN_VENDOR_MASTER`, `Rad_Dad_QR_RED_AVERY_6450_OL1025_63UP_US_LETTER`, `Rad_Dad_QR_RED_FEDEX_OFFICE_FULL_SHEET_48UP_US_LETTER`, and `Rad_Dad_QR_RED_PRINT_CALIBRATION_US_LETTER` |
 
-No logo, lightning bolt, text, texture, color, rounded module, transparent area,
-or artwork may enter the QR square or its white quiet zone. Any surrounding
-label text must remain solid black on matte white.
+No logo, lightning bolt, text, texture, decorative color, rounded module,
+transparent area, or artwork may enter the QR square or its white quiet zone.
+Any surrounding label text must use the same ink as the modules. Approve the
+red fallback only after the red calibration page scans from two phones.
 
 ## Printing stickers at home
 
@@ -160,7 +220,9 @@ label text must remain solid black on matte white.
 3. Select **Actual Size**, **100%**, or **No Scaling**.
 4. Disable `Fit`, `Shrink oversized pages`, borderless enlargement, and photo
    optimization.
-5. Print at the highest black-text or monochrome quality available.
+5. Print preferred black masters at the highest black-text or monochrome
+   quality available. If using the official `Rad_Dad_QR_RED_` fallback, print
+   as color rather than grayscale.
 6. Measure a finished circle. It must be 25.4 mm across.
 7. Scan samples before cutting and again after application.
 
@@ -175,7 +237,8 @@ Use the dedicated full-sheet FedEx Office PDF. Ask for:
 
 - US Letter output.
 - Actual Size / 100% with no fit-to-page scaling.
-- Crisp black-only printing on matte white adhesive stock.
+- Crisp black-only printing on matte white adhesive stock, or the official
+  `Rad_Dad_QR_RED_` fallback printed as color if black ink is unavailable.
 - One proof sheet before the full quantity.
 - No lamination or gloss coating over the QR.
 
@@ -243,6 +306,7 @@ sticker because the landing dimensions did not change.
 | `release/v9/` | Recommended Authenticity + QR release |
 | `release/v8/` | Historical first QR release |
 | `release/v7/` | Historical NFC release |
+| `src/digital_merch/` | Digital merch desk: catalog, cart, admin, public-path security |
 | `docs/QR_STICKERS.md` | QR artwork, printing, installation, and physical QC |
 | `docs/NFC.md` | Legacy NFC retirement notice |
 | `CHANGELOG.md` | Release history and revision details |

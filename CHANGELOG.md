@@ -1,5 +1,47 @@
 # Changelog
 
+## Digital merch desk
+
+- Cart updates now show pending, success, rejection, and uncertain outcomes.
+  Pending changes pause other cart edits and hold submission. Lost responses
+  never trigger another mutation; an explicit current-cart link provides
+  recovery. Quantity-button intent and native no-JavaScript forms are preserved.
+
+- Added **Your holds** navigation with the current session's receipts, newest
+  first, and explicit confirmed withdrawal from each active receipt. Withdrawn
+  status is shared with the admin desk; retries keep the first withdrawal time.
+- Kept receipt details after withdrawal and stated the in-memory/session access
+  limits. Added owner-isolation, CSRF, confirmation, retry, and lifecycle tests.
+
+- Catalog cards and product pages now serve leftover-#8 crops of the Current
+  Three study so cassette, floppy, and mini VHS are visually distinct on a
+  phone. Combined study stays the original render bytes.
+- Checkout requires an explicit digital-hold confirmation and redirects to a
+  session-owned receipt. Empty carts still have no checkout. Nothing is priced,
+  charged, printed, shipped, or posted.
+- Hold-cart quantity uses 44 px steppers instead of a cramped number field.
+
+- Added a shopper catalog, cart, and request-hold flow bound to the leftover
+  Current Three PETG material study.
+- Added an admin publish/hold desk with token auth, CSRF, and rate-limited
+  sign-in. Unpublished cards leave the public catalog and cannot enter a cart.
+- Locked the public merch path to an allowlist so STL, 3MF, renderer, and
+  release files are not served as shop assets. Checkout rejects shipping,
+  payment, printer, and pitch fields.
+- Added `tools/serve_digital_merch.py`, `tools/verify_digital_merch.py`, and a
+  release-integrity CI step. No prices, print jobs, QR destination change, or
+  merch auto-post.
+
+## Current Three material-study preview
+
+- Added a dedicated cassette v38, floppy v22, and mini VHS v5 overview rendered
+  directly from the current sealed STL files at true relative scale.
+- Reused the existing software-rendering conventions while adding restrained
+  satin-PETG shading, specular response, grounded shadows, and a 25 mm reference
+  without altering printable geometry or the sealed v9 package.
+- Added machine-readable source/output/renderer provenance and a CI smoke render
+  that fails closed if the preview loses its digital-only disclaimer.
+
 ## Trailer Swift v16 Strat-style guitar rebuild
 
 - Replaced the generic double-cutaway with a rounded Strat-style perimeter:

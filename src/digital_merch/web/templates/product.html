@@ -1,0 +1,33 @@
+<article class="product">
+  <p class="eyebrow" style="color:{{color}}">{{identity}} · {{revision}} · digital study</p>
+  <h1>{{title}}</h1>
+  <p class="chip">Digital study hold · no charge</p>
+  <p class="lede">{{description}}</p>
+  {{study_crop}}
+  <dl class="facts">
+    <div>
+      <dt>SKU</dt>
+      <dd>{{sku}}</dd>
+    </div>
+    <div>
+      <dt>Study envelope</dt>
+      <dd>{{extents}}</dd>
+    </div>
+    <div>
+      <dt>Material visualization</dt>
+      <dd>{{material}}</dd>
+    </div>
+    <div>
+      <dt>Fulfillment</dt>
+      <dd>Digital study hold only</dd>
+    </div>
+  </dl>
+  <form method="post" action="/cart" class="panel stack add-form">
+    <input type="hidden" name="csrf" value="{{csrf}}">
+    <input type="hidden" name="action" value="add">
+    <input type="hidden" name="sku" value="{{sku}}">
+    <input type="hidden" name="qty" value="1">
+    <button type="submit">Add {{identity}} study to hold cart</button>
+    <p class="hint">No charge, shipment, or printer job is created when you add this card. Change quantity on the cart if you need more than one.</p>
+  </form>
+</article>

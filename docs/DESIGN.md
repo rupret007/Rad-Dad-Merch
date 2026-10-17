@@ -12,15 +12,41 @@ nozzle. Do not scale them to solve text, eyelet, or sticker-fit problems.
 
 | Product | Revision | Exact envelope | Use | Keyring bore | QR landing |
 |---|---:|---:|---|---:|---:|
-| Compact cassette | v38 | 58.163 x 30.260 x 6.685 mm | Keychain | 6.0 mm | 26.0 mm rear |
-| 3.5-inch floppy | v21 | 44.360 x 36.916 x 4.130 mm | Keychain | 6.0 mm | 26.0 mm rear |
+| Compact cassette | v38 | 58.162 x 30.260 x 6.685 mm | Keychain | 6.0 mm | 26.0 mm rear |
+| 3.5-inch floppy | v22 | 44.360 x 36.916 x 4.130 mm | Keychain | 6.0 mm | 26.0 mm rear |
 | Mini VHS | v5 | 65.800 x 31.900 x 7.000 mm | Keychain | 6.0 mm | 26.0 mm rear |
-| Trailer Swift | v9 | 45.000 x 45.000 x 64.400 mm | Desk collectible | None | 27.0 mm underside |
+| Trailer Swift | v16 | 45.000 x 45.000 x 64.400 mm | Desk collectible | None | 27.0 mm underside |
 
 The cassette, floppy, and VHS eyelets use two-sided lead-ins around a nominal
 6.0 mm cylindrical opening. The reinforced neck must remain thick enough for
 split-ring installation and normal key carry. The media products print flat
 with their detailed faces up. Trailer Swift prints upright with tree support.
+
+### Current Three preview truth
+
+`docs/previews/Rad_Dad_Current_Three_PETG_Material_Study.png` is the dedicated
+visual overview for the current cassette v38, floppy v22, and mini VHS v5. The
+renderer reads their checked-in v9 binary STL files directly and uses a shared
+orthographic camera so the relative scale is not editorially distorted. The
+three colors visualize separate one-color satin PETG prints; they do not claim
+an exact filament, surface finish, layer result, or successful physical print.
+
+The adjacent JSON records the three source hashes and measured envelopes, the
+renderer hash, the output hash, and `physical_proof: false`. CI checks all of
+that provenance and performs a disposable smoke render. The study does not
+change, regenerate, or validate any STL, 3MF, Bambu profile, release archive,
+QR artwork, or physical acceptance step.
+
+The digital merch desk in `src/digital_merch/` uses that leftover study as the
+only public catalog source. Shoppers can view published digital study cards,
+tell cassette, floppy, and mini VHS apart by cropped study windows, add them to
+a hold cart, and request a hold. A confirmed request opens a session-owned
+receipt; other sessions cannot read it. Admin can publish or unpublish those
+cards. The public merch path is an allowlist: it can serve the study image,
+catalog copy, and hold receipts, not source hashes, STL paths, 3MF projects, or
+the renderer. Checkout rejects shipping, payment, printer, and social-post
+fields and requires an explicit digital-hold confirmation. This desk is not a
+second QR destination and it does not prove a physical print.
 
 ## Shared design hierarchy
 
@@ -110,7 +136,9 @@ watertight body. Supports must be removable without breaking the character.
 ## QR interaction standard
 
 The current production interaction is a visible 25.4 mm / 1-inch matte-white
-sticker with a solid-black QR code. NFC hardware is not installed.
+sticker. Preferred artwork is a solid-black QR. The official fallback, when
+black ink is unavailable, is pure process red `#FF0000` on white from the
+existing `Rad_Dad_QR_RED_` files. NFC hardware is not installed.
 
 - Canonical destination: `https://raddadband.com/qr/`
 - Legacy ordered stickers using `/tap/` remain valid through a permanent
