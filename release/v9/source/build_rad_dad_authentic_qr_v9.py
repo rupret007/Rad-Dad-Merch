@@ -17,7 +17,6 @@ import shutil
 import sys
 import tempfile
 from typing import Iterable, Sequence
-import zipfile
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -25,7 +24,10 @@ if str(REPO_ROOT / "src") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "src"))
 
 import build_rad_dad_micro_replica_v7 as legacy  # noqa: E402
-from build_three_device_plate_v9 import build as build_three_device_plate  # noqa: E402
+from build_three_device_plate_v9 import (  # noqa: E402
+    build as build_three_device_plate,
+    write_support_ready_project,
+)
 import qr_artwork_v9  # noqa: E402
 import v7_release_packaging as packaging  # noqa: E402
 from media_micro_v9 import build_cassette_v9, build_floppy_v22, build_vhs_v9  # noqa: E402
@@ -144,43 +146,11 @@ def _write_support_ready_project(
 ) -> Path:
     """Add the proven A1 mini tree-support profile to the v9 all-four model."""
 
-    source = output / "3mf" / f"{ALL_FOUR_STEM}_MODEL_ONLY.3mf"
+    source = output / "3mf" / f"{ALL_FOUR_STEM}_A1_MINI_0.4_PROJECT.3mf"
     target = output / "3mf" / f"{SUPPORT_PROJECT_STEM}.3mf"
-    baseline = (
-        REPO_ROOT
-        / "release"
-        / "v7"
-        / "3mf"
-        / "Rad_Dad_Retro_Riot_v7_ALL_FOUR_A1_MINI_0.4_PROJECT.3mf"
-    )
-    if not source.is_file() or not baseline.is_file():
+    if not source.is_file():
         raise RuntimeError("Support-ready project inputs are missing")
-
-    with zipfile.ZipFile(baseline) as archive:
-        settings = json.loads(
-            archive.read("Metadata/project_settings.config").decode("utf-8")
-        )
-    settings.update(
-        {
-            "enable_support": "1",
-            "support_on_build_plate_only": "1",
-            "support_remove_small_overhang": "1",
-            "support_critical_regions_only": "0",
-            "support_threshold_angle": "30",
-            "support_top_z_distance": "0.2",
-            "support_bottom_z_distance": "0.2",
-            "support_type": "tree(auto)",
-            "support_style": "default",
-            "raft_layers": "0",
-        }
-    )
-
-    shutil.copyfile(source, target)
-    with zipfile.ZipFile(target, "a", compression=zipfile.ZIP_DEFLATED) as archive:
-        archive.writestr(
-            "Metadata/project_settings.config",
-            json.dumps(settings, indent=2, sort_keys=True) + "\n",
-        )
+    write_support_ready_project(source, target)
     geometry_hashes[target.relative_to(output).as_posix()] = _sha256(target)
     return target
 
@@ -227,7 +197,7 @@ one-inch QR sticker that opens `{QR_URL}`.
 | Need | File |
 |---|---|
 | Print the current cassette, v22 floppy, and VHS together | `3mf/{CURRENT_THREE_STEM}.3mf` |
-| Print all four together | `3mf/{ALL_FOUR_STEM}_MODEL_ONLY.3mf` |
+| Print all four together | `3mf/{ALL_FOUR_STEM}_A1_MINI_0.4_PROJECT.3mf` |
 | Print all four with Trailer Swift supports preset | `3mf/{SUPPORT_PROJECT_STEM}.3mf` |
 | Print on 63-up pre-cut stock | [{sheet_63.name}]({rel(sheet_63)}) |
 | Print at FedEx Office on adhesive paper | [{fedex_sheet.name}]({rel(fedex_sheet)}) |
@@ -238,6 +208,11 @@ one-inch QR sticker that opens `{QR_URL}`.
 | Send the red master to a vendor | [{red_vendor_pdf.name}]({rel(red_vendor_pdf)}) |
 | Calibrate and scan-test red first | [{red_calibration.name}]({rel(red_calibration)}) |
 | Follow the physical acceptance gate | [Physical QC checklist](qa/PHYSICAL_QC_CHECKLIST.md) |
+
+The three multi-model files listed above are editable, configured Bambu Studio
+projects. They include printer, process, object, and plate metadata and must
+open without the `invalid config, load geometry data only` warning. Files with
+`MODEL_ONLY` in their name intentionally contain geometry without print setup.
 
 ## V9 authenticity changes
 
@@ -411,37 +386,8 @@ def _write_sha256s(output: Path, excluded: Iterable[Path]) -> Path:
     return _atomic_text(output / "SHA256SUMS.txt", "\n".join(rows) + "\n")
 
 
-def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> dict[str, Path]:
-    output = output.expanduser().resolve()
-    if output.exists():
-        shutil.rmtree(output)
-    output.mkdir(parents=True, exist_ok=True)
-
-    _configure_geometry_builder()
-    with tempfile.TemporaryDirectory(prefix="rad-dad-v9-geometry-") as temporary:
-        geometry_root = Path(temporary) / "release"
-        geometry_result = legacy.build_release(geometry_root, bambu_mode=bambu_mode)
-        geometry_hashes = _copy_geometry(geometry_root, output)
-        support_project = _write_support_ready_project(output, geometry_hashes)
-        current_three = build_three_device_plate(
-            source=support_project,
-            output=output / "3mf" / f"{CURRENT_THREE_STEM}.3mf",
-        )
-        geometry_hashes[current_three.relative_to(output).as_posix()] = _sha256(
-            current_three
-        )
-        _write_json(
-            output / "qa" / "GEOMETRY_BUILD_STATUS.json",
-            {
-                "bambu_required_satisfied": geometry_result.bambu_required_satisfied,
-                "packaging_load_mode": geometry_result.packaging_load_mode,
-                "source_build": RELEASE_NAME,
-            },
-        )
-
-    qr_artwork_v9.write_qr_artwork_v9(output / "guides" / "qr_stickers")
-    _write_release_documents(output, geometry_hashes)
-    _copy_source_snapshot(output)
+def _finalize_release_metadata(output: Path) -> tuple[Path, Path]:
+    """Regenerate checksums, manifest, deterministic print pack, and sidecar."""
 
     archive = output / ARCHIVE_NAME
     sidecar = archive.with_name(archive.name + ".sha256")
@@ -470,6 +416,45 @@ def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> di
         exclude=(archive, sidecar),
     )
     packaging.write_sha256_sidecar(archive)
+    return archive, manifest
+
+
+def build_release(output: Path = DEFAULT_OUTPUT, bambu_mode: str = "auto") -> dict[str, Path]:
+    output = output.expanduser().resolve()
+    if output.exists():
+        shutil.rmtree(output)
+    output.mkdir(parents=True, exist_ok=True)
+
+    _configure_geometry_builder()
+    with tempfile.TemporaryDirectory(prefix="rad-dad-v9-geometry-") as temporary:
+        geometry_root = Path(temporary) / "release"
+        geometry_result = legacy.build_release(geometry_root, bambu_mode=bambu_mode)
+        geometry_hashes = _copy_geometry(geometry_root, output)
+        support_project = _write_support_ready_project(output, geometry_hashes)
+        all_four_project = (
+            output / "3mf" / f"{ALL_FOUR_STEM}_A1_MINI_0.4_PROJECT.3mf"
+        )
+        current_three = build_three_device_plate(
+            source=all_four_project,
+            output=output / "3mf" / f"{CURRENT_THREE_STEM}.3mf",
+        )
+        geometry_hashes[current_three.relative_to(output).as_posix()] = _sha256(
+            current_three
+        )
+        _write_json(
+            output / "qa" / "GEOMETRY_BUILD_STATUS.json",
+            {
+                "bambu_required_satisfied": geometry_result.bambu_required_satisfied,
+                "packaging_load_mode": geometry_result.packaging_load_mode,
+                "source_build": RELEASE_NAME,
+            },
+        )
+
+    qr_artwork_v9.write_qr_artwork_v9(output / "guides" / "qr_stickers")
+    _write_release_documents(output, geometry_hashes)
+    _copy_source_snapshot(output)
+
+    archive, manifest = _finalize_release_metadata(output)
 
     return {
         "release": output,
